@@ -1,56 +1,108 @@
-import { styled, connect } from "frontity";
+import { styled, connect, css } from "frontity";
+// import Container from "./constant/Container";
+import P from "./constant/Paragraph";
+import TextLink from "./constant/TextLink";
+import { flex, font, stretch } from "./base/functions";
+import { TitleS, TitleM } from "./constant/Title";
 
-const description404 = (
-  <>
-    That page can’t be found{" "}
-    <span role="img" aria-label="confused face">
-      😕
-    </span>
-  </>
-);
+import page404 from "../assets/images/page404.png";
+import page4042x from "../assets/images/page404@2x.png";
 
 const description = (
-  <>
-    Don&apos;t panic! Seems like you encountered an error. If this persists,
-    <a href="https://community.frontity.org"> let us know </a> or try refreshing
-    your browser.
-  </>
+  <TitleS
+    css={css`
+      text-align: center;
+    `}
+  >
+    Don&apos;t panic! Seems like you encountered an error. If this persists, try
+    to refresh your browser.
+  </TitleS>
 );
 
 // The 404 page component
 const Page404 = ({ state }) => {
   const data = state.source.get(state.router.link);
 
-  const title = "Oops! Something went wrong";
-  const title404 = "Oops! 404";
-
   return (
-    <Container>
-      <Title>{data.is404 ? title404 : title}</Title>
-      <Description>{data.is404 ? description404 : description}</Description>
-    </Container>
+    <Container404>
+      <Content>
+        <Picture>
+          <img
+            src={page404}
+            srcSet={`${page404} 1x, ${page4042x ? page4042x : page404} 2x`}
+            alt="404"
+          />
+        </Picture>
+        <Title>Нет, так нет</Title>
+        <Subtitle>
+          <P>Да, была страница, но её уже нет. Чё бубнить-то?</P>
+        </Subtitle>
+        <TextLink404 link="/">Главная страница</TextLink404>
+      </Content>
+    </Container404>
   );
 };
 
-export default connect(Page404);
+const Title = styled(TitleM)`
+  margin-bottom: 13px;
+`;
+
+const TextLink404 = styled(TextLink)`
+  ${font(16, 24)};
+  ${stretch(122)};
+`;
+
+const Subtitle = styled.div`
+  margin-bottom: 96px;
+  & p {
+    text-align: center;
+  }
+  @media screen and (max-width: 991px) {
+    margin-bottom: 72px;
+  }
+`;
+
+const Content = styled.div`
+  border: 1px solid var(--gray-100);
+  padding: 48px 54px;
+  border-radius: 48px;
+  box-sizing: border-box;
+  width: 587px;
+  max-width: 100%;
+  margin: 0 auto;
+  ${flex("column", "center")};
+  @media screen and (max-width: 991px) {
+    padding: 40px 24px;
+  }
+`;
+
+const Picture = styled.div`
+  margin-bottom: 25px;
+  width: 240px;
+  max-width: 100%;
+  & img {
+    width: 100%;
+  }
+  @media screen and (max-width: 576px) {
+    margin-bottom: 30px;
+    width: 202px;
+  }
+`;
 
 const Container = styled.div`
-  width: 800px;
-  margin: 0;
-  padding: 24px;
+  max-width: 587px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
   text-align: center;
 `;
 
-const Title = styled.h1`
-  margin: 0;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  color: rgba(12, 17, 43);
-  font-size: 4em;
+const Container404 = styled(Container)`
+  padding: 112px 0 205px;
+  text-align: center;
+  @media screen and (max-width: 991px) {
+    padding-top: 56px;
+    padding-bottom: 184px;
+  }
 `;
 
-const Description = styled.div`
-  line-height: 1.6em;
-  color: rgba(12, 17, 43, 0.8);
-  margin: 24px 0;
-`;
+export default connect(Page404);

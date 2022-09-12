@@ -36,7 +36,7 @@ const AdditionalBlock = ({ state }) => {
                 Вот так будет выглядеть
                 <PopupBtn onClick={() => setResumeOpened(true)}>
                   ваше резюме
-                </PopupBtn>
+                </PopupBtn>{" "}
                 после курса
               </P>
             </Note>
@@ -53,6 +53,7 @@ const PopupBtn = styled.button`
   border: none;
   color: var(--link-200);
   text-decoration: underline;
+  padding: 0;
   ${font(16, 24)};
   font-stretch: 122%;
   font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,

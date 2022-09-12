@@ -34,6 +34,8 @@ const globalStyles = css`
     --link-100: #daf5fd;
     --link-visited: #cd1fd1;
 
+    --error: #f3286c;
+
     --container-padding-xl: calc((100vw - 1200px) / 2);
     --container-padding-lg: calc((100vw - 950px) / 2);
     --container-padding-md: calc((100vw - 730px) / 2);

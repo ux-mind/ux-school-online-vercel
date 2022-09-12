@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import { TitleM } from "../../constant/Title";
 import P from "../../constant/Paragraph";
 import Input from "../../constant/Input";
+import CommonModal from "../../constant/CommonModal";
 import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import CheckboxItem from "../../constant/CheckboxItem";
 import { flex, whiteRgba, font } from "../../base/functions";
@@ -12,8 +13,19 @@ import bg from "../../../assets/images/consultation-bg.png";
 import like from "../../../assets/images/Like.png";
 import like2x from "../../../assets/images/Like@2x.png";
 
+import { useFormik } from "formik";
+
 const Consultation = () => {
   const [isUserAgree, setIsUserAgree] = useState(true);
+  const [consultationModalOpened, setConsultationModalOpened] = useState(false);
+
+  const formik = useFormik({
+    initialValues: { name: "", tel: "" },
+    onSubmit: (values) => {
+      setConsultationModalOpened(true);
+      console.log(values);
+    },
+  });
 
   return (
     <Section>
@@ -29,15 +41,30 @@ const Consultation = () => {
                 выбор-)`}
               </P>
             </Subtitle>
-            <Form>
+            <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
-                <Input placeholder="Имя" name="name" />
+                <Input
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  placeholder="Имя"
+                  name="name"
+                />
               </FormBlock>
               <FormBlock>
-                <Input placeholder="Телефон" name="tel" type="tel" />
+                <Input
+                  value={formik.values.tel}
+                  onChange={formik.handleChange}
+                  placeholder="Телефон"
+                  name="tel"
+                  type="tel"
+                />
               </FormBlock>
               <SubmitWrapper>
-                <PrimaryBtn content="Отправить" disabled={!isUserAgree} />
+                <PrimaryBtn
+                  type="submit"
+                  content="Отправить"
+                  disabled={!isUserAgree}
+                />
               </SubmitWrapper>
             </Form>
             <Agreement>
@@ -46,7 +73,7 @@ const Consultation = () => {
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
                 Я согласен с условиями обработки{" "}
-                <a href="/">персональных данных</a>
+                <a href="/terms/">персональных данных</a>
               </CheckboxItem>
             </Agreement>
           </Content>
@@ -59,9 +86,36 @@ const Consultation = () => {
           alt=""
         />
       </Like>
+      <ModalWrapper>
+        <CommonModal
+          isOpened={consultationModalOpened}
+          setIsOpened={setConsultationModalOpened}
+        >
+          <ModalTitle>Заявка отправлена</ModalTitle>
+          <P size="l">Наш менеджер совсем скоро свяжется с вами</P>
+        </CommonModal>
+      </ModalWrapper>
     </Section>
   );
 };
+
+const ModalWrapper = styled.div`
+  & .modal {
+    max-width: 670px;
+  }
+  @media screen and (max-width: 991px) {
+    & .modal {
+      max-width: calc(100% - 32px);
+    }
+  }
+`;
+
+const ModalTitle = styled(TitleM)`
+  margin-bottom: 23px;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 9px;
+  }
+`;
 
 const ConsultationTitle = styled(TitleM)`
   margin-bottom: 15px;

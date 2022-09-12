@@ -29,7 +29,11 @@ const Additional = () => {
         <YtContent>
           <P>Целый плейлист интервью с нашими выпускниками на YouTube</P>
           <YtBtnWrapper>
-            <YtBtn link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y">
+            <YtBtn
+              rel="noopenner noreferrer"
+              target="_blank"
+              link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y"
+            >
               <div>
                 <svg
                   width="20"

@@ -36,7 +36,11 @@ const Additional = ({ state }) => {
         <YtContent>
           <P>Видео-ответы на частые вопросы по обучению</P>
           <YtBtnWrapper>
-            <YtBtn link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y">
+            <YtBtn
+              rel="noopenner noreferrer"
+              target="_blank"
+              link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y"
+            >
               <div>
                 <svg
                   width="20"

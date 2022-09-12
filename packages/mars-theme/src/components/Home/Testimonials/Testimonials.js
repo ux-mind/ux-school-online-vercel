@@ -116,7 +116,11 @@ const Testimonials = () => {
         <TestimonialsTitle>Отзывы выпускников</TestimonialsTitle>
         <Content>
           <TestimonialsList>
-            {testimonials.map((testimonial) => {
+            {testimonials.map((testimonial, idx) => {
+              if (!allTestimonialsShown && idx > 3) {
+                return null;
+              }
+
               return (
                 <TestimonialItem key={testimonial.id}>
                   <Avatar>
@@ -131,7 +135,12 @@ const Testimonials = () => {
                     />
                   </Avatar>
                   <Info>
-                    <InfoText>
+                    <InfoText
+                      onClick={() => {
+                        setOpenedTestimonial(testimonial);
+                        setTestimonialModalOpened(true);
+                      }}
+                    >
                       <P size="l">{testimonial.shortText}</P>
                     </InfoText>
                     <Name>
@@ -145,8 +154,15 @@ const Testimonials = () => {
                 </TestimonialItem>
               );
             })}
+            {!allTestimonialsShown && (
+              <BtnContainer>
+                <WhiteBtn onClick={() => setAllTestimonialsShown(true)}>
+                  Показать ещё
+                </WhiteBtn>
+              </BtnContainer>
+            )}
           </TestimonialsList>
-          {/* <Additional></Additional> */}
+          <Additional />
         </Content>
         <TestimonialModal
           isOpened={testimonialModalOpened}
@@ -157,6 +173,16 @@ const Testimonials = () => {
     </Section>
   );
 };
+
+const BtnContainer = styled.div`
+  margin-top: 64px;
+  & button {
+    width: 100%;
+  }
+  @media screen and (max-width: 991px) {
+    margin-top: 30px;
+  }
+`;
 
 const Name = styled.div`
   & p {

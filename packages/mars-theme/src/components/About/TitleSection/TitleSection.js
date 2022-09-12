@@ -34,7 +34,11 @@ const TitleSection = () => {
                   использовать, что стоит делать.
                 </P>
               </InfoText>
-              <InfoLink link="http://ux-mind.pro">
+              <InfoLink
+                target="_blank"
+                rel="noopener noreferrer"
+                link="http://ux-mind.pro"
+              >
                 ux-mind.pro
                 <img width="24" height="24" src={linkExternal} alt="" />
               </InfoLink>
@@ -93,6 +97,7 @@ const Who = styled(P)`
   ${stretch(110)}
 	color: ${whiteRgba(0.7)};
   @media screen and (max-width: 991px) {
+    ${font(14, 20)}
     position: absolute;
     top: 25px;
     left: 0;
@@ -104,6 +109,9 @@ const InfoBlock = styled.div`
   display: grid;
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: 4fr 8fr;
+  }
   @media screen and (max-width: 991px) {
     padding: 0;
     grid-template-columns: 100%;

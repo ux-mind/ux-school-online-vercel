@@ -169,7 +169,8 @@ const HeaderWrapper = styled.div`
   padding: 28px 0;
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid ${whiteRgba(0.1)};
+  border-bottom: 1px solid
+    ${({ theme }) => (theme === "white" ? whiteRgba(0.1) : "var(--gray-100)")};
   position: ${({ theme }) => (theme === "white" ? "absolute" : "relative")};
   top: 0;
   left: 0;
@@ -179,6 +180,7 @@ const HeaderWrapper = styled.div`
 
   @media screen and (max-width: 991px) {
     padding: 16px 0;
+    border: none;
   }
 `;
 
@@ -206,7 +208,8 @@ const CourseButton = styled.button`
   padding-right: 46px;
   background: transparent;
   border-radius: 8px;
-  border: 1px solid ${whiteRgba(0.2)};
+  border: 1px solid
+    ${({ theme }) => (theme === "white" ? whiteRgba(0.2) : "var(--gray-100)")};
   color: ${({ theme }) =>
     theme === "white" ? "var(--white)" : "var(--black-900)"};
   &::after {

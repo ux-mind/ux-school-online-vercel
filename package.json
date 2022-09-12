@@ -24,6 +24,7 @@
     "@frontity/wp-source": "^1.11.7",
     "formik": "^2.2.9",
     "frontity": "^1.17.2",
+    "simplebar-react": "^2.4.1",
     "swiper": "^8.3.1"
   }
 }

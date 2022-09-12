@@ -26,7 +26,7 @@ const Lecturers = ({ state }) => {
 
   return (
     <Section>
-      <Container>
+      <LecturersContainer>
         <Content>
           <LecturersTitle color="white">Преподаватели</LecturersTitle>
           <SwiperWrapper>
@@ -36,14 +36,18 @@ const Lecturers = ({ state }) => {
                 el: ".lecturers-swiper-pagination",
                 clickable: true,
               }}
-              slidesPerView={1}
-              spaceBetween={24}
+              slidesPerView={"auto"}
+              spaceBetween={8}
+              centeredSlides={true}
               breakpoints={{
                 992: {
                   slidesPerView: 3,
+                  centeredSlides: false,
                 },
                 577: {
+                  centeredSlides: false,
                   slidesPerView: 2,
+                  spaceBetween: 24,
                 },
               }}
             >
@@ -69,10 +73,16 @@ const Lecturers = ({ state }) => {
             <SwiperPagination className="lecturers-swiper-pagination" />
           </SwiperWrapper>
         </Content>
-      </Container>
+      </LecturersContainer>
     </Section>
   );
 };
+
+const LecturersContainer = styled(Container)`
+  @media screen and (max-width: 576px) {
+    padding: 0;
+  }
+`;
 
 const SwiperPagination = styled.div`
   display: none;
@@ -111,6 +121,7 @@ const SlideImage = styled.div`
   position: relative;
   border-radius: 48px;
   overflow: hidden;
+  display: flex;
   & img {
     width: 100%;
     object-fit: cover;
@@ -126,12 +137,19 @@ const LecturersTitle = styled(TitleM)`
   @media screen and (max-width: 991px) {
     margin-bottom: 30px;
   }
+  @media screen and (max-width: 576px) {
+    padding: 0 24px;
+  }
 `;
 
 const SwiperWrapper = styled.div`
   position: relative;
   & .swiper-slide {
     height: auto;
+    @media screen and (max-width: 576px) {
+      width: 312px;
+      max-width: calc(100vw - 48px);
+    }
   }
   & div.lecturers-swiper-pagination {
     position: absolute;

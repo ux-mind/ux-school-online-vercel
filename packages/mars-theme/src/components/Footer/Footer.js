@@ -20,15 +20,23 @@ const socialLinks = [
   {
     icon: youtube,
     text: "Youtube",
-    link: "https://www.youtube.com/c/ux_mind_school",
+    link: "https://www.youtube.com/c/ux_mind_school/videos",
   },
   {
     icon: instagram,
     text: "Instagram",
     link: "https://www.instagram.com/ux_mind_school/",
   },
-  { icon: whatsapp, text: "WhatsApp", link: "https://wa.me/79200000000" },
-  { icon: viber, text: "Viber", link: "viber://chat/?number=%2B79200000000" },
+  {
+    icon: whatsapp,
+    text: "WhatsApp",
+    link: "https://api.whatsapp.com/send?phone=375(29)%20863-06-57",
+  },
+  {
+    icon: viber,
+    text: "Viber",
+    link: "https://viber.click/375(29)%20863-06-57",
+  },
 ];
 
 const Footer = ({ state }) => {

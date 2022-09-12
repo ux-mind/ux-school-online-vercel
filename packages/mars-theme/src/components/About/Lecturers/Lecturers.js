@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import { TitleS } from "../../constant/Title";
@@ -10,19 +10,19 @@ import teacher2x from "../../../assets/images/teacher@2x.png";
 
 const lecturers = [
   {
-    name: "Игорь Колесень",
+    name: "Александр Колесень",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Игорь Колесень",
+    name: "Олег Колесень",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Игорь Колесень",
+    name: "Игорь Луцик",
     position: "Основатель школы",
     image: teacher,
     image2x: teacher2x,
@@ -46,13 +46,13 @@ const lecturers = [
     image2x: teacher2x,
   },
   {
-    name: "Оля Казанза",
+    name: "Наташа Казанза",
     position: "Преподаватель курса «веб-дизайн»",
     image: teacher,
     image2x: teacher2x,
   },
   {
-    name: "Ксюша Лебедева",
+    name: "Ксюша Ефремова",
     position: "Преподаватель курса «дизайн старт»",
     image: teacher,
     image2x: teacher2x,
@@ -70,7 +70,7 @@ const lecturers = [
     image2x: teacher2x,
   },
   {
-    name: "Ксюша Лебедева",
+    name: "Ксюша Суркова",
     position: "Преподаватель курса «дизайн старт»",
     image: teacher,
     image2x: teacher2x,
@@ -84,6 +84,40 @@ const lecturers = [
 ];
 
 const Lecturers = ({ state }) => {
+  const [isLaptop, setIsLaptop] = useState(false);
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth > 1400) {
+      setIsLaptop(false);
+    } else {
+      setIsLaptop(true);
+    }
+
+    window.addEventListener("resize", () => {
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth > 1400) {
+        setIsLaptop(false);
+      } else {
+        setIsLaptop(true);
+      }
+    });
+
+    return () => {
+      window.removeEventListener(() => {
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth > 1400) {
+          setIsLaptop(false);
+        } else {
+          setIsLaptop(true);
+        }
+      });
+    };
+  }, []);
+
   return (
     <Section>
       <Container>
@@ -94,8 +128,12 @@ const Lecturers = ({ state }) => {
                 return null;
               }
 
-              return (
-                <Lecturer>
+              if (isLaptop && idx > 9) {
+                return null;
+              }
+
+              return idx > 11 ? null : (
+                <Lecturer key={lecturer.name}>
                   <ImgWrapper>
                     <img
                       src={lecturer.image}
@@ -163,6 +201,7 @@ const Mission = styled(P)`
   ${stretch(110)}
 	color: var(--gray-500);
   @media screen and (max-width: 991px) {
+    ${font(14, 20)}
     position: absolute;
     top: 25px;
     left: 0;
@@ -176,6 +215,9 @@ const InfoBlock = styled.div`
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
   position: relative;
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: 4fr 8fr;
+  }
   @media screen and (max-width: 991px) {
     padding-top: 152px;
     grid-template-columns: 100%;

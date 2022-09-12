@@ -1,7 +1,7 @@
 import React from "react";
 import P from "../../../constant/Paragraph";
 import CourseItem from "./CourseItem/CourseItem";
-import { styled, connect, css } from "frontity";
+import { styled, connect } from "frontity";
 import { flex, whiteRgba } from "../../../base/functions";
 
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react.js";

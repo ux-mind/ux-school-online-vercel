@@ -129,6 +129,9 @@ const Item = styled.div`
   box-sizing: border-box;
   position: relative;
   ${flex("column", "center", "flex-end")};
+  min-height: 344px;
+  padding: ${({ isMouseOver }) =>
+    isMouseOver ? "100px 32px 24px" : "24px 32px 24px"};
   @media screen and (max-width: 991px) {
     border-radius: 32px;
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.35);

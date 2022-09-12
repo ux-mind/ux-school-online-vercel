@@ -111,7 +111,10 @@ const Projects = ({ state }) => {
       <ProjectsTitle>Проекты наших выпускников</ProjectsTitle>
       <Content>
         {projects.map((project, idx) => {
-          if (isMobile && idx > 2 && !isAllProjectsShown) {
+          if (
+            (isMobile && idx > 2 && !isAllProjectsShown) ||
+            (isMobile && idx > 5 && isAllProjectsShown)
+          ) {
             return null;
           }
 

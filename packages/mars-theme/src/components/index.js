@@ -7,7 +7,7 @@ import Router from "./Router";
 import Loading from "./Loading";
 import PageError from "./PageError";
 import globalStyles from "./base/globalStyles";
-import { setSwiperCssBundle } from "./functions/functions";
+import { setSwiperCssBundle, setSimplebarBundle } from "./functions/functions";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -27,6 +27,8 @@ const Theme = ({ state, actions }) => {
 
   useEffect(() => {
     setSwiperCssBundle();
+    setSimplebarBundle();
+
     actions.theme.setHeaderTheme();
   }, [state.router.link]);
 

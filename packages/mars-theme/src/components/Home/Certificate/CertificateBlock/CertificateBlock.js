@@ -34,9 +34,9 @@ const CertificateBlock = ({ state }) => {
     },
   });
 
-  React.useEffect(() => {
-    console.log(isUserAgree);
-  }, [isUserAgree]);
+  const scrollToRates = () => {
+    state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <Wrapper>
@@ -71,7 +71,7 @@ const CertificateBlock = ({ state }) => {
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
-        <PrimaryBtn content="Записаться на курс" />
+        <PrimaryBtn onClick={scrollToRates} content="Записаться на курс" />
       </CourseBtnWrapper>
       <CommonModal
         isOpened={checkModalOpened}
@@ -125,7 +125,7 @@ const CertificateBlock = ({ state }) => {
               setChecked={() => setIsUserAgree((prev) => !prev)}
             >
               Я согласен с условиями обработки{" "}
-              <a href="/">персональных данных</a>
+              <a href="/terms/">персональных данных</a>
             </CheckboxItem>
           </CheckboxWrapper>
         </CheckForm>
@@ -349,6 +349,9 @@ const Subtitle = styled.div`
   margin: 0 auto 63px;
   z-index: 2;
   position: relative;
+  & p {
+    text-align: center;
+  }
   @media screen and (max-width: 991px) {
     margin-bottom: 33px;
   }
@@ -377,10 +380,8 @@ const Wrapper = styled.div`
     padding: 110px 0 104px;
     margin-bottom: -372px;
 
-    @media screen and (max-width: 991px) {
-      & .modal {
-        max-width: calc(100% - 32px);
-      }
+    & .modal {
+      max-width: calc(100% - 32px);
     }
 
     & .modal-wrapper {

@@ -3,8 +3,6 @@ import image from "@frontity/html2react/processors/image";
 import iframe from "@frontity/html2react/processors/iframe";
 import link from "@frontity/html2react/processors/link";
 
-/* test changes */
-
 const marsTheme = {
   name: "@frontity/mars-theme",
   roots: {
@@ -30,6 +28,7 @@ const marsTheme = {
       headerTheme: "white",
       isMobile: false,
       isMobileMenuOpened: false,
+      ratesElement: null,
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -66,6 +65,9 @@ const marsTheme = {
       },
       toggleCourseModal: ({ state }) => {
         state.theme.courseModalOpened = !state.theme.courseModalOpened;
+      },
+      setRatesElement: ({ state }) => (el) => {
+        state.theme.ratesElement = el;
       },
       setHeaderTheme: ({ state }) => {
         switch (state.router.link) {

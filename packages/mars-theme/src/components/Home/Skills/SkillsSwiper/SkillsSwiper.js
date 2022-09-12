@@ -216,7 +216,7 @@ const ImageSwiperWrapper = styled.div`
       opacity: 1 !important;
     }
   }
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1200px) {
     max-width: 280px;
     max-height: 280px;
     top: 20px;
@@ -251,7 +251,7 @@ const Note = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1200px) {
     & img {
       max-width: 280px;
       max-height: 280px;

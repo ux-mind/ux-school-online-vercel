@@ -18,6 +18,7 @@ const WhiteButton = styled.button`
     ${stretch(122)};
     font-weight: 500;
     padding: 0.4375em 1em;
+    border-radius: 8px;
   }
 `;
 

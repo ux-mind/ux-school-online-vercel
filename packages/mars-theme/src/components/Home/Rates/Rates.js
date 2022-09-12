@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import P from "../../constant/Paragraph";
 import Container from "../../constant/Container";
 import RateItem from "./RateItem/RateItem";
@@ -38,8 +38,10 @@ const nextContent = [
   "Как минимум 2 месяца погружения в мир дизайна с головой-)",
 ];
 
-const Rates = ({ state }) => {
+const Rates = ({ state, actions }) => {
   const { isMobile } = state.theme;
+
+  const ratesRef = useRef(null);
 
   const [signupModalOpened, setSignupModalOpened] = useState(false);
   const [sendModalOpened, setSendModalOpened] = useState(false);
@@ -55,10 +57,16 @@ const Rates = ({ state }) => {
     },
   });
 
+  useEffect(() => {
+    if (ratesRef) {
+      actions.theme.setRatesElement(ratesRef.current);
+    }
+  }, [ratesRef]);
+
   return (
     <>
       <Section>
-        <Container>
+        <Container ref={ratesRef}>
           <TitleM align="center" mb={isMobile ? 13 : 23}>
             Тарифы
           </TitleM>
@@ -131,7 +139,7 @@ const Rates = ({ state }) => {
               setChecked={() => setIsApproved((prev) => !prev)}
             >
               Я согласен с условиями обработки{" "}
-              <a href="/">персональных данных</a>
+              <a href="/terms/">персональных данных</a>
             </CheckboxItem>
           </CheckboxWrapper>
         </SignupForm>

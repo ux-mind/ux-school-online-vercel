@@ -22,8 +22,13 @@ export const TitleL = styled.h1`
 
 export const TitleM = styled.h2`
   margin: 0;
-  color: var(--white);
-  ${({ color }) => (color === "white" ? "" : gradient())};
+  ${({ color }) =>
+    color === "white"
+      ? "color: var(--white)"
+      : color === "black"
+      ? "color: var(--black-900)"
+      : `${gradient()}`};
+
   text-align: ${({ align }) => (align ? align : "left")};
   ${font(52, 56)};
   font-weight: 540;

@@ -1,5 +1,5 @@
 import { styled } from "frontity";
-import { font } from "../base/functions";
+import { font, whiteRgba } from "../base/functions";
 
 const Button = ({ disabled, type, content, onClick }) => {
   return (
@@ -38,10 +38,7 @@ const PrimaryButton = styled.button`
   font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,
     "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   backdrop-filter: blur(50px);
-  box-shadow: 0px 1px 1px rgba(55, 61, 67, 0.1),
-    0px -30px 100px rgba(255, 255, 255, 0.3),
-    0px 70px 90px rgba(55, 61, 67, 0.3),
-    inset 0.5px 1px 0px rgba(255, 255, 255, 0.35);
+  box-shadow: inset 1px 1px 0px ${whiteRgba(0.15)};
   &:hover {
     background: var(--gradient-primary-btn-hover);
   }

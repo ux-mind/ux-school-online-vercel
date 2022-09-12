@@ -3,11 +3,11 @@ import P from "./Paragraph";
 import { flex, font } from "../base/functions";
 import { styled } from "frontity";
 
-const CheckboxItem = ({ checked, setChecked, children }) => {
+const CheckboxItem = ({ checked, setChecked, top, children }) => {
   return (
     <CheckboxWrapper onClick={setChecked}>
       <CheckboxInput />
-      <Checkbox checked={checked}>
+      <Checkbox top={top} checked={checked}>
         {checked && (
           <svg
             width="12"
@@ -40,14 +40,16 @@ const Checkbox = styled.div`
   width: 14px;
   height: 14px;
   left: 3px;
-  top: 50%;
-  transform: translateY(-50%);
   border: 2px solid var(--gray-300);
   border-radius: 4px;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.35);
   background: var(--white);
   display: grid;
   place-items: center;
+  ${({ top }) =>
+    top
+      ? `top: 3px; transform: none;`
+      : `top: 50%; transform: translateY(-50%);`}
   ${({ checked }) =>
     checked &&
     `background: var(--gradient-primary-btn); border: none; width: 18px; height: 18px;`};
@@ -57,6 +59,7 @@ const CheckboxWrapper = styled.div`
   padding-left: 32px;
   position: relative;
   ${flex()};
+  cursor: pointer;
   @media screen and (max-width: 991px) {
     & p {
       ${font(14, 20)};

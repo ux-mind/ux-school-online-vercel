@@ -146,6 +146,15 @@ const InfoIcon = styled.span`
 const InstallmentP = styled(P)`
   position: relative;
   ${flex("row", "center")};
+  @media screen and (max-width: 576px) {
+    text-align: center;
+    display: inline;
+    padding: 0 20px;
+    & span {
+      display: inline-flex;
+      transform: translateY(3px);
+    }
+  }
 `;
 
 const Installment = styled.div`

@@ -34,9 +34,10 @@ const CompaniesSwiper = () => {
           className="companies-swiper"
           modules={[Autoplay]}
           autoplay={{
-            delay: 5000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
+          speed={600}
           spaceBetween={8}
           loop={true}
           slidesPerView={"auto"}
@@ -73,6 +74,7 @@ const Title = styled.div`
   text-align: center;
   & p {
     color: var(--black-900);
+    text-align: center;
   }
 `;
 

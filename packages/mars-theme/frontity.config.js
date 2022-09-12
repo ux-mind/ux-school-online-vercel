@@ -1,7 +1,7 @@
 export const webpack = ({ config, mode, target }) => {
   // Add support for a new file type.
   config.module.rules.push({
-    test: /\.(mov|mp4)$/,
+    test: /\.(mov|mp4|webm)$/,
     // type: "asset/resource",
     use: [
       {

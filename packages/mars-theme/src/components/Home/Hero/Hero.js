@@ -6,6 +6,8 @@ import { connect, styled } from "frontity";
 import { font, whiteRgba, stretch } from "../../base/functions";
 
 import video from "../../../assets/videos/hero-video.mov";
+import videoWebm from "../../../assets/videos/hero-video.webm";
+
 import bg from "../../../assets/images/Bg.png";
 import check from "../../../assets/images/svg/list-check.svg";
 
@@ -16,6 +18,10 @@ const advantages = [
 ];
 
 const Hero = ({ state }) => {
+  const scrollToRates = () => {
+    state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <HeroWrapper>
       <Container>
@@ -27,17 +33,31 @@ const Hero = ({ state }) => {
           <AdvantagesList>
             {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
           </AdvantagesList>
-          <PrimaryButton content={"Записаться на курс"} />
+          <PrimaryButton
+            onClick={scrollToRates}
+            content={"Записаться на курс"}
+          />
           <VideoWrapper>
-            <video width="728" height="728" autoPlay>
+            {/* <img src={videoGif} alt="" /> */}
+            <video
+              width="728"
+              height="728"
+              autoPlay
+              nocontrols="true"
+              playsInline
+              muted
+              loop={true}
+              preload="auto"
+            >
               <source src={video} type="video/mp4" />
-              Тег video не поддерживается вашим браузером.
+              <source src={videoWebm} type="video/webm" /> § Тег video не
+              поддерживается вашим браузером.
             </video>
           </VideoWrapper>
           <Quote>
             <p>
               Сделай крутой шаг в карьере и получи современную,
-              высооплачиваемую профессию
+              высокооплачиваемую профессию
             </p>
           </Quote>
         </Content>
@@ -69,7 +89,7 @@ const Quote = styled.div`
   @media screen and (max-width: 991px) {
     transform: rotate(-5deg);
     left: 5px;
-    bottom: 188px;
+    bottom: 185px;
     top: auto;
     & p {
       ${font(14, 20)};
@@ -82,12 +102,12 @@ const VideoWrapper = styled.div`
   width: auto;
   height: 728px;
   position: absolute;
-  top: -23px;
+  top: 20px;
   right: -112px;
   @media screen and (max-width: 1400px) {
     height: auto;
-    right: 0;
-    top: 240px;
+    right: -80px;
+    top: 120px;
     & video {
       width: 500px;
       height: 500px;
@@ -97,11 +117,18 @@ const VideoWrapper = styled.div`
     position: relative;
     top: initial;
     left: initial;
+    right: initial;
     margin-top: 46px;
     width: 100%;
     & video {
       width: 100%;
     }
+  }
+  @media screen and (max-width: 576px) {
+    width: calc(100% + 160px);
+    left: 50%;
+    transform: translateX(calc(-50% - 20px));
+    margin: 0;
   }
 `;
 
@@ -149,10 +176,14 @@ const Content = styled.div`
     padding-top: calc(71px + 54px);
     padding-bottom: 135px;
   }
+  @media screen and (max-width: 576px) {
+    padding-bottom: 50px;
+  }
 `;
 
 const HeroWrapper = styled.div`
   background: url(${bg}) 50% / cover;
+  overflow: hidden;
 `;
 
 export default connect(Hero);

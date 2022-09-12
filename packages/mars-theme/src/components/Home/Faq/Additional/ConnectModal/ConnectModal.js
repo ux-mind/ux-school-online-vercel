@@ -69,7 +69,8 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
             checked={isUserAgree}
             setChecked={() => setIsUserAgree((prev) => !prev)}
           >
-            Я согласен с условиями обработки <a href="/">персональных данных</a>
+            Я согласен с условиями обработки{" "}
+            <a href="/terms/">персональных данных</a>
           </CheckboxItem>
         </CheckboxWrapper>
       </ConnectForm>
