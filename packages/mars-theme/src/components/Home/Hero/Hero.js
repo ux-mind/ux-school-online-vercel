@@ -28,7 +28,7 @@ const Hero = ({ state }) => {
         <Content>
           <HeroTitle>
             Профессия <br />
-            UX/UI-дизайнер
+            UX/UI-дизайнер updated
           </HeroTitle>
           <AdvantagesList>
             {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
