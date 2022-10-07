@@ -22,7 +22,8 @@ import portfolio from "../../../../assets/images/learn-slider/portfolio.png";
 import portfolio2x from "../../../../assets/images/learn-slider/portfolio@2x.png";
 import job from "../../../../assets/images/learn-slider/job.png";
 import job2x from "../../../../assets/images/learn-slider/job@2x.png";
-
+import parse from "html-react-parser";
+/*
 const slides = [
   {
     id: 1,
@@ -63,9 +64,9 @@ const slides = [
     image: job,
     image2x: job2x,
   },
-];
+];*/
 
-const SkillsSwiper = ({ state }) => {
+const SkillsSwiper = ({ state, post }) => {
   const [infoSwiper, setInfoSwiper] = useState(null);
   const [infoImgSwiper, setInfoImgSwiper] = useState(null);
 
@@ -118,19 +119,25 @@ const SkillsSwiper = ({ state }) => {
           delay: 3000,
         }}
       >
-        {slides.map((slide) => {
+        {post.acf.skills_items.map((slide) => {
           return (
-            <SwiperSlide key={slide.id}>
+            <SwiperSlide key={slide.skills_item_title}>
               <SlideContent className="slide-content">
                 <Note>
-                  <SlideTitle>{slide.title}</SlideTitle>
+                  <SlideTitle>{slide.skills_item_title ? parse(slide.skills_item_title) : ''}</SlideTitle>
                   <Text>
-                    <P size="l">{slide.content}</P>
+                    <P size="l">{slide.skills_item_description ? parse(slide.skills_item_description) : ''}</P>
                   </Text>
                 </Note>
                 <ImageContainer>
                   <ImageWrapper className="image-wrapper">
-                    <img wdith="400" height="400" src={slide.image} alt="" />
+                   { /*<img
+                      width="400"
+                      height="400"
+                      src={slide.skills_item_image_1x.url}
+                      srcSet={slide.skills_item_image_2x.url ? slide.skills_item_image_2x.url : slide.skills_item_image_1x.url}
+                      alt=""
+                    />*/}
                   </ImageWrapper>
                 </ImageContainer>
               </SlideContent>
@@ -149,11 +156,17 @@ const SkillsSwiper = ({ state }) => {
             setInfoImgSwiper(swiper);
           }}
         >
-          {slides.map((slide) => {
+          {post.acf.skills_items.map((slide) => {
             return (
               <SwiperSlide key={slide.id}>
                 <ImageWrapper>
-                  <img wdith="400" height="400" src={slide.image} alt="" />
+                  <img
+                    width="400"
+                    height="400" 
+                    src={slide.skills_item_image_1x.url}
+                    srcSet={slide.skills_item_image_2x.url ? slide.skills_item_image_2x.url : slide.skills_item_image_1x.url}
+                    alt=""
+                  />
                 </ImageWrapper>
               </SwiperSlide>
             );

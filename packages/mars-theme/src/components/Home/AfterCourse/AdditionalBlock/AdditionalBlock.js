@@ -7,7 +7,9 @@ import { font, whiteRgba, grayRgba } from "../../../base/functions";
 import people from "../../../../assets/images/svg/People.svg";
 import lighting from "../../../../assets/images/svg/Lightning.svg";
 
-const AdditionalBlock = ({ state }) => {
+import parse from "html-react-parser";
+
+const AdditionalBlock = ({ state, post }) => {
   const { isMobile } = state.theme;
 
   const [resumeOpened, setResumeOpened] = useState(false);
@@ -16,18 +18,21 @@ const AdditionalBlock = ({ state }) => {
     <>
       <Additional>
         <Wrapper>
-          <AdditionalItem>
-            <Icon>
-              <img width="24" height="24" src={people} alt="" />
-            </Icon>
-            <Note>
-              <P color="white">
-                Если вы являетесь представителем компании, которой нужны хорошие
-                дизайнеры, напишите нам
-              </P>
-            </Note>
-          </AdditionalItem>
-          <AdditionalItem>
+          {post.acf.after_course_info_items.map((item) => {
+            return (
+              <AdditionalItem>
+                <Icon>
+                  <img width="24" height="24" src={item.after_course_info_item_icon.url} alt="" />
+                </Icon>
+                <Note>
+                  <P color="white">
+                    {item.after_course_info_item_text ? parse(item.after_course_info_item_text) : ''}
+                  </P>
+                </Note>
+              </AdditionalItem>
+            );
+          })}
+          {/*<AdditionalItem>
             <Icon>
               <img width="24" height="24" src={lighting} alt="" />
             </Icon>
@@ -40,7 +45,7 @@ const AdditionalBlock = ({ state }) => {
                 после курса
               </P>
             </Note>
-          </AdditionalItem>
+        </AdditionalItem>*/}
         </Wrapper>
       </Additional>
       <Resume isOpened={resumeOpened} setIsOpened={setResumeOpened} />

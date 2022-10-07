@@ -8,38 +8,35 @@ import { styled } from "frontity";
 
 import bg from "../../../assets/images/about-title-bg.png";
 import linkExternal from "../../../assets/images/svg/Link-external.svg";
+import parse from "html-react-parser";
 
-const TitleSection = () => {
+const TitleSection = ({ post }) => {
   return (
     <Section>
       <Container>
         <Content>
           <TitleBlock>
-            <TitleTop>Школа дизайна</TitleTop>
-            <TitleBottom>UX MIND School</TitleBottom>
+            <TitleTop>{post.acf.who_we_are_title_top}</TitleTop>
+            <TitleBottom>{post.acf.who_we_are_title_bottom}</TitleBottom>
           </TitleBlock>
           <InfoBlock>
-            <Who>Кто мы такие</Who>
+            <Who>{post.acf.who_we_are_block_title}</Who>
             <Info>
               <InfoText>
-                <P size="l" color="white">
-                  Мы — школа дизайна, которая построена на основе студии&nbsp;UX
-                  Mind, для того чтобы вырастить собственных специалистов и
-                  делиться своим опытом со всеми желающими.
-                </P>
-                <P size="l" color="white">
-                  Сейчас знания быстро устаревают, и учиться имеет смысл только
-                  у тех, кто в этом «варится». Мы каждый день на передовой
-                  и знаем, что сейчас в тренде, какие технологии лучше
-                  использовать, что стоит делать.
-                </P>
+                {post.acf.who_we_are_text.map((item) => {
+                  return (
+                  <P size="l" color="white">
+                    {parse(item.who_we_are_paragraph)}
+                  </P>
+                  );
+                })}
               </InfoText>
               <InfoLink
                 target="_blank"
                 rel="noopener noreferrer"
-                link="http://ux-mind.pro"
+                link={post.acf.who_we_are_button_link}
               >
-                ux-mind.pro
+                {post.acf.who_we_are_button_text}
                 <img width="24" height="24" src={linkExternal} alt="" />
               </InfoLink>
             </Info>

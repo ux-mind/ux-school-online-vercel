@@ -6,6 +6,7 @@ import { font, flex, grayRgba, whiteRgba } from "../../base/functions";
 import { styled, connect } from "frontity";
 
 import next from "../../../assets/images/svg/next.svg";
+import parse from "html-react-parser";
 
 const roadmap = [
   {
@@ -39,49 +40,49 @@ const roadmap = [
   },
 ];
 
-const Roadmap = ({ state }) => {
+const Roadmap = ({ state, post }) => {
   const { isMobile } = state.theme;
 
-  const [activeSlide, setActiveSlide] = useState(roadmap[0]);
+  const [activeSlide, setActiveSlide] = useState(post.acf.roadmap_tabs[0]);
 
   return (
     <Section>
       <Container>
         <Content>
           <div>
-            <TitleM>Как проходит обучение</TitleM>
+            <TitleM>{post.acf.roadmap_title ? parse(post.acf.roadmap_title) : ''}</TitleM>
           </div>
           <Slides>
             {!isMobile && (
               <Pagination>
-                {roadmap.map((item) => (
+                {post.acf.roadmap_tabs.map((item, id) => (
                   <PaginationItem
-                    active={activeSlide.id === item.id}
-                    key={item.id}
+                    active={activeSlide.roadmap_item_title === item.roadmap_item_title}
+                    key={item.roadmap_item_title}
                     onClick={() => setActiveSlide(item)}
                   >
-                    <Number>{item.id}</Number>
-                    <P>{item.title}</P>
+                    <Number>{id+1}</Number>
+                    <P>{item.roadmap_item_title ? parse(item.roadmap_item_title) : ''}</P>
                   </PaginationItem>
                 ))}
               </Pagination>
             )}
             {isMobile ? (
-              roadmap.map((item) => (
-                <Slide key={item.id}>
-                  <SlideTitle>{item.title}</SlideTitle>
-                  {item.paragraphs.map((paragraph) => (
-                    <P size="l" key={paragraph}>
-                      {paragraph}
+              post.acf.roadmap_tabs.map((item) => (
+                <Slide key={item.roadmap_item_title}>
+                  <SlideTitle>{item.roadmap_item_title ? parse(item.roadmap_item_title) : ''}</SlideTitle>
+                  {item.roadmap_item_text.map((paragraph) => (
+                    <P size="l" key={paragraph.roadmap_item_paragraph}>
+                      {paragraph.roadmap_item_paragraph ? parse(paragraph.roadmap_item_paragraph) : ''}
                     </P>
                   ))}
                 </Slide>
               ))
             ) : (
               <Slide>
-                {activeSlide.paragraphs.map((paragraph) => (
-                  <P size="l" key={paragraph}>
-                    {paragraph}
+                {activeSlide.roadmap_item_text.map((paragraph) => (
+                  <P size="l" key={paragraph.roadmap_item_paragraph}>
+                    {paragraph.roadmap_item_paragraph ? parse(paragraph.roadmap_item_paragraph) : ''}
                   </P>
                 ))}
               </Slide>

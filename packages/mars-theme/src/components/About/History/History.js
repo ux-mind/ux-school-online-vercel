@@ -4,7 +4,8 @@ import Container from "../../constant/Container";
 import WhiteBtn from "../../constant/WhiteButton";
 import { font, stretch, grayRgba } from "../../base/functions";
 import { styled } from "frontity";
-
+import parse from "html-react-parser";
+/*
 const history = [
   {
     date: "2 марта 2018",
@@ -30,9 +31,9 @@ const history = [
     content:
       "Первое занятие в дистанционном формате. Началось из-за covid-19, но формат понравился и прижился.",
   },
-];
+];*/
 
-const History = () => {
+const History = ({ post }) => {
   const [historyOpened, setHistoryOpened] = useState(false);
 
   return (
@@ -40,16 +41,16 @@ const History = () => {
       <Container>
         <Content>
           <InfoBlock>
-            <Mission>История</Mission>
+            <Mission>{post.acf.history_block_title}</Mission>
             <Info>
               <InfoText>
-                {history.map((item, idx) => {
+                {post.acf.history_items.map((item, idx) => {
                   if (!historyOpened && idx > 3) {
                     return null;
                   }
 
                   return (
-                    <InfoItem key={item.date}>
+                    <InfoItem key={item.history_item_date}>
                       <Decorative className="decorative">
                         <svg
                           width="1"
@@ -68,8 +69,8 @@ const History = () => {
                         </svg>
                         <Point />
                       </Decorative>
-                      <Date>{item.date}</Date>
-                      <P size="l">{item.content}</P>
+                      <Date>{item.history_item_date}</Date>
+                      <P size="l">{parse(item.history_item_description)}</P>
                     </InfoItem>
                   );
                 })}
@@ -77,7 +78,7 @@ const History = () => {
               <ShowMore>
                 {!historyOpened && (
                   <WhiteBtn onClick={() => setHistoryOpened(true)}>
-                    Показать еще
+                    {post.acf.history_show_more_button}
                   </WhiteBtn>
                 )}
               </ShowMore>

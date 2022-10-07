@@ -6,15 +6,16 @@ import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
 
 import bg from "../../../assets/images/after-bg.png";
+import parse from "html-react-parser";
 
-const AfterCourse = () => {
+const AfterCourse = ({ post }) => {
   return (
     <Section>
       <Container>
         <Content>
-          <AfterTitleM color="white">Что будет после курса</AfterTitleM>
-          <AdditionalBlock />
-          <AfterCourseList />
+          <AfterTitleM color="white">{post.acf.after_course_title ? parse(post.acf.after_course_title ) : ''}</AfterTitleM>
+          <AdditionalBlock post={post} />
+          <AfterCourseList post={post} />
         </Content>
       </Container>
     </Section>

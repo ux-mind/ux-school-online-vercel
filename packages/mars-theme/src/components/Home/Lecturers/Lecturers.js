@@ -14,6 +14,7 @@ import lecturer2 from "../../../assets/images/lecturers/lecturer2.png";
 import lecturer2_2x from "../../../assets/images/lecturers/lecturer2@2x.png";
 import lecturer3 from "../../../assets/images/lecturers/lecturer3.png";
 import lecturer3_2x from "../../../assets/images/lecturers/lecturer3@2x.png";
+import parse from "html-react-parser";
 
 const lecturers = [
   { name: "Илья Метла", avatar: lecturer1, avatar2x: lecturer1_2x },
@@ -21,14 +22,15 @@ const lecturers = [
   { name: "Саша Карасик", avatar: lecturer3, avatar2x: lecturer3_2x },
 ];
 
-const Lecturers = ({ state }) => {
+const Lecturers = ({ state, post }) => {
   const { isMobile } = state.theme;
+  console.log(post);
 
   return (
     <Section>
       <LecturersContainer>
         <Content>
-          <LecturersTitle color="white">Преподаватели</LecturersTitle>
+          <LecturersTitle color="white">{post.acf.lecturers_title ? parse(post.acf.lecturers_title) : ''}</LecturersTitle>
           <SwiperWrapper>
             <Swiper
               modules={[Pagination]}
@@ -51,21 +53,21 @@ const Lecturers = ({ state }) => {
                 },
               }}
             >
-              {lecturers.map(({ name, avatar, avatar2x }) => (
-                <SwiperSlide key={name}>
+              {post.acf.lecturers_items.map((item) => (
+                <SwiperSlide key={item.lecturers_item_name}>
                   <SlideImage>
                     <img
                       width="384"
-                      src={avatar}
-                      srcSet={`${avatar} 1x, ${
-                        avatar2x ? avatar2x : avatar
+                      src={item.lecturers_item_photo_1x.url}
+                      srcSet={`${item.lecturers_item_photo_1x.url} 1x, ${
+                        item.lecturers_item_photo_2x.url ? item.lecturers_item_photo_2x.url : item.lecturers_item_photo_1x.url
                       } 2x`}
                       alt="lecturer"
                     />
                     <Fade />
                   </SlideImage>
                   <SlideContent>
-                    <Name color="white">{name}</Name>
+                    <Name color="white">{item.lecturers_item_name}</Name>
                   </SlideContent>
                 </SwiperSlide>
               ))}

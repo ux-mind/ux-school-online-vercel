@@ -18,7 +18,7 @@ const slides = [
   { id: 1, image: slide3, image2x: slide3_2x },
 ];
 
-const AboutSlider = () => {
+const AboutSlider = ({ post }) => {
   return (
     <Section>
       <Content>
@@ -38,12 +38,12 @@ const AboutSlider = () => {
             },
           }}
         >
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
+          {post.acf.mission_slider.map((slide, id) => (
+            <SwiperSlide key={`slide-${id}`}>
               <Image>
                 <img
-                  src={slide.image}
-                  srcSet={slide.image2x ? slide.image2x : slide.image}
+                  src={slide.mission_slider_image_1x.url}
+                  srcSet={slide.mission_slider_image_2x.url ? slide.mission_slider_image_2x.url : slide.mission_slider_image_1x.url}
                   alt="slide"
                 />
               </Image>

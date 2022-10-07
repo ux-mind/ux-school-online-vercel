@@ -10,40 +10,35 @@ import {
   whiteRgba,
 } from "../../base/functions";
 import { styled } from "frontity";
+import parse from "html-react-parser";
 
 import igor from "../../../assets/images/Igor.png";
 import bg from "../../../assets/images/quote-bg.png";
 import bgMobile from "../../../assets/images/quote-bg-mobile.png";
 
-const Info = () => {
+const Info = ({ post }) => {
   return (
     <Section>
-      <QuoteMobile>Цитата</QuoteMobile>
+      <QuoteMobile>{post.acf.info_quote_title}</QuoteMobile>
       <Container>
         <Content>
           <Top>
             <InfoBlock>
-              <Quote>Цитата</Quote>
+              <Quote>{post.acf.info_quote_title}</Quote>
               <InfoWrapper>
                 <InfoText>
-                  <P size="l">
-                    Мы — школа дизайна, которая построена на основе студии UX
-                    Mind, для того чтобы вырастить собственных специалистов и
-                    делиться своим опытом со всеми желающими.
-                  </P>
-                  <P size="l">
-                    Сейчас знания быстро устаревают, и учиться имеет смысл
-                    только у тех, кто в этом «варится». Мы каждый день
-                    на передовой и знаем, что сейчас в тренде, какие технологии
-                    лучше использовать, что стоит делать.
-                  </P>
+                  {post.acf.info_quote_text.map((paragraph) => (
+                    <P size="l">
+                      {parse(paragraph.info_quote_paragraph)}
+                    </P>
+                  ))}
                   <SmallInfo>
                     <Avatar>
-                      <img src={igor} alt="" />
+                      <img src={post.acf.info_quote_author_photo.url} alt="" />
                     </Avatar>
                     <div>
-                      <Name>Игорь Колесень</Name>
-                      <Position>Основатель школы</Position>
+                      <Name>{post.acf.info_quote_author_name}</Name>
+                      <Position>{post.acf.info_quote_author_post}</Position>
                     </div>
                   </SmallInfo>
                 </InfoText>
@@ -52,20 +47,20 @@ const Info = () => {
           </Top>
           <Bottom>
             <NumbersBlock>
-              <Number>2018</Number>
-              <NumberTitle>Год основания</NumberTitle>
+              <Number>{post.acf.info_item_1_number}</Number>
+              <NumberTitle>{post.acf.info_item_1_text}</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>1000+</Number>
-              <NumberTitle>Выпускников</NumberTitle>
+              <Number>{post.acf.info_item_2_number}</Number>
+              <NumberTitle>{post.acf.info_item_2_text}</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>20</Number>
-              <NumberTitle>Преподавателей</NumberTitle>
+              <Number>{post.acf.info_item_3_number}</Number>
+              <NumberTitle>{post.acf.info_item_3_text}</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>12</Number>
-              <NumberTitle>Направлений</NumberTitle>
+              <Number>{post.acf.info_item_4_number}</Number>
+              <NumberTitle>{post.acf.info_item_4_text}</NumberTitle>
             </NumbersBlock>
           </Bottom>
         </Content>

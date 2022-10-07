@@ -3,6 +3,7 @@ import P from "../../../../constant/Paragraph";
 import Link from "../../../../constant/TextLink";
 import { font, flex, grayRgba } from "../../../../base/functions";
 import { styled, connect, useConnect } from "frontity";
+import parse from "html-react-parser";
 
 import play from "../../../../../assets/images/svg/play.svg";
 
@@ -21,7 +22,7 @@ const ProgramItem = ({ data }) => {
         }
       >
         <Title>
-          <P size="l">{data.title}</P>
+          <P size="l">{data.program_item_title ? parse(data.program_item_title) : ''}</P>
         </Title>
         <Drop
           style={
@@ -46,14 +47,14 @@ const ProgramItem = ({ data }) => {
       </BtnWrapper>
       {isOpened && (
         <ContentWrapper>
-          {data.videos.map((item) => {
+          {data.program_item_links.map((item) => {
             return (
-              <VideoItem key={item.id}>
+              <VideoItem key={item.program_item_link_title}>
                 <VideoItemContent>
-                  <P>{item.title}</P>
+                  <P>{item.program_item_link_title ? parse(item.program_item_link_title) : ''}</P>
                 </VideoItemContent>
                 <VideoItemState>
-                  {item.blocked ? (
+                  {!item.program_item_link_url ? (
                     <div>
                       <svg
                         width="24"
@@ -72,8 +73,8 @@ const ProgramItem = ({ data }) => {
                     </div>
                   ) : (
                     <VideoInfo>
-                      <VideoLink link={item.videoLink}>
-                        <span>Бесплатно ({item.videoLength})</span>
+                      <VideoLink link={item.program_item_link_url}>
+                        <span>{item.program_item_link_text ? parse(item.program_item_link_text) : ''}</span>
                         <img src={play} width="24" height="24" alt="play" />
                       </VideoLink>
                     </VideoInfo>

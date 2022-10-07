@@ -15,6 +15,8 @@ import { ListButton } from "../constant/Button";
 const Header = ({ state, actions }) => {
   const { menu, headerTheme, courseModalOpened } = state.theme;
 
+  const options = state.source.get(`acf-settings`);
+
   useEffect(() => {
     actions.theme.checkIsMobile();
 
@@ -29,7 +31,7 @@ const Header = ({ state, actions }) => {
     <HeaderWrapper theme={headerTheme}>
       <HeaderContainer>
         <StyledLink link="/">
-          <Image src={headerTheme === "white" ? whiteLogo : logo} alt="logo" />
+          <Image src={headerTheme === "white" ? options.acf.header_logo_white.url : options.acf.header_logo.url} alt="logo" />
         </StyledLink>
         <div
           css={css`
@@ -45,7 +47,7 @@ const Header = ({ state, actions }) => {
             rotation={"down"}
             onClick={() => actions.theme.toggleCourseModal()}
           >
-            Онлайн-курсы
+            {options.acf.header_dropdown_menu_button_text}
           </CourseButton>
           {courseModalOpened && (
             <CourseModal>
@@ -53,14 +55,14 @@ const Header = ({ state, actions }) => {
                 <CourseListButton
                   onClick={() => actions.theme.closeCourseModal()}
                 >
-                  Онлайн-курсы
+                  {options.acf.header_dropdown_menu_item_1}
                 </CourseListButton>
                 <CourseListButton
                   onClick={() =>
                     (window.location.href = "https://ux-school.by/")
                   }
                 >
-                  Занятия в классе
+                  {options.acf.header_dropdown_menu_item_2}
                 </CourseListButton>
               </DropdownModal>
             </CourseModal>

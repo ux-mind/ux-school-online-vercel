@@ -4,6 +4,7 @@ import Link from "../../../constant/Link";
 import P from "../../../constant/Paragraph";
 import { flex } from "../../../base/functions";
 import { styled } from "frontity";
+import parse from "html-react-parser";
 
 const TestimonialModal = ({ isOpened, setIsOpened, testimonial }) => {
   if (!testimonial) {
@@ -16,28 +17,28 @@ const TestimonialModal = ({ isOpened, setIsOpened, testimonial }) => {
         <Info>
           <Avatar>
             <img
-              src={testimonial.avatar}
-              srcSet={`${testimonial.avatar} 1x, ${
-                testimonial.avatar2x ? testimonial.avatar2x : testimonial.avatar
+              src={testimonial.acf.review_photo_1x.url}
+              srcSet={`${testimonial.acf.review_photo_1x.url} 1x, ${
+                testimonial.acf.review_photo_2x.url ? testimonial.acf.review_photo_2x.url : testimonial.acf.review_photo_1x.url
               } 2x`}
               alt="avatar"
             />
           </Avatar>
-          <Name>{testimonial.name}</Name>
-          {testimonial.age && <Age>{testimonial.age}</Age>}
+          <Name>{testimonial.acf.review_author_name}</Name>
+          {testimonial.acf.review_author_age && <Age>{testimonial.acf.review_author_age}</Age>}
           <Social>
-            {testimonial.social[0] &&
-              testimonial.social.map((item) => (
-                <SocialLink link={item.link} key={item.id}>
-                  <img src={item.icon} alt="social link" />
+            {testimonial.acf.review_social_links[0] &&
+              testimonial.acf.review_social_links.map((item, id) => (
+                <SocialLink link={item.review_social_link} key={`${item.review_social_link}-${id}`}>
+                  <img src={item.review_social_icon.url} alt="social link" />
                 </SocialLink>
               ))}
           </Social>
         </Info>
         <Text>
-          {testimonial.paragraphs.map((paragraph) => (
-            <P size="l" key={paragraph}>
-              {paragraph}
+          {testimonial.acf.review_full_text.map((paragraph) => (
+            <P size="l" key={paragraph.review_full_paragrah}>
+              {paragraph.review_full_paragrah ? parse(paragraph.review_full_paragrah) : ''}
             </P>
           ))}
         </Text>

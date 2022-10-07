@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import P from "../../../constant/Paragraph";
 import { flex, grayRgba } from "../../../base/functions";
 import { styled, connect, useConnect } from "frontity";
+import parse from "html-react-parser";
 
 const ProgramItem = ({ data }) => {
   const { state } = useConnect();
@@ -18,7 +19,7 @@ const ProgramItem = ({ data }) => {
         }
       >
         <Title>
-          <P size="l">{data.question}</P>
+          <P size="l">{data.faq_item_title ? parse(data.faq_item_title) : ''}</P>
         </Title>
         <Drop
           style={
@@ -43,8 +44,8 @@ const ProgramItem = ({ data }) => {
       </BtnWrapper>
       {isOpened && (
         <ContentWrapper>
-          {data.answer.map((paragraph) => (
-            <P key={paragraph}>{paragraph}</P>
+          {data.faq_item_text.map((paragraph) => (
+            <P key={paragraph.faq_item_paragraph}>{paragraph.faq_item_paragraph}</P>
           ))}
         </ContentWrapper>
       )}

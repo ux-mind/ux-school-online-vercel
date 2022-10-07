@@ -7,7 +7,7 @@ import { connect, styled } from "frontity";
 import bg from "../../../assets/images/program-section-bg.png";
 import mobileBg from "../../../assets/images/program-section-mobile-bg.png";
 
-const ProgramSectionEl = ({ state }) => {
+const ProgramSectionEl = ({ state, post }) => {
   const { isMobile } = state.theme;
 
   return (
@@ -16,10 +16,10 @@ const ProgramSectionEl = ({ state }) => {
         <img src={isMobile ? mobileBg : bg} alt="background" />
       </Bg>
       <ProgramContainer>
-        <Course />
+        <Course post={post} />
       </ProgramContainer>
       <Container>
-        <Program />
+        <Program post={post} />
       </Container>
     </ProgramSection>
   );

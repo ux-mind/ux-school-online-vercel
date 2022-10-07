@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { styled } from "frontity";
 
 import video from "../../../assets/videos/hero-video.mov";
@@ -6,8 +6,9 @@ import poster from "../../../assets/images/about-video-large.png";
 import posterMobile from "../../../assets/images/about-video-large-mobile.png";
 import play from "../../../assets/images/svg/play-large.svg";
 
-const HeroVideo = () => {
+const HeroVideo = ({ post }) => {
   const [isPosterMobile, setIsPosterMobile] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -33,14 +34,23 @@ const HeroVideo = () => {
     };
   }, []);
 
+  const handlePlay = () => {
+    console.log('hello');
+    videoRef.current.play();
+  }
+
   return (
     <Section>
       <VideoWrapper>
-        <video width="100%" poster={isPosterMobile ? posterMobile : poster}>
+        <video
+          ref={videoRef}
+          width="100%"
+          poster={isPosterMobile ? post.acf.about_page_video_poster_mobile.url : post.acf.about_page_video_poster.url}
+        >
           <source src={video} type="video/mp4" />
         </video>
         <Play>
-          <img src={play} alt="play" />
+          <img onClick={handlePlay} src={play} alt="play" />
         </Play>
         <Drop>
           <svg
