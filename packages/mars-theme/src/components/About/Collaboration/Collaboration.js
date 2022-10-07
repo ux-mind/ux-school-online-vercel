@@ -8,6 +8,7 @@ import CommonModal from "../../constant/CommonModal";
 import { TitleM } from "../../constant/Title";
 import { flex, font } from "../../base/functions";
 import { styled } from "frontity";
+import parse from "html-react-parser";
 
 import { useFormik } from "formik";
 
@@ -78,8 +79,8 @@ const Collaboration = ({ post }) => {
           isOpened={submitModalOpened}
           setIsOpened={setSubmitModalOpened}
         >
-          <ModalTitle>Заявка отправлена</ModalTitle>
-          <P size="l">Наш менеджер скоро свяжется с вами</P>
+          <ModalTitle>{post.acf.collaboration_modal_title}</ModalTitle>
+          <P size="l">{post.acf.collaboration_modal_text ? parse(post.acf.collaboration_modal_text) : ''}</P>
         </CommonModal>
       </ModalWrapper>
     </section>
