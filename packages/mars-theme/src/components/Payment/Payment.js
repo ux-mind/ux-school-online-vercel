@@ -8,13 +8,12 @@ import Input from "../constant/Input";
 import { font, stretch, flex } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect, css } from "frontity";
-import parse from "html-react-parser";
 
 import { useFormik } from "formik";
 
 import envelope from "../../assets/images/svg/Envelope.svg";
 
-const Payment = ({ state, post }) => {
+const Payment = ({ state }) => {
   const { isMobile } = state.theme;
 
   const [dropdownOpened, setDropdownOpened] = useState(false);
@@ -139,13 +138,13 @@ const Payment = ({ state, post }) => {
     <PaymentWrapper>
       <Content>
         <TitleM color="black" mb={isMobile ? 30 : 46}>
-          {post.acf.payment_title ? parse(post.acf.payment_title) : ''}
+          Оплатить курс
         </TitleM>
         <Select onClick={() => setDropdownOpened((prev) => !prev)}>
           {selectedRate ? (
             selectedRate
           ) : (
-            <span data-span="placeholder">{post.acf.payment_tariff_placeholder}</span>
+            <span data-span="placeholder">Тариф</span>
           )}
           <Drop rotated={dropdownOpened}>
             <svg
@@ -166,7 +165,7 @@ const Payment = ({ state, post }) => {
         </Select>
         <PaymentBlock>
           <Price>
-            <SumTitle>{post.acf.payment_sum_label}</SumTitle>
+            <SumTitle>Сумма для оплаты</SumTitle>
             <PriceContent>{renderPrice()}</PriceContent>
             <Promocode htmlFor="switch">
               <SwitchInput
@@ -176,7 +175,7 @@ const Payment = ({ state, post }) => {
                 id="switch"
               />
               <Toggle />
-              <P>{post.acf.payment_promocode_label}</P>
+              <P>У меня есть промокод</P>
             </Promocode>
             {promocodeFieldOpened && (
               <div>
@@ -189,7 +188,7 @@ const Payment = ({ state, post }) => {
                       name="promocode"
                       value={formik.values.promocode}
                       onChange={formik.handleChange}
-                      placeholder={post.acf.payment_sum_label}
+                      placeholder="Промокод"
                     />
                     {formik.values.promocode !== "" && (
                       <Close aria-label="close" onClick={handlePromocodeClear}>
@@ -240,7 +239,7 @@ const Payment = ({ state, post }) => {
                   setChecked={() => setInstallmentCheckbox((prev) => !prev)}
                   top={true}
                 >
-                  {post.acf.payment_installment_checkbox_label}
+                  Рассрочка на 3 месяца от UX Mind School
                 </CheckboxItem>
               </CheckboxWrapper>
               <CheckboxWrapper>
@@ -249,37 +248,37 @@ const Payment = ({ state, post }) => {
                   setChecked={() => setGraduateCheckbox((prev) => !prev)}
                   top={true}
                 >
-                  {post.acf.payment_discount_checkbox_label}
+                  Скидка 10% выпускникам UX Mind School
                 </CheckboxItem>
               </CheckboxWrapper>
             </Checkboxes>
             <MailNote>
               <img width="24" height="24" src={envelope} alt="envelope" />
               <P>
-                {`${post.acf.payment_remark_text} `}
-                <TextLink link={post.acf.payment_remark_link}>
-                  {post.acf.payment_remark_link_text}
+                После внесения платежа, отправьте копию квитанции на 
+                <TextLink link="mailto:hello@ux-school.by">
+                  hello@ux-school.by
                 </TextLink>
               </P>
             </MailNote>
             <InputWrapper>
               <Input
-                placeholder={post.acf.payment_name_placeholder}
+                placeholder="Имя и фамилия ученика"
                 name="name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
               />
             </InputWrapper>
             <BtnWrapper>
-              <PrimaryBtn content={post.acf.payment_submit_button_text} />
+              <PrimaryBtn content="Перейти к оплате" />
             </BtnWrapper>
             <CheckboxAgreementWrapper>
               <CheckboxItem
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
-                {`${post.acf.payment_personal_data_text} `}
-                <a href={post.acf.payment_personal_data_link}>{post.acf.payment_personal_data_link_text}</a>
+                Я согласен с условиями обработки{" "}
+                <a href="/terms/">персональных данных</a>
               </CheckboxItem>
             </CheckboxAgreementWrapper>
           </Info>

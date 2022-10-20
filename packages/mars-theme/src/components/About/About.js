@@ -8,16 +8,16 @@ import Info from "./Info/Info";
 import Collaboration from "./Collaboration/Collaboration";
 import { styled } from "frontity";
 
-const About = ({ state, post }) => {
+const About = () => {
   return (
     <AboutElement>
-      <HeroVideo post={post} />
-      <TitleSection post={post} />
-      <Lecturers post={post} />
-      <AboutSlider post={post} />
-      <History post={post} />
-      <Info post={post} />
-      <Collaboration post={post} />
+      <HeroVideo />
+      <TitleSection />
+      <Lecturers />
+      <AboutSlider />
+      <History />
+      <Info />
+      <Collaboration />
     </AboutElement>
   );
 };

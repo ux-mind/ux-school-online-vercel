@@ -10,35 +10,40 @@ import {
   whiteRgba,
 } from "../../base/functions";
 import { styled } from "frontity";
-import parse from "html-react-parser";
 
 import igor from "../../../assets/images/Igor.png";
 import bg from "../../../assets/images/quote-bg.png";
 import bgMobile from "../../../assets/images/quote-bg-mobile.png";
 
-const Info = ({ post }) => {
+const Info = () => {
   return (
     <Section>
-      <QuoteMobile>{post.acf.info_quote_title}</QuoteMobile>
+      <QuoteMobile>Цитата</QuoteMobile>
       <Container>
         <Content>
           <Top>
             <InfoBlock>
-              <Quote>{post.acf.info_quote_title}</Quote>
+              <Quote>Цитата</Quote>
               <InfoWrapper>
                 <InfoText>
-                  {post.acf.info_quote_text.map((paragraph) => (
-                    <P size="l">
-                      {parse(paragraph.info_quote_paragraph)}
-                    </P>
-                  ))}
+                  <P size="l">
+                    Мы — школа дизайна, которая построена на основе студии UX
+                    Mind, для того чтобы вырастить собственных специалистов и
+                    делиться своим опытом со всеми желающими.
+                  </P>
+                  <P size="l">
+                    Сейчас знания быстро устаревают, и учиться имеет смысл
+                    только у тех, кто в этом «варится». Мы каждый день
+                    на передовой и знаем, что сейчас в тренде, какие технологии
+                    лучше использовать, что стоит делать.
+                  </P>
                   <SmallInfo>
                     <Avatar>
-                      <img src={post.acf.info_quote_author_photo.url} alt="" />
+                      <img src={igor} alt="" />
                     </Avatar>
                     <div>
-                      <Name>{post.acf.info_quote_author_name}</Name>
-                      <Position>{post.acf.info_quote_author_post}</Position>
+                      <Name>Игорь Колесень</Name>
+                      <Position>Основатель школы</Position>
                     </div>
                   </SmallInfo>
                 </InfoText>
@@ -47,20 +52,20 @@ const Info = ({ post }) => {
           </Top>
           <Bottom>
             <NumbersBlock>
-              <Number>{post.acf.info_item_1_number}</Number>
-              <NumberTitle>{post.acf.info_item_1_text}</NumberTitle>
+              <Number>2018</Number>
+              <NumberTitle>Год основания</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>{post.acf.info_item_2_number}</Number>
-              <NumberTitle>{post.acf.info_item_2_text}</NumberTitle>
+              <Number>1000+</Number>
+              <NumberTitle>Выпускников</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>{post.acf.info_item_3_number}</Number>
-              <NumberTitle>{post.acf.info_item_3_text}</NumberTitle>
+              <Number>20</Number>
+              <NumberTitle>Преподавателей</NumberTitle>
             </NumbersBlock>
             <NumbersBlock>
-              <Number>{post.acf.info_item_4_number}</Number>
-              <NumberTitle>{post.acf.info_item_4_text}</NumberTitle>
+              <Number>12</Number>
+              <NumberTitle>Направлений</NumberTitle>
             </NumbersBlock>
           </Bottom>
         </Content>

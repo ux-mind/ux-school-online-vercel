@@ -8,11 +8,10 @@ import CommonModal from "../../constant/CommonModal";
 import { TitleM } from "../../constant/Title";
 import { flex, font } from "../../base/functions";
 import { styled } from "frontity";
-import parse from "html-react-parser";
 
 import { useFormik } from "formik";
 
-const Collaboration = ({ post }) => {
+const Collaboration = () => {
   const [isUserAgree, setIsUserAgree] = useState(true);
 
   const [submitModalOpened, setSubmitModalOpened] = useState(false);
@@ -30,10 +29,10 @@ const Collaboration = ({ post }) => {
       <Container>
         <Content>
           <FormWrapper>
-            <FormTitle>{post.acf.collaboration_title}</FormTitle>
+            <FormTitle>Будем рады новым знакомствам</FormTitle>
             <Subtitle>
               <P size="l">
-                {post.acf.collaboration_text}
+                Всегда готовы обсуждать интересные предложения о сотрудничестве
               </P>
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
@@ -41,7 +40,7 @@ const Collaboration = ({ post }) => {
                 <Input
                   value={formik.values.name}
                   onChange={formik.handleChange}
-                  placeholder={post.acf.collaboration_name_placeholder}
+                  placeholder="Имя"
                   name="name"
                 />
               </FormBlock>
@@ -49,7 +48,7 @@ const Collaboration = ({ post }) => {
                 <Input
                   value={formik.values.tel}
                   onChange={formik.handleChange}
-                  placeholder={post.acf.collaboration_phone_placeholder}
+                  placeholder="Телефон"
                   name="tel"
                   type="tel"
                 />
@@ -57,7 +56,7 @@ const Collaboration = ({ post }) => {
               <SubmitWrapper>
                 <PrimaryBtn
                   type="submit"
-                  content={post.acf.collaboration_send_button_text}
+                  content="Отправить"
                   disabled={!isUserAgree}
                 />
               </SubmitWrapper>
@@ -67,8 +66,8 @@ const Collaboration = ({ post }) => {
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
-                {post.acf.collaboration_personal_data_text}{" "}
-                <a href={post.acf.collaboration_personal_data_link}>{post.acf.collaboration_personal_data_link_text}</a>
+                Я согласен с условиями обработки{" "}
+                <a href="/terms/">персональных данных</a>
               </CheckboxItem>
             </Agreement>
           </FormWrapper>
@@ -79,8 +78,8 @@ const Collaboration = ({ post }) => {
           isOpened={submitModalOpened}
           setIsOpened={setSubmitModalOpened}
         >
-          <ModalTitle>{post.acf.collaboration_modal_title}</ModalTitle>
-          <P size="l">{post.acf.collaboration_modal_text ? parse(post.acf.collaboration_modal_text) : ''}</P>
+          <ModalTitle>Заявка отправлена</ModalTitle>
+          <P size="l">Наш менеджер скоро свяжется с вами</P>
         </CommonModal>
       </ModalWrapper>
     </section>

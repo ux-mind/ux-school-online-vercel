@@ -16,9 +16,8 @@ const advantages = [
   "Учись в своём темпе",
   "От 5000₽ одним платёжом, или рассрочка",
 ];
-import parse from "html-react-parser";
 
-const Hero = ({ state, post }) => {
+const Hero = ({ state }) => {
   const scrollToRates = () => {
     state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
   };
@@ -28,14 +27,15 @@ const Hero = ({ state, post }) => {
       <Container>
         <Content>
           <HeroTitle>
-            {post.acf.main_banner_title ? parse(post.acf.main_banner_title) : ''}
+            Профессия <br />
+            UX/UI-дизайнер
           </HeroTitle>
           <AdvantagesList>
-            {post.acf.main_banner_list && post.acf.main_banner_list.map((item) => <li key={item.main_banner_list_item}>{item.main_banner_list_item}</li>)}
+            {advantages && advantages.map((text) => <li key={text}>{text}</li>)}
           </AdvantagesList>
           <PrimaryButton
             onClick={scrollToRates}
-            content={post.acf.main_banner_button_text ? parse(post.acf.main_banner_button_text) : ''}
+            content={"Записаться на курс"}
           />
           <VideoWrapper>
             {/* <img src={videoGif} alt="" /> */}
@@ -49,14 +49,15 @@ const Hero = ({ state, post }) => {
               loop={true}
               preload="auto"
             >
-              <source src={post.acf.main_banner_animation} type="video/mp4" />
-              <source src={post.acf.main_banner_animation_webm} type="video/webm" /> § Тег video не
+              <source src={video} type="video/mp4" />
+              <source src={videoWebm} type="video/webm" /> § Тег video не
               поддерживается вашим браузером.
             </video>
           </VideoWrapper>
           <Quote>
             <p>
-              {post.acf.main_banner_sticker_text ? parse(post.acf.main_banner_sticker_text) : ''}
+              Сделай крутой шаг в карьере и получи современную,
+              высокооплачиваемую профессию
             </p>
           </Quote>
         </Content>

@@ -1,6 +1,6 @@
 import React from "react";
 import { TitleM } from "../../../constant/Title";
-import AdditionalBlock from "./AdditionalBlock/AdditionalBlock";
+import AdditionalBlock from "../../../constant/AdditionalBlock";
 import ProgramItem from "./ProgramItem/ProgramItem";
 import { connect, styled } from "frontity";
 
@@ -12,8 +12,6 @@ import mobileEducation from "../../../../assets/images/svg/Education-mobile.svg"
 import mobileClock from "../../../../assets/images/svg/Clock-mobile.svg";
 import mobileFigma from "../../../../assets/images/svg/Figma-mobile.svg";
 import mobilePC from "../../../../assets/images/svg/PC-mobile.svg";
-
-import parse from "html-react-parser";
 
 const program = [
   {
@@ -285,19 +283,19 @@ const additionalItems = [
   },
 ];
 
-const Program = ({ post }) => {
+const Program = () => {
   return (
     <ProgramWrapper>
-      <ProgramTitleM color="white">{post.acf.program_title && parse(post.acf.program_title)}</ProgramTitleM>
+      <ProgramTitleM color="white">Программа обучения</ProgramTitleM>
       <ContentWrapper>
         <Block>
           <ProgramList>
-            {post.acf.program_items.map((item) => {
-              return <ProgramItem key={item.program_item_title} data={item} />;
+            {program.map((item) => {
+              return <ProgramItem key={item.id} data={item} />;
             })}
           </ProgramList>
         </Block>
-        <AdditionalBlock additionalItems={post.acf.program_info_items} />
+        <AdditionalBlock additionalItems={additionalItems} />
       </ContentWrapper>
     </ProgramWrapper>
   );

@@ -19,7 +19,6 @@ import suitable5 from "../../../../assets/images/suitable-for-whom/suitable-for-
 import suitable5_2x from "../../../../assets/images/suitable-for-whom/suitable-for-whom-5@2x.png";
 import suitable6 from "../../../../assets/images/suitable-for-whom/suitable-for-whom-6.png";
 import suitable6_2x from "../../../../assets/images/suitable-for-whom/suitable-for-whom-6@2x.png";
-import parse from "html-react-parser";
 
 const courseItems = [
   {
@@ -72,21 +71,21 @@ const courseItems = [
   },
 ];
 
-const Course = ({ state, post }) => {
+const Course = ({ state }) => {
   const { isMobile } = state.theme;
 
   return (
     <CourseWrapper>
-      <Question size="l">{post.acf.clients_title ? parse(post.acf.clients_title) : ''}</Question>
+      <Question size="l">Кому подойдёт наш курс?</Question>
       {!isMobile && (
         <Content>
-          {post.acf.clients_items.map((item) => (
+          {courseItems.map((item) => (
             <CourseItem
-              key={item.clients_item_title}
-              image={item.clients_item_image_1x.url}
-              image2x={item.clients_item_image_2x.url}
-              title={item.clients_item_title}
-              content={item.clients_item_description ? parse(item.clients_item_description) : ''}
+              key={item.id}
+              image={item.image}
+              image2x={item.image2x}
+              title={item.title}
+              content={item.content}
             />
           ))}
         </Content>
@@ -101,13 +100,13 @@ const Course = ({ state, post }) => {
             slidesPerView={"auto"}
             centeredSlides={true}
           >
-            {post.acf.clients_items.map((item) => (
-              <SwiperSlide key={item.clients_item_title}>
+            {courseItems.map((item) => (
+              <SwiperSlide key={item.id}>
                 <CourseItem
-                  image={item.clients_item_image_1x.url}
-                  image2x={item.clients_item_image_2x.url}
-                  title={item.clients_item_title}
-                  content={item.clients_item_description ? parse(item.clients_item_description) : ''}
+                  image={item.image}
+                  image2x={item.image2x}
+                  title={item.title}
+                  content={item.content}
                 />
               </SwiperSlide>
             ))}

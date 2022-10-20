@@ -6,19 +6,19 @@ import { styled } from "frontity";
 import commonImage from "../../../assets/images/common-image.png";
 import commonImage2x from "../../../assets/images/common-image@2x.png";
 
-const Certificate = ({ post }) => {
+const Certificate = () => {
   return (
     <Section>
       <Container>
         <ImageWrapper>
           <img
-            src={post.acf.after_course_image_1x.url}
-            srcSet={`${post.acf.after_course_image_1x.url} 1x, ${post.acf.after_course_image_2x.url} 2x`}
+            src={commonImage}
+            srcSet={`${commonImage} 1x, ${commonImage2x} 2x`}
             alt=""
           />
           <DarkLayer />
         </ImageWrapper>
-        <CertificateBlock post={post} />
+        <CertificateBlock />
       </Container>
     </Section>
   );

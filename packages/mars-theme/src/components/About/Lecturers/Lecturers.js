@@ -4,11 +4,10 @@ import P from "../../constant/Paragraph";
 import { TitleS } from "../../constant/Title";
 import { font, stretch, grayRgba, flex, whiteRgba } from "../../base/functions";
 import { styled, connect } from "frontity";
-import parse from "html-react-parser";
 
 import teacher from "../../../assets/images/teacher.png";
 import teacher2x from "../../../assets/images/teacher@2x.png";
-/*
+
 const lecturers = [
   {
     name: "Александр Колесень",
@@ -82,9 +81,9 @@ const lecturers = [
     image: teacher,
     image2x: teacher2x,
   },
-];*/
+];
 
-const Lecturers = ({ state, post }) => {
+const Lecturers = ({ state }) => {
   const [isLaptop, setIsLaptop] = useState(false);
 
   useEffect(() => {
@@ -124,7 +123,7 @@ const Lecturers = ({ state, post }) => {
       <Container>
         <Content>
           <LecturersContent>
-            {post.acf.team_members.map((lecturer, idx) => {
+            {lecturers.map((lecturer, idx) => {
               if (state.theme.isMobile && idx > 7) {
                 return null;
               }
@@ -134,31 +133,39 @@ const Lecturers = ({ state, post }) => {
               }
 
               return idx > 11 ? null : (
-                <Lecturer key={lecturer.team_member_name}>
+                <Lecturer key={lecturer.name}>
                   <ImgWrapper>
                     <img
-                      src={lecturer.team_member_photo_1x.url}
+                      src={lecturer.image}
                       srcSet={
-                        lecturer.team_member_photo_2x.url ? lecturer.team_member_photo_2x.url : lecturer.team_member_photo_1x.url
+                        lecturer.image2x ? lecturer.image2x : lecturer.image
                       }
                       alt="lecturer"
                     />
                   </ImgWrapper>
-                  <Name>{lecturer.team_member_name}</Name>
-                  <Position>{lecturer.team_member_post}</Position>
+                  <Name>{lecturer.name}</Name>
+                  <Position>{lecturer.position}</Position>
                 </Lecturer>
               );
             })}
           </LecturersContent>
           <InfoBlock>
-            <Mission>{post.acf.mission_block_title}</Mission>
+            <Mission>Миссия</Mission>
             <Info>
               <InfoText>
-                {post.acf.mission_block_text.map((paragraph) => (
-                  <P size="l">
-                    {parse(paragraph.mission_block_paragraph)}
-                  </P>
-                ))}
+                <P size="l">
+                  Сейчас знания быстро устаревают, и учиться имеет смысл только
+                  у тех, кто в этом «варится». Мы каждый день на передовой и
+                  знаем, что сейчас в тренде, какие технологии лучше
+                  использовать, что стоит делать, а что — нет. Наша команда UX
+                  Mind имеет большой опыт работы с клиентами из Европы
+                  и Америки, и этим опытом мы поделимся с тобой.
+                </P>
+                <P size="l">
+                  Так в чём же миссия нашей школы? — Мы хотим научить тебя не
+                  только дизайнить, а ещё и зарабатывать на своих навыках и
+                  актуальных знаниях.
+                </P>
               </InfoText>
             </Info>
           </InfoBlock>

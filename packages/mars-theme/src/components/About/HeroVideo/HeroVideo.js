@@ -1,14 +1,28 @@
 import React, { useEffect, useState, useRef } from "react";
 import { styled } from "frontity";
 
-import video from "../../../assets/videos/hero-video.mov";
 import poster from "../../../assets/images/about-video-large.png";
 import posterMobile from "../../../assets/images/about-video-large-mobile.png";
 import play from "../../../assets/images/svg/play-large.svg";
+import pause from "../../../assets/images/svg/pause-large.svg";
 
-const HeroVideo = ({ post }) => {
+import aboutVideo from "../../../assets/videos/UX_Mind_School.mp4";
+
+const HeroVideo = () => {
+  const videoElementRef = useRef(null);
+
   const [isPosterMobile, setIsPosterMobile] = useState(false);
-  const videoRef = useRef(null);
+  const [videoPlays, setVideoPlays] = useState(false);
+
+  const toggleVideo = () => {
+    if (videoElementRef.current) {
+      videoPlays
+        ? videoElementRef.current.pause()
+        : videoElementRef.current.play();
+
+      setVideoPlays((prev) => !prev);
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -34,23 +48,28 @@ const HeroVideo = ({ post }) => {
     };
   }, []);
 
-  const handlePlay = () => {
-    console.log('hello');
-    videoRef.current.play();
-  }
-
   return (
     <Section>
-      <VideoWrapper>
+      <VideoWrapper videoPlays={videoPlays}>
         <video
-          ref={videoRef}
           width="100%"
-          poster={isPosterMobile ? post.acf.about_page_video_poster_mobile.url : post.acf.about_page_video_poster.url}
+          height="1080"
+          loop={true}
+          nocontrols="true"
+          playsInline
+          preload="auto"
+          poster={isPosterMobile ? posterMobile : poster}
+          ref={videoElementRef}
         >
-          <source src={video} type="video/mp4" />
+          <source src={aboutVideo} type="video/mp4" />
+          Тег video не поддерживается вашим браузером.
         </video>
-        <Play>
-          <img onClick={handlePlay} src={play} alt="play" />
+        <Play onClick={() => toggleVideo()}>
+          {videoPlays ? (
+            <img src={pause} alt="pause" />
+          ) : (
+            <img src={play} alt="play" />
+          )}
         </Play>
         <Drop>
           <svg
@@ -74,8 +93,11 @@ const HeroVideo = ({ post }) => {
   );
 };
 
-const Drop = styled.div`
+const Drop = styled.span`
+  display: block;
   position: absolute;
+  width: 24px;
+  height: 24px;
   left: 50%;
   transform: translateX(-50%);
   bottom: 128px;
@@ -101,7 +123,32 @@ const VideoWrapper = styled.div`
   max-width: 100%;
   display: flex;
   & video {
+    object-fit: cover;
+  }
+  & > div {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    ${({ videoPlays }) => (videoPlays ? "z-index: 1" : "z-index: -1")};
+    & iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  & img {
+    max-width: 100vw;
+  }
+  @media screen and (max-width: 1400px) {
+    & video {
+      max-height: 800px;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    & video {
+      max-height: 640px;
+    }
   }
 `;
 

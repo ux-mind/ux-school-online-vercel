@@ -6,7 +6,6 @@ import FaqItem from "./FaqItem/FaqItem";
 import { grayRgba } from "../../base/functions";
 import { TitleM } from "../../constant/Title";
 import { styled } from "frontity";
-import parse from "html-react-parser";
 
 import bg from "../../../assets/images/faq-bg.png";
 
@@ -91,29 +90,29 @@ const faq = [
   },
 ];
 
-const Faq = ({ post }) => {
+const Faq = () => {
   const [isAllFaqShown, setIsAllFaqShown] = useState(false);
 
   return (
     <Section>
       <Container>
         <Content>
-          <FaqTitleM color="white">{post.acf.faq_title ? parse(post.acf.faq_title) : ''}</FaqTitleM>
-          <Additional post={post} />
+          <FaqTitleM color="white">Часто задаваемые вопросы</FaqTitleM>
+          <Additional />
           <FaqContent>
             <FaqBlock>
-              {post.acf.faq_items.map((item, idx) => {
+              {faq.map((item, idx) => {
                 if (!isAllFaqShown && idx > 8) {
                   return null;
                 }
 
-                return <FaqItem key={item.faq_item_title} data={item} />;
+                return <FaqItem key={item.id} data={item} />;
               })}
             </FaqBlock>
             {!isAllFaqShown && (
               <ShowMore>
                 <WhiteBtn onClick={() => setIsAllFaqShown(true)}>
-                  {post.acf.faq_more_button_text}
+                  Показать ещё
                 </WhiteBtn>
               </ShowMore>
             )}

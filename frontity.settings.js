@@ -25,7 +25,6 @@ const settings = {
       state: {
         source: {
           url: "https://online.ux-mind.pro/",
-          homepage: "home-page",
         },
       },
     },

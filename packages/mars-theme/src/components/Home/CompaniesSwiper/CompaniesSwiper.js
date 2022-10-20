@@ -12,7 +12,6 @@ import epam from "../../../assets/images/companies/epam-logo.svg";
 import iba from "../../../assets/images/companies/iba-logo.svg";
 import itransition from "../../../assets/images/companies/itransition-logo.svg";
 import techArt from "../../../assets/images/companies/tech-art-logo.svg";
-import parse from "html-react-parser";
 
 const companies = [
   yandex,
@@ -24,11 +23,11 @@ const companies = [
   techArt,
 ];
 
-const CompaniesSwiper = ({ post }) => {
+const CompaniesSwiper = () => {
   return (
     <Section>
       <Title>
-        <P size="l">{post.acf.companies_title ? parse(post.acf.companies_title) : ''}</P>
+        <P size="l">Наши выпускники работают здесь</P>
       </Title>
       <SwiperWrapper>
         <Swiper
@@ -44,10 +43,10 @@ const CompaniesSwiper = ({ post }) => {
           slidesPerView={"auto"}
           centeredSlides={true}
         >
-          {post.acf.companies_items.map((companyIcon) => (
-            <SwiperSlide key={companyIcon.companies_item_image.url}>
+          {companies.map((companyIcon) => (
+            <SwiperSlide key={companyIcon}>
               <CompanyWrapper>
-                <img src={companyIcon.companies_item_image.url} alt="company" />
+                <img src={companyIcon} alt="company" />
               </CompanyWrapper>
             </SwiperSlide>
           ))}

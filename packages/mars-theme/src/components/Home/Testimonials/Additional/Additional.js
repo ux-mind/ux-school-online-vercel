@@ -14,26 +14,25 @@ import relax from "../../../../assets/images/Relax.png";
 import relax2x from "../../../../assets/images/Relax@2x.png";
 import gmaps from "../../../../assets/images/Google-maps.png";
 import gmaps2x from "../../../../assets/images/Google-maps@2x.png";
-import parse from "html-react-parser";
 
-const Additional = ({ post }) => {
+const Additional = () => {
   return (
     <Wrapper>
       <YtBlock>
         <Poster>
           <img
-            src={post.acf.reviews_youtube_poster_1x.url}
-            srcSet={`${post.acf.reviews_youtube_poster_1x.url} 1x, ${post.acf.reviews_youtube_poster_2x.url ? post.acf.reviews_youtube_poster_2x.url : post.acf.reviews_youtube_poster_1x.url} 2x`}
+            src={poster}
+            srcSet={`${poster} 1x, ${poster2x ? poster2x : poster} 2x`}
             alt="youtube poster"
           />
         </Poster>
         <YtContent>
-          <P>{post.acf.reviews_youtube_text ? parse(post.acf.reviews_youtube_text) : ''}</P>
+          <P>Целый плейлист интервью с нашими выпускниками на YouTube</P>
           <YtBtnWrapper>
             <YtBtn
               rel="noopenner noreferrer"
               target="_blank"
-              link={post.acf.reviews_youtube_button_link}
+              link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y"
             >
               <div>
                 <svg
@@ -49,26 +48,48 @@ const Additional = ({ post }) => {
                   />
                 </svg>
               </div>
-              {post.acf.reviews_youtube_button_text}
+              Смотреть
             </YtBtn>
           </YtBtnWrapper>
         </YtContent>
       </YtBlock>
       <MoreTestimonials>
         <Title>
-          <P>{post.acf.reviews_social_title}</P>
+          <P>Ещё больше отзывов о нас</P>
         </Title>
         <LinksWrapper>
-          {post.acf.reviews_social_items.map((link, id) => {
-            return (<TestimonialLink link={link.reviews_social_link} key={`${link.reviews_social_link}-${id}`}>
-              <img
-                height="40"
-                src={link.reviews_social_image_1x.url}
-                srcSet={`${link.reviews_social_image_1x.url} 1x, ${link.reviews_social_image_2x.url} 2x`}
-                alt="icon"
-              />
-            </TestimonialLink>);
-          })}
+          <TestimonialLink link="/">
+            <img
+              height="40"
+              src={insta}
+              srcSet={`${insta} 1x, ${insta2x} 2x`}
+              alt="instagram"
+            />
+          </TestimonialLink>
+          <TestimonialLink link="/">
+            <img
+              height="32"
+              src={yandex}
+              srcSet={`${yandex} 1x, ${yandex2x} 2x`}
+              alt="yandex"
+            />
+          </TestimonialLink>
+          <TestimonialLink link="/">
+            <img
+              height="31"
+              src={relax}
+              srcSet={`${relax} 1x, ${relax2x} 2x`}
+              alt="relax"
+            />
+          </TestimonialLink>
+          <TestimonialLink link="/">
+            <img
+              height="32"
+              src={gmaps}
+              srcSet={`${gmaps} 1x, ${gmaps2x} 2x`}
+              alt="google-maps"
+            />
+          </TestimonialLink>
         </LinksWrapper>
       </MoreTestimonials>
     </Wrapper>

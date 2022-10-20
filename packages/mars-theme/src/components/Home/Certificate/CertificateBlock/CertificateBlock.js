@@ -18,9 +18,8 @@ import { TitleM } from "../../../constant/Title";
 
 import certificate from "../../../../assets/images/certificate.svg";
 import certificateMobile from "../../../../assets/images/certificate-mobile.svg";
-import parse from "html-react-parser";
 
-const CertificateBlock = ({ state, post }) => {
+const CertificateBlock = ({ state }) => {
   const [checkModalOpened, setCheckModalOpened] = useState(false);
   const [confirmModalOpened, setConfirmModalOpened] = useState(false);
   const [isUserAgree, setIsUserAgree] = useState(false);
@@ -41,10 +40,11 @@ const CertificateBlock = ({ state, post }) => {
 
   return (
     <Wrapper>
-      <CertificateTitle>{post.acf.certificate_title ? parse(post.acf.certificate_title) : ''}</CertificateTitle>
+      <CertificateTitle>Сертификат</CertificateTitle>
       <Subtitle>
         <P size="l">
-          {post.acf.certificate_text ? parse(post.acf.certificate_text) : ''}
+          Cтуденты защитившие итоговую работу получают именной сертификат
+          от UX Mind School
         </P>
       </Subtitle>
       <CertificateWrapper>
@@ -52,18 +52,18 @@ const CertificateBlock = ({ state, post }) => {
           <CertificateBorderInner>
             <Certificate>
               <img
-                src={state.theme.isMobile ? post.acf.certificate_image_mobile.url : post.acf.certificate_image.url}
+                src={state.theme.isMobile ? certificateMobile : certificate}
                 alt="certificate"
               />
             </Certificate>
           </CertificateBorderInner>
           <CertificateCheck>
             <P>
-              {post.acf.certificate_sticker_text_before}{" "}
+              Мы внедрили{" "}
               <CheckBtn onClick={() => setCheckModalOpened(true)}>
-                {post.acf.certificate_sticker_button_text}
+                проверку сертификатов
               </CheckBtn>
-              {post.acf.certificate_sticker_text_after}
+              . Вы можете посмотреть кому и когда выдавали
             </P>
           </CertificateCheck>
           {/* TODO: Add Emoji */}
@@ -71,7 +71,7 @@ const CertificateBlock = ({ state, post }) => {
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
-        <PrimaryBtn onClick={scrollToRates} content={post.acf.certificate_button_text} />
+        <PrimaryBtn onClick={scrollToRates} content="Записаться на курс" />
       </CourseBtnWrapper>
       <CommonModal
         isOpened={checkModalOpened}

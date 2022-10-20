@@ -15,24 +15,23 @@ import Consultation from "./Consultation/Consultation";
 import About from "./About/About";
 import { connect, styled } from "frontity";
 
-const Home = ({ state, post }) => {
-
+const Home = () => {
   return (
     <HomeElement>
-      <Hero post={post} />
-      <Skills post={post} />
-      <Program post={post} />
-      <Roadmap post={post} />
-      <Projects post={post} />
-      <AfterCourse post={post} />
-      <Certificate post={post} />
-      <Lecturers post={post} />
-      <Testimonials state={state} post={post} />
-      <CompaniesSwiper post={post} />
-      <Faq post={post} />
-      <Rates post={post} />
-      <Consultation post={post} />
-      <About post={post} />
+      <Hero />
+      <Skills />
+      <Program />
+      <Roadmap />
+      <Projects />
+      <AfterCourse />
+      <Certificate />
+      <Lecturers />
+      <Testimonials />
+      <CompaniesSwiper />
+      <Faq />
+      <Rates />
+      <Consultation />
+      <About />
     </HomeElement>
   );
 };

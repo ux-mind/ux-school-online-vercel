@@ -4,8 +4,7 @@ import Container from "../../constant/Container";
 import WhiteBtn from "../../constant/WhiteButton";
 import { font, stretch, grayRgba } from "../../base/functions";
 import { styled } from "frontity";
-import parse from "html-react-parser";
-/*
+
 const history = [
   {
     date: "2 марта 2018",
@@ -31,9 +30,9 @@ const history = [
     content:
       "Первое занятие в дистанционном формате. Началось из-за covid-19, но формат понравился и прижился.",
   },
-];*/
+];
 
-const History = ({ post }) => {
+const History = () => {
   const [historyOpened, setHistoryOpened] = useState(false);
 
   return (
@@ -41,16 +40,16 @@ const History = ({ post }) => {
       <Container>
         <Content>
           <InfoBlock>
-            <Mission>{post.acf.history_block_title}</Mission>
+            <Mission>История</Mission>
             <Info>
               <InfoText>
-                {post.acf.history_items.map((item, idx) => {
+                {history.map((item, idx) => {
                   if (!historyOpened && idx > 3) {
                     return null;
                   }
 
                   return (
-                    <InfoItem key={item.history_item_date}>
+                    <InfoItem key={item.date}>
                       <Decorative className="decorative">
                         <svg
                           width="1"
@@ -64,13 +63,13 @@ const History = ({ post }) => {
                             x2="0.499981"
                             y2="438"
                             stroke="#D8DCEC"
-                            stroke-dasharray="3 3"
+                            strokeDasharray="3 3"
                           />
                         </svg>
                         <Point />
                       </Decorative>
-                      <Date>{item.history_item_date}</Date>
-                      <P size="l">{parse(item.history_item_description)}</P>
+                      <Date>{item.date}</Date>
+                      <P size="l">{item.content}</P>
                     </InfoItem>
                   );
                 })}
@@ -78,7 +77,7 @@ const History = ({ post }) => {
               <ShowMore>
                 {!historyOpened && (
                   <WhiteBtn onClick={() => setHistoryOpened(true)}>
-                    {post.acf.history_show_more_button}
+                    Показать еще
                   </WhiteBtn>
                 )}
               </ShowMore>

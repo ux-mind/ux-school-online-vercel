@@ -16,9 +16,8 @@ import poster from "../../../../assets/images/faq-poster.png";
 import poster2x from "../../../../assets/images/faq-poster@2x.png";
 import faqIcon from "../../../../assets/images/svg/Question.svg";
 import faqIconMobile from "../../../../assets/images/svg/Question-mobile.svg";
-import parse from "html-react-parser";
 
-const Additional = ({ state, post }) => {
+const Additional = ({ state }) => {
   const { isMobile } = state.theme;
 
   const [connectModalOpened, setConnectModalOpened] = useState(false);
@@ -29,18 +28,18 @@ const Additional = ({ state, post }) => {
       <YtBlock>
         <Poster>
           <img
-            src={post.acf.faq_video_poster_1x.url}
-            srcSet={`${post.acf.faq_video_poster_1x.url} 1x, ${post.acf.faq_video_poster_2x.url ? post.acf.faq_video_poster_2x.url : post.acf.faq_video_poster_1x.url} 2x`}
+            src={poster}
+            srcSet={`${poster} 1x, ${poster2x ? poster2x : poster} 2x`}
             alt="youtube poster"
           />
         </Poster>
         <YtContent>
-          <P>{post.acf.faq_video_text ? parse(post.acf.faq_video_text) : ''}</P>
+          <P>Видео-ответы на частые вопросы по обучению</P>
           <YtBtnWrapper>
             <YtBtn
               rel="noopenner noreferrer"
               target="_blank"
-              link={post.acf.faq_video_button_link}
+              link="https://www.youtube.com/playlist?list=PLj21x_Lp9NV3zGrj1Jfzs2CwzGqE4GC2y"
             >
               <div>
                 <svg
@@ -56,7 +55,7 @@ const Additional = ({ state, post }) => {
                   />
                 </svg>
               </div>
-              {post.acf.faq_video_button_text}
+              Смотреть
             </YtBtn>
           </YtBtnWrapper>
         </YtContent>
@@ -74,9 +73,9 @@ const Additional = ({ state, post }) => {
             </Icon>
             <Note>
               <P color={isMobile ? `black` : `white`}>
-                {post.acf.faq_contact_text} <br />
+                Мы ответим на все ваши вопросы лично <br />
                 <button onClick={() => setConnectModalOpened(true)}>
-                  {post.acf.faq_contact_link_text} 
+                  Связаться с нами
                 </button>
               </P>
             </Note>

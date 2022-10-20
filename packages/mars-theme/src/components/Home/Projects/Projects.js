@@ -7,7 +7,6 @@ import { styled, connect } from "frontity";
 import archi from "../../../assets/images/projects/archi.png";
 import link from "../../../assets/images/svg/Link.svg";
 import whitelink from "../../../assets/images/svg/whitelink.svg";
-import parse from "html-react-parser";
 
 const projects = [
   {
@@ -102,16 +101,16 @@ const projects = [
   },
 ];
 
-const Projects = ({ state, post }) => {
+const Projects = ({ state }) => {
   const { isMobile } = state.theme;
 
   const [isAllProjectsShown, setIsAllProjectsShown] = useState(false);
 
   return (
     <Section>
-      <ProjectsTitle>{post.acf.projects_title ? parse(post.acf.projects_title) : ''}</ProjectsTitle>
+      <ProjectsTitle>Проекты наших выпускников</ProjectsTitle>
       <Content>
-        {post.acf.projects_items.map((project, idx) => {
+        {projects.map((project, idx) => {
           if (
             (isMobile && idx > 2 && !isAllProjectsShown) ||
             (isMobile && idx > 5 && isAllProjectsShown)
@@ -120,13 +119,13 @@ const Projects = ({ state, post }) => {
           }
 
           return (
-            <ProjectBlock key={project.projects_item_title}>
+            <ProjectBlock key={project.id}>
               <Bg>
-                <img src={project.projects_item_image.url} alt="project image" />
+                <img src={project.image} alt="project image" />
                 <Shadow />
               </Bg>
               <BtnLinkWrapper>
-                <BtnLink link={project.project_item_link}>{project.projects_item_title ? parse(project.projects_item_title) : ''}</BtnLink>
+                <BtnLink link={project.link}>{project.title}</BtnLink>
               </BtnLinkWrapper>
             </ProjectBlock>
           );
@@ -143,9 +142,11 @@ const Projects = ({ state, post }) => {
         <AllProjectsBtn
           rel="noopenner noreferrer"
           target="_blank"
-          link={post.acf.all_projects_button_link}
+          link={
+            "https://www.behance.net/collection/181601277/itogovye-raboty-uchenikov-UX-Mind-School"
+          }
         >
-          {post.acf.all_projects_button_text ? parse(post.acf.all_projects_button_text) : ''}
+          Все проекты на Behance
         </AllProjectsBtn>
       </AllProjects>
     </Section>

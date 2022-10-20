@@ -20,8 +20,6 @@ import { flex, font, whiteRgba, grayRgba } from "../base/functions";
 const Menu = ({ state, actions }) => {
   const { menu, headerTheme, isMobileMenuOpened } = state.theme;
 
-  const navLinks = state.source.get(`/menu/header-menu`).items;
-
   return (
     <MobileMenu isOpened={isMobileMenuOpened}>
       <header
@@ -58,11 +56,11 @@ const Menu = ({ state, actions }) => {
       <Container>
         <nav>
           <MenuList>
-            {navLinks &&
-              navLinks.map((item) => {
+            {menu &&
+              menu.map(([text, link]) => {
                 return (
-                  <MenuItem theme key={item.title}>
-                    <NavLink link={item.url}>{item.title}</NavLink>
+                  <MenuItem theme key={link}>
+                    <NavLink link={link}>{text}</NavLink>
                   </MenuItem>
                 );
               })}

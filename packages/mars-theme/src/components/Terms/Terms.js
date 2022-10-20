@@ -5,7 +5,6 @@ import P from "../constant/Paragraph";
 import { font, stretch } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
-import parse from "html-react-parser";
 
 const terms = [
   {
@@ -318,7 +317,7 @@ const terms = [
   },
 ];
 
-const Terms = ({ state, post }) => {
+const Terms = ({ state }) => {
   const { isMobile } = state.theme;
 
   const contentRef = useRef(null);
@@ -395,48 +394,33 @@ const Terms = ({ state, post }) => {
         <Content>
           <Info>
             <TermsTitleM color="black" mb={isMobile ? 15 : 23}>
-              {post.acf.terms_top_title}
+              Политика конфиденциальности
             </TermsTitleM>
             <Subtitle>
               <P size="l">
-                {post.acf.terms_top_text ? parse(post.acf.terms_top_text) : ''}
+                Настоящая Политика конфиденциальности регулирует порядок
+                обработки и использования персональных и иных данных, которые
+                ИП Колесень И.Г. может получить о Пользователе во время
+                использования сайта{" "}
+                <TextLink link="https://ux-school.by/">
+                  https://ux-school.by/
+                </TextLink>
+                .
               </P>
             </Subtitle>
           </Info>
           <NavigationWrapper>
             <Navigation>
-              {post.acf.terms_items.map((term, idx) => (
-                <NavItem key={idx} onClick={() => scrollToTerm(idx)}>
+              {terms.map((term, idx) => (
+                <NavItem key={term.id} onClick={() => scrollToTerm(idx)}>
                   <NavButton
                     active={hoveredElementIndex === idx}
-                  >{term.terms_item_title}</NavButton>
+                  >{`${term.id}. ${term.title}`}</NavButton>
                 </NavItem>
               ))}
             </Navigation>
           </NavigationWrapper>
           <TermsContent ref={contentRef}>
-            {post.acf.terms_items.map((term, idx) => (
-              <TermsItem key={idx}>
-                <TitleS mb={isMobile ? 15 : 23} color="black">
-                  {term.terms_item_title}
-                </TitleS>
-                {term.terms_subitems.map((termItem, idx) => {
-                  const termItemNumber = termItem.id;
-
-                  return (
-                    <React.Fragment key={idx}>
-                      <Term size="l">
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: termItem.terms_subitem_text,
-                          }}
-                        />
-                      </Term>
-                    </React.Fragment>
-                  );
-                })}
-              </TermsItem>
-            ))}
             {terms.map((term) => {
               const termNumber = term.id;
 

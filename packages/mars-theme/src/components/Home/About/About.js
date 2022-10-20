@@ -4,7 +4,6 @@ import P from "../../constant/Paragraph";
 import Link from "../../constant/Link";
 import { font, stretch, gradient, grayRgba } from "../../base/functions";
 import { styled } from "frontity";
-import parse from "html-react-parser";
 
 import igor from "../../../assets/images/Igor.png";
 import poster from "../../../assets/images/about-poster.png";
@@ -20,43 +19,45 @@ const largeContent = [
   "Мы каждый день используем приложения, серфим сайты и получаем множество из интернета. При этом совершенно не задумываемся о тех, кто всё это так здорово для нас придумал, и почему этим так удобно пользоваться.",
 ];
 
-const About = ({ post }) => {
+const About = () => {
   return (
     <Section>
       <Container>
         <Content>
           <Small>
             <SmallText>
-              {post.acf.home_about_quote ? <P key={post.acf.home_about_quote}>{parse(post.acf.home_about_quote)}</P> : ''}
+              {smallContent.map((item) => (
+                <P key={item}>{item}</P>
+              ))}
             </SmallText>
             <SmallInfo>
               <Avatar>
-                <img src={post.acf.home_about_quote_photo.url} alt="" />
+                <img src={igor} alt="" />
               </Avatar>
               <div>
-                <Name>{post.acf.home_about_name}</Name>
-                <Position>{post.acf.home_about_post}</Position>
+                <Name>Игорь Колесень</Name>
+                <Position>Основатель школы</Position>
               </div>
             </SmallInfo>
           </Small>
           <Large>
             <LargeText>
-              {post.acf.home_about_text.map((item) => (
-                <P size="l" key={item.home_about_paragraph}>
-                  {item.home_about_paragraph ? parse(item.home_about_paragraph) : ''}
+              {largeContent.map((item) => (
+                <P size="l" key={item}>
+                  {item}
                 </P>
               ))}
             </LargeText>
             <BtnWrapper>
-              <WhiteBtn link={post.acf.home_about_button_link}>{post.acf.home_about_button_text}</WhiteBtn>
+              <WhiteBtn link="/about">О нашей школе</WhiteBtn>
             </BtnWrapper>
           </Large>
         </Content>
       </Container>
       <Poster>
         <img
-          src={post.acf.home_about_image_1x.url}
-          srcSet={`${post.acf.home_about_image_1x.url} 1x, ${post.acf.home_about_image_2x.url ? post.acf.home_about_image_2x.url : post.acf.home_about_image_1x.url}`}
+          src={poster}
+          srcSet={`${poster} 1x, ${poster2x ? poster2x : poster}`}
           alt="poster"
         />
       </Poster>
