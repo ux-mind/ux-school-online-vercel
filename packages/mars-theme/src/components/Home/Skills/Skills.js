@@ -6,8 +6,9 @@ import { connect, styled, css } from "frontity";
 import { font } from "../../base/functions";
 
 import poster from "../../../assets/images/about-video.png";
+import parse from "html-react-parser";
 
-const Skills = () => {
+const Skills = ({ post }) => {
   return (
     <SkillsSection>
       <VideoContainer>
@@ -17,14 +18,15 @@ const Skills = () => {
               position: relative;
             `}
           >
-            <img src={poster} alt="" />
+            <img src={post.acf.main_banner_video_poster.url} alt="" />
             <iframe
               width="100%"
               height="675"
-              src="https://www.youtube.com/embed/EJWL0ZACABc"
+              src={post.acf.main_banner_video_source}
               title="YouTube video player"
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen=""
+              allowfullscreen
             ></iframe>
             {/* <Play aria-label="play video" onClick={playVideo}>
               <svg
@@ -61,8 +63,8 @@ const Skills = () => {
       </VideoContainer>
       <SkillsContainer>
         <SkillsBlock>
-          <SkillsTitleM>Чему вы&nbsp;научитесь</SkillsTitleM>
-          <SkillsSwiper />
+          <SkillsTitleM>{post.acf.skills_title ? parse(post.acf.skills_title) : ''}</SkillsTitleM>
+          <SkillsSwiper post={post} />
         </SkillsBlock>
       </SkillsContainer>
     </SkillsSection>

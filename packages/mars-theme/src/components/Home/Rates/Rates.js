@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import P from "../../constant/Paragraph";
 import Container from "../../constant/Container";
-import RateItem from "./RateItem/RateItem";
+import RateItemMax from "./RateItems/RateItemMax";
+import RateItemSelf from "./RateItems/RateItemSelf";
+import RateItemFree from "./RateItems/RateItemFree";
 import CheckboxItem from "../../constant/CheckboxItem";
 import PrimaryBtn from "../../constant/PrimaryButton";
 import WhiteBtn from "../../constant/WhiteButton";
@@ -10,6 +12,7 @@ import Input from "../../constant/Input";
 import { font, grayRgba, flex } from "../../base/functions";
 import { TitleM } from "../../constant/Title";
 import { styled, connect } from "frontity";
+import parse from "html-react-parser";
 
 import { useFormik } from "formik";
 
@@ -38,7 +41,7 @@ const nextContent = [
   "Как минимум 2 месяца погружения в мир дизайна с головой-)",
 ];
 
-const Rates = ({ state, actions }) => {
+const Rates = ({ state, actions, post }) => {
   const { isMobile } = state.theme;
 
   const ratesRef = useRef(null);
@@ -68,25 +71,24 @@ const Rates = ({ state, actions }) => {
       <Section>
         <Container ref={ratesRef}>
           <TitleM align="center" mb={isMobile ? 13 : 23}>
-            Тарифы
+            {post.acf.tariffs_title ? parse(post.acf.tariffs_title) : ''}
           </TitleM>
           <Subtitle>
             <P align="center" size="l">
-              Обучение в нашей школе доступно всем, вне зависимости
-              от количества свободного времени и доступных средств
+              {post.acf.tariffs_text ? parse(post.acf.tariffs_text) : ''}
             </P>
           </Subtitle>
           <Content>
-            <RateItem type="free" availableContent={freeContent} />
-            <RateItem
+            <RateItemFree type="free" post={post} />
+            <RateItemMax
               openModalFunc={() => setSignupModalOpened(true)}
               type="max"
-              availableContent={maxContent}
+              post={post}
             />
-            <RateItem
+            <RateItemSelf
               openModalFunc={() => setSendModalOpened(true)}
               type="self"
-              availableContent={selfContent}
+              post={post}
             />
           </Content>
         </Container>
@@ -96,13 +98,13 @@ const Rates = ({ state, actions }) => {
         setIsOpened={setSignupModalOpened}
         className="signup"
       >
-        <TitleM mb={isMobile ? 14 : 30}>Записаться</TitleM>
+        <TitleM mb={isMobile ? 14 : 30}>{post.acf.tariff_2_modal_title}</TitleM>
         <SignupForm onSubmit={formik.handleSubmit}>
           <Label>
             <Input
               type="text"
               name="name"
-              placeholder="Имя и фамилия"
+              placeholder={post.acf.tariff_2_modal_name_placeholder}
               value={formik.values.name}
               onChange={formik.handleChange}
             />
@@ -111,7 +113,7 @@ const Rates = ({ state, actions }) => {
             <Input
               type="tel"
               name="tel"
-              placeholder="Телефон"
+              placeholder={post.acf.tariff_2_modal_phone_placeholder}
               value={formik.values.tel}
               onChange={formik.handleChange}
             />
@@ -120,7 +122,7 @@ const Rates = ({ state, actions }) => {
             <Input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={post.acf.tariff_2_modal_email_placeholder}
               value={formik.values.email}
               onChange={formik.handleChange}
             />
@@ -130,7 +132,7 @@ const Rates = ({ state, actions }) => {
               disabled={!isApproved}
               maxWidth="100%"
               type="submit"
-              content="Отправить заявку"
+              content={post.acf.tariff_2_modal_button_text}
             />
           </SubmitWrapper>
           <CheckboxWrapper>
@@ -138,8 +140,7 @@ const Rates = ({ state, actions }) => {
               checked={isApproved}
               setChecked={() => setIsApproved((prev) => !prev)}
             >
-              Я согласен с условиями обработки{" "}
-              <a href="/terms/">персональных данных</a>
+              {post.acf.tariff_2_modal_checkbox_label ? parse(post.acf.tariff_2_modal_checkbox_label) : ''}
             </CheckboxItem>
           </CheckboxWrapper>
         </SignupForm>
@@ -149,20 +150,20 @@ const Rates = ({ state, actions }) => {
         setIsOpened={setSendModalOpened}
         className="send"
       >
-        <TitleM mb={isMobile ? 19 : 37}>Заявка отправлена</TitleM>
+        <TitleM mb={isMobile ? 19 : 37}>{post.acf.tariff_3_modal_title}</TitleM>
         <Next>
-          <P>Что будет дальше?</P>
+          <P>{post.acf.tariff_3_modal_subtitle}</P>
         </Next>
         <NextList>
-          {nextContent.map((item, idx) => (
-            <NextItem key={item}>
+          {post.acf.tariff_3_modal_items.map((item, idx) => (
+            <NextItem key={item.tariff_3_modal_item}>
               <NextNumber>{idx + 1}</NextNumber>
-              <P size="l">{item}</P>
+              <P size="l">{item.tariff_3_modal_item}</P>
             </NextItem>
           ))}
         </NextList>
         <BtnWrapper>
-          <WhiteBtn onClick={() => setSendModalOpened(false)}>Закрыть</WhiteBtn>
+          <WhiteBtn onClick={() => setSendModalOpened(false)}>{post.acf.tariff_3_modal_button_text}</WhiteBtn>
         </BtnWrapper>
       </Modal>
     </>

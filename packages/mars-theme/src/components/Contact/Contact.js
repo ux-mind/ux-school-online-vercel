@@ -9,6 +9,7 @@ import { flex, font, grayRgba, stretch } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect } from "frontity";
 import P from "../constant/Paragraph";
+import parse from "html-react-parser";
 
 import { useFormik } from "formik";
 
@@ -18,6 +19,7 @@ import whatsapp from "../../assets/images/social/Whatsapp-large.svg";
 import viber from "../../assets/images/social/Viber-large.svg";
 import linked from "../../assets/images/social/linkedin-large.svg";
 
+/*
 const socials = [
   {
     id: 1,
@@ -49,9 +51,9 @@ const socials = [
     link: "linkedin.com/company/ux-mind-school",
     content: "linkedin.com/company/ux-mind-school",
   },
-];
+];*/
 
-const Contact = ({ state }) => {
+const Contact = ({ state, post }) => {
   const { isMobile } = state.theme;
 
   const [isUserAgree, setIsUserAgree] = useState(true);
@@ -69,12 +71,12 @@ const Contact = ({ state }) => {
     <ContactsWrapper>
       <Content>
         <TitleM color="black" mb={isMobile ? 30 : 46}>
-          Контакты
+          {post.acf.contacts_title}
         </TitleM>
         <MapBlock>
           <Map>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.540784751345!2d27.58559125944169!3d53.904365597695424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbcfb6cb6a50c3%3A0x823a68a49cd1d602!2z0YPQu9C40YbQsCDQp9Cw0L_QsNC10LLQsCAzLCDQnNC40L3RgdC6LCDQkdC10LvQsNGA0YPRgdGM!5e0!3m2!1sru!2sru!4v1660890169287!5m2!1sru!2sru"
+              src={post.acf.contacts_map_link}
               width="100%"
               height="272"
               style={{ border: "0" }}
@@ -84,14 +86,13 @@ const Contact = ({ state }) => {
             ></iframe>
           </Map>
           <Address>
-            <Office>Головной офис</Office>
+            <Office>{post.acf.contacts_map_location_name}</Office>
             <P size="l">
-              Республика Беларусь. <br />
-              г. Минск. ул. Чапаева, д. 3, оф. 237
+              {post.acf.contacts_map_location_address ? parse(post.acf.contacts_map_location_address) : ''}
             </P>
           </Address>
           <SocialList>
-            {socials.map((item) => {
+            {/*socials.map((item) => {
               return (
                 <SocialItem key={item.id}>
                   <Icon>
@@ -100,15 +101,14 @@ const Contact = ({ state }) => {
                   <SocialLink link={item.link}>{item.content}</SocialLink>
                 </SocialItem>
               );
-            })}
+            })*/}
           </SocialList>
         </MapBlock>
         <FormBlock onSubmit={formik.handleSubmit}>
-          <FormTitle>Связаться с нами</FormTitle>
+          <FormTitle>{post.acf.contacts_form_title}</FormTitle>
           <FormSubtitle>
             <P>
-              Оставьте ваши контактные данные. Мы свяжемся с вами
-              и проконсультируем вас по любым вопросам.
+              {post.acf.contacts_form_text}
             </P>
           </FormSubtitle>
           <ContactForm>
@@ -116,7 +116,7 @@ const Contact = ({ state }) => {
               <Input
                 required
                 type="text"
-                placeholder="Имя"
+                placeholder={post.acf.contacts_form_name_placeholder}
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 name="name"
@@ -126,7 +126,7 @@ const Contact = ({ state }) => {
               <Input
                 required
                 type="tel"
-                placeholder="Телефон"
+                placeholder={post.acf.contacts_form_phone_placeholder}
                 value={formik.values.tel}
                 onChange={formik.handleChange}
                 name="tel"
@@ -135,7 +135,7 @@ const Contact = ({ state }) => {
             <SubmitWrapper>
               <PrimaryBtn
                 disabled={isUserAgree ? false : true}
-                content="Отправить заявку"
+                content={post.acf.contacts_form_send_button_text}
                 type="submit"
               />
             </SubmitWrapper>
@@ -144,8 +144,8 @@ const Contact = ({ state }) => {
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
-                Я согласен с условиями обработки{" "}
-                <a href="/terms/">персональных данных</a>
+                {post.acf.contacts_form_personal_data_text}{" "}
+                <a href={post.acf.contacts_form_personal_data_link}>{post.acf.contacts_form_personal_data_link_text}</a>
               </CheckboxItem>
             </div>
           </ContactForm>

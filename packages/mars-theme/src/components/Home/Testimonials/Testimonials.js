@@ -21,6 +21,7 @@ import instaGray from "../../../assets/images/svg/instagram-gray.svg";
 import behanceGray from "../../../assets/images/svg/behance-gray.svg";
 import dribbleGray from "../../../assets/images/svg/dribble-gray.svg";
 import linkedinGray from "../../../assets/images/svg/linkedin-gray.svg";
+import parse from "html-react-parser";
 
 const testimonials = [
   {
@@ -105,31 +106,35 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
+const Testimonials = ({ state, post }) => {
   const [testimonialModalOpened, setTestimonialModalOpened] = useState(false);
   const [openedTestimonial, setOpenedTestimonial] = useState(null);
   const [allTestimonialsShown, setAllTestimonialsShown] = useState(false);
+  
+  const reviews = state.source.get(`/reviews/`).items;
+  console.log("reviews");
+  console.log(reviews);
 
   return (
     <Section>
       <Container>
-        <TestimonialsTitle>Отзывы выпускников</TestimonialsTitle>
+        <TestimonialsTitle>{post.acf.reviews_title ? parse(post.acf.reviews_title) : ''}</TestimonialsTitle>
         <Content>
           <TestimonialsList>
-            {testimonials.map((testimonial, idx) => {
+            {reviews.map((review, idx) => {
               if (!allTestimonialsShown && idx > 3) {
                 return null;
               }
 
               return (
-                <TestimonialItem key={testimonial.id}>
+                <TestimonialItem key={review.id}>
                   <Avatar>
                     <img
-                      src={testimonial.avatar}
-                      srcSet={`${testimonial.avatar} 1x, ${
-                        testimonial.avatar2x
-                          ? testimonial.avatar2x
-                          : testimonial.avatar
+                      src={review.acf.review_photo_1x.url}
+                      srcSet={`${review.acf.review_photo_1x.url} 1x, ${
+                        review.acf.review_photo_2x.url
+                          ? review.acf.review_photo_2x.url
+                          : review.acf.review_photo_1x.url
                       } 2x`}
                       alt="avatar"
                     />
@@ -137,32 +142,32 @@ const Testimonials = () => {
                   <Info>
                     <InfoText
                       onClick={() => {
-                        setOpenedTestimonial(testimonial);
+                        setOpenedTestimonial(review);
                         setTestimonialModalOpened(true);
                       }}
                     >
-                      <P size="l">{testimonial.shortText}</P>
+                      <P size="l">{review.acf.review_excerpt}</P>
                     </InfoText>
                     <Name>
-                      {testimonial.age ? (
-                        <P>{`${testimonial.name}, ${testimonial.age}`}</P>
+                      {review.acf.review_author_age ? (
+                        <P>{`${review.acf.review_author_name}, ${review.acf.review_author_age}`}</P>
                       ) : (
-                        <P>{testimonial.name}</P>
+                        <P>{review.acf.review_author_name}</P>
                       )}
                     </Name>
                   </Info>
                 </TestimonialItem>
               );
             })}
-            {!allTestimonialsShown && (
+            {(!allTestimonialsShown && reviews.length > 4) && (
               <BtnContainer>
                 <WhiteBtn onClick={() => setAllTestimonialsShown(true)}>
-                  Показать ещё
+                  {post.acf.reviews_show_more}
                 </WhiteBtn>
               </BtnContainer>
             )}
           </TestimonialsList>
-          <Additional />
+          <Additional post={post}/>
         </Content>
         <TestimonialModal
           isOpened={testimonialModalOpened}

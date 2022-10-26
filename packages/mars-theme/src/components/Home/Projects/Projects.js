@@ -7,6 +7,7 @@ import { styled, connect } from "frontity";
 import archi from "../../../assets/images/projects/archi.png";
 import link from "../../../assets/images/svg/Link.svg";
 import whitelink from "../../../assets/images/svg/whitelink.svg";
+import parse from "html-react-parser";
 
 const projects = [
   {
@@ -101,16 +102,16 @@ const projects = [
   },
 ];
 
-const Projects = ({ state }) => {
+const Projects = ({ state, post }) => {
   const { isMobile } = state.theme;
 
   const [isAllProjectsShown, setIsAllProjectsShown] = useState(false);
 
   return (
     <Section>
-      <ProjectsTitle>Проекты наших выпускников</ProjectsTitle>
+      <ProjectsTitle>{post.acf.projects_title ? parse(post.acf.projects_title) : ''}</ProjectsTitle>
       <Content>
-        {projects.map((project, idx) => {
+        {post.acf.projects_items.map((project, idx) => {
           if (
             (isMobile && idx > 2 && !isAllProjectsShown) ||
             (isMobile && idx > 5 && isAllProjectsShown)
@@ -119,13 +120,13 @@ const Projects = ({ state }) => {
           }
 
           return (
-            <ProjectBlock key={project.id}>
+            <ProjectBlock key={project.projects_item_title}>
               <Bg>
-                <img src={project.image} alt="project image" />
+                <img src={project.projects_item_image.url} alt="project image" />
                 <Shadow />
               </Bg>
               <BtnLinkWrapper>
-                <BtnLink link={project.link}>{project.title}</BtnLink>
+                <BtnLink link={project.project_item_link}>{project.projects_item_title ? parse(project.projects_item_title) : ''}</BtnLink>
               </BtnLinkWrapper>
             </ProjectBlock>
           );
@@ -142,11 +143,9 @@ const Projects = ({ state }) => {
         <AllProjectsBtn
           rel="noopenner noreferrer"
           target="_blank"
-          link={
-            "https://www.behance.net/collection/181601277/itogovye-raboty-uchenikov-UX-Mind-School"
-          }
+          link={post.acf.all_projects_button_link}
         >
-          Все проекты на Behance
+          {post.acf.all_projects_button_text ? parse(post.acf.all_projects_button_text) : ''}
         </AllProjectsBtn>
       </AllProjects>
     </Section>

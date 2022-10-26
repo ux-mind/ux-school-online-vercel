@@ -5,6 +5,7 @@ import Link from "../constant/Link";
 import Image from "@frontity/components/image";
 import { font, flex, whiteRgba, stretch } from "../base/functions";
 import { styled, connect } from "frontity";
+import parse from "html-react-parser";
 
 import whiteLogo from "../../assets/images/svg/Logo-white.svg";
 import bg from "../../assets/images/footer-bg.png";
@@ -42,34 +43,38 @@ const socialLinks = [
 const Footer = ({ state }) => {
   const { menu, isMobile } = state.theme;
 
+  const options = state.source.get(`acf-settings`);
+  const navLinks = state.source.get(`/menu/footer-menu`).items;
+  const navLinksAdditional = state.source.get(`/menu/footer-additional-menu`).items;
+
   return (
     <FooterElement>
       <Container>
         <Content>
           <Top>
             <StyledLink link="/">
-              <Image src={whiteLogo} alt="logo" />
+              <Image src={options.acf.footer_logo.url} alt="logo" />
             </StyledLink>
             <Nav>
               <School>
-                <ListTitle>Школа</ListTitle>
+                <ListTitle>{options.acf.footer_menu_section_title}</ListTitle>
                 <List>
-                  {menu.map(([text, link]) => (
-                    <Li key={link}>
-                      <Link link={link}>{text}</Link>
+                  {navLinks.map((item) => (
+                    <Li key={item.title}>
+                      <Link link={item.url}>{item.title}</Link>
                     </Li>
                   ))}
                 </List>
               </School>
               <Social>
-                <ListTitle>Мы на связи</ListTitle>
+                <ListTitle>{options.acf.footer_social_section_title}</ListTitle>
                 <SocialList>
-                  {socialLinks.map(({ icon, text, link }) => (
-                    <SocialLi key={text}>
+                  {options.acf.footer_social_items.map(( item ) => (
+                    <SocialLi key={item.footer_social_item_text}>
                       <Icon>
-                        <img src={icon} alt="" />
+                        <img src={item.footer_social_item_icon.url} alt="" />
                       </Icon>
-                      <Link link={link}>{text}</Link>
+                      <Link link={item.footer_social_item_link}>{item.footer_social_item_text}</Link>
                     </SocialLi>
                   ))}
                 </SocialList>
@@ -78,31 +83,30 @@ const Footer = ({ state }) => {
             <InfoWrapper>
               <Info>
                 <Block mb={24}>
-                  <InfoTitle>Режим работы</InfoTitle>
-                  <P color="white">Пн-Сб с 10:00 до 20.00</P>
+                  <InfoTitle>{options.acf.footer_working_hours_title}</InfoTitle>
+                  <P color="white">{options.acf.footer_working_hours_text}</P>
                 </Block>
                 <Block mb={32}>
-                  <P color="white">ИП Колесень И.Г.</P>
-                  <P color="white">
-                    УНП 190602238. Выдано 15.10.2020 Мингорисполкомом.
-                  </P>
+                  {options.acf.footer_legal_info.map((item) => {
+                    return (
+                      <P color="white">{item.footer_legal_info_item}</P>
+                    );
+                  })}
                 </Block>
                 <Block>
-                  <InfoLink link="/">Политика конфиденциальности</InfoLink>
-                  <InfoLink link="/">Договор оферты</InfoLink>
+                  {navLinksAdditional.map((item) => (
+                    <InfoLink link={item.url} key={item.title}>{item.title}</InfoLink>
+                  ))}
                 </Block>
               </Info>
             </InfoWrapper>
           </Top>
           <Bottom>
-            <P>Торговый реестр: 147946 2018–05–28</P>
-            <P>
-              Предоставляемая вами персональная информация (например: имя,
-              адрес, телефон, email, номер банковской карты и прочее) является
-              конфиденциальной и не подлежит разглашению. Данные карточки
-              передаются только в зашифрованном виде и не сохраняются на данном
-              интернет-ресурсе
-            </P>
+            {options.acf.footer_bottom_text.map((item) => {
+              return (
+                <P color="white">{item.footer_bottom_paragraph ? parse(item.footer_bottom_paragraph) : ''}</P>
+              );
+            })}
           </Bottom>
         </Content>
       </Container>

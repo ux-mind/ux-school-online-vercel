@@ -8,6 +8,7 @@ import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import CheckboxItem from "../../constant/CheckboxItem";
 import { flex, whiteRgba, font } from "../../base/functions";
 import { styled } from "frontity";
+import parse from "html-react-parser";
 
 import bg from "../../../assets/images/consultation-bg.png";
 import like from "../../../assets/images/Like.png";
@@ -15,7 +16,7 @@ import like2x from "../../../assets/images/Like@2x.png";
 
 import { useFormik } from "formik";
 
-const Consultation = () => {
+const Consultation = ({ post }) => {
   const [isUserAgree, setIsUserAgree] = useState(true);
   const [consultationModalOpened, setConsultationModalOpened] = useState(false);
 
@@ -33,12 +34,11 @@ const Consultation = () => {
         <Block>
           <Content>
             <ConsultationTitle color="white">
-              Проконсультируем вас, поможем с выбором
+              {post.acf.consultation_title ? parse(post.acf.consultation_title) : ''}
             </ConsultationTitle>
             <Subtitle>
               <P size="l" color="white">
-                {`Оставьте свой номер телефона, и мы поможем сделать правильный
-                выбор-)`}
+                {post.acf.consultation_subtitle ? parse(post.acf.consultation_subtitle) : ''}
               </P>
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
@@ -46,7 +46,7 @@ const Consultation = () => {
                 <Input
                   value={formik.values.name}
                   onChange={formik.handleChange}
-                  placeholder="Имя"
+                  placeholder={post.acf.consultation_name_placeholder}
                   name="name"
                 />
               </FormBlock>
@@ -54,7 +54,7 @@ const Consultation = () => {
                 <Input
                   value={formik.values.tel}
                   onChange={formik.handleChange}
-                  placeholder="Телефон"
+                  placeholder={post.acf.consultation_phone_placeholder}
                   name="tel"
                   type="tel"
                 />
@@ -62,7 +62,7 @@ const Consultation = () => {
               <SubmitWrapper>
                 <PrimaryBtn
                   type="submit"
-                  content="Отправить"
+                  content={post.acf.consultation_button_text}
                   disabled={!isUserAgree}
                 />
               </SubmitWrapper>
@@ -72,8 +72,7 @@ const Consultation = () => {
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
-                Я согласен с условиями обработки{" "}
-                <a href="/terms/">персональных данных</a>
+                {post.acf.consultation_checkbox_text ? parse(post.acf.consultation_checkbox_text) : ''}
               </CheckboxItem>
             </Agreement>
           </Content>
@@ -81,8 +80,8 @@ const Consultation = () => {
       </Container>
       <Like>
         <img
-          src={like}
-          srcSet={`${like} 1x, ${like2x ? like2x : like} 2x`}
+          src={post.acf.consultation_image_1x.url}
+          srcSet={`${post.acf.consultation_image_1x.url} 1x, ${post.acf.consultation_image_2x.url ? post.acf.consultation_image_2x.url : post.acf.consultation_image_1x.url} 2x`}
           alt=""
         />
       </Like>
@@ -91,8 +90,8 @@ const Consultation = () => {
           isOpened={consultationModalOpened}
           setIsOpened={setConsultationModalOpened}
         >
-          <ModalTitle>Заявка отправлена</ModalTitle>
-          <P size="l">Наш менеджер совсем скоро свяжется с вами</P>
+          <ModalTitle>{post.acf.consultation_modal_title}</ModalTitle>
+          <P size="l">{post.acf.consultation_modal_text ? parse(post.acf.consultation_modal_text) : ''}</P>
         </CommonModal>
       </ModalWrapper>
     </Section>

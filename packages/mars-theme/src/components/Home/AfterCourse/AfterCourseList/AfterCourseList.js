@@ -57,23 +57,7 @@ const AfterCourseList = ({ state }) => {
             onClick={() => setOpenedItem(item.id)}
             key={item.id}
           >
-            {isOpened ? (
-              <OpenedItem>
-                <Number>{item.id}</Number>
-                <OpenedItemContent>
-                  <OpenedItemTitle>{item.title}</OpenedItemTitle>
-                  <OpenedItemText>
-                    {item.paragraphs.map((paragraph) => (
-                      <P
-                        size="l"
-                        key={paragraph}
-                        dangerouslySetInnerHTML={{ __html: paragraph }}
-                      />
-                    ))}
-                  </OpenedItemText>
-                </OpenedItemContent>
-              </OpenedItem>
-            ) : (
+            {!isOpened && (
               <ClosedItem>
                 <Number>{item.id}</Number>
                 <ClosedItemTitle>
@@ -98,6 +82,23 @@ const AfterCourseList = ({ state }) => {
                   )}
                 </ClosedItemTitle>
               </ClosedItem>
+            )}
+            {isOpened && (
+              <OpenedItem>
+                <Number>{item.id}</Number>
+                <OpenedItemContent>
+                  <OpenedItemTitle>{item.title}</OpenedItemTitle>
+                  <OpenedItemText>
+                    {item.paragraphs.map((paragraph) => (
+                      <P
+                        size="l"
+                        key={paragraph}
+                        dangerouslySetInnerHTML={{ __html: paragraph }}
+                      />
+                    ))}
+                  </OpenedItemText>
+                </OpenedItemContent>
+              </OpenedItem>
             )}
           </AfterItem>
         );
