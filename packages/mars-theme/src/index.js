@@ -24,7 +24,7 @@ const marsTheme = {
       autoPrefetch: "in-view",
       courseModalOpened: false,
       menu: [
-        ["Oплатить курс", "/payment"],
+        ["Oплатить курс", "https://ux-school.by/oplatit-kurs-online/"],
         ["О школе", "/about"],
         ["Контакты", "/contacts"],
       ],

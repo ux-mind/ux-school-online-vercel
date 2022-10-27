@@ -14,8 +14,8 @@ import slide3_2x from "../../../assets/images/about-slide3@2x.png";
 
 const slides = [
   { id: 1, image: slide1, image2x: slide1_2x },
-  { id: 1, image: slide2, image2x: slide2_2x },
-  { id: 1, image: slide3, image2x: slide3_2x },
+  { id: 2, image: slide2, image2x: slide2_2x },
+  { id: 3, image: slide3, image2x: slide3_2x }
 ];
 
 const AboutSlider = ({ post }) => {

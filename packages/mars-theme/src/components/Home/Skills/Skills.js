@@ -24,9 +24,9 @@ const Skills = ({ post }) => {
               height="675"
               src={post.acf.main_banner_video_source}
               title="YouTube video player"
-              frameborder="0"
+              /*frameborder="0"*/
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowfullscreen=""
             ></iframe>
             {/* <Play aria-label="play video" onClick={playVideo}>
               <svg
