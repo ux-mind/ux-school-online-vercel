@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import { TitleM } from "../../constant/Title";
 import P from "../../constant/Paragraph";
 import Input from "../../constant/Input";
+import InputValid from "../../constant/InputWithValidation";
 import CommonModal from "../../constant/CommonModal";
 import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import CheckboxItem from "../../constant/CheckboxItem";
@@ -34,11 +35,15 @@ const Consultation = ({ post }) => {
         <Block>
           <Content>
             <ConsultationTitle color="white">
-              {post.acf.consultation_title ? parse(post.acf.consultation_title) : ''}
+              {post.acf.consultation_title
+                ? parse(post.acf.consultation_title)
+                : ""}
             </ConsultationTitle>
             <Subtitle>
               <P size="l" color="white">
-                {post.acf.consultation_subtitle ? parse(post.acf.consultation_subtitle) : ''}
+                {post.acf.consultation_subtitle
+                  ? parse(post.acf.consultation_subtitle)
+                  : ""}
               </P>
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
@@ -51,7 +56,7 @@ const Consultation = ({ post }) => {
                 />
               </FormBlock>
               <FormBlock>
-                <Input
+                <InputValid
                   value={formik.values.tel}
                   onChange={formik.handleChange}
                   placeholder={post.acf.consultation_phone_placeholder}
@@ -72,7 +77,9 @@ const Consultation = ({ post }) => {
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
-                {post.acf.consultation_checkbox_text ? parse(post.acf.consultation_checkbox_text) : ''}
+                {post.acf.consultation_checkbox_text
+                  ? parse(post.acf.consultation_checkbox_text)
+                  : ""}
               </CheckboxItem>
             </Agreement>
           </Content>
@@ -81,7 +88,11 @@ const Consultation = ({ post }) => {
       <Like>
         <img
           src={post.acf.consultation_image_1x.url}
-          srcSet={`${post.acf.consultation_image_1x.url} 1x, ${post.acf.consultation_image_2x.url ? post.acf.consultation_image_2x.url : post.acf.consultation_image_1x.url} 2x`}
+          srcSet={`${post.acf.consultation_image_1x.url} 1x, ${
+            post.acf.consultation_image_2x.url
+              ? post.acf.consultation_image_2x.url
+              : post.acf.consultation_image_1x.url
+          } 2x`}
           alt=""
         />
       </Like>
@@ -91,7 +102,11 @@ const Consultation = ({ post }) => {
           setIsOpened={setConsultationModalOpened}
         >
           <ModalTitle>{post.acf.consultation_modal_title}</ModalTitle>
-          <P size="l">{post.acf.consultation_modal_text ? parse(post.acf.consultation_modal_text) : ''}</P>
+          <P size="l">
+            {post.acf.consultation_modal_text
+              ? parse(post.acf.consultation_modal_text)
+              : ""}
+          </P>
         </CommonModal>
       </ModalWrapper>
     </Section>
@@ -159,6 +174,7 @@ const SubmitWrapper = styled.div`
 
 const FormBlock = styled.div`
   margin-right: 8px;
+  position: relative;
   &:last-child {
     margin-right: 0;
   }

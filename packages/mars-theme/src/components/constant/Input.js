@@ -11,6 +11,7 @@ const Input = styled.input`
   box-sizing: border-box;
   border: 1px solid var(--gray-200);
   border-radius: 12px;
+  outline: none;
   &::placeholder {
     color: var(--gray-300);
   }

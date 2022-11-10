@@ -41,10 +41,12 @@ const CertificateBlock = ({ state, post }) => {
 
   return (
     <Wrapper>
-      <CertificateTitle>{post.acf.certificate_title ? parse(post.acf.certificate_title) : ''}</CertificateTitle>
+      <CertificateTitle>
+        {post.acf.certificate_title ? parse(post.acf.certificate_title) : ""}
+      </CertificateTitle>
       <Subtitle>
         <P size="l">
-          {post.acf.certificate_text ? parse(post.acf.certificate_text) : ''}
+          {post.acf.certificate_text ? parse(post.acf.certificate_text) : ""}
         </P>
       </Subtitle>
       <CertificateWrapper>
@@ -52,7 +54,11 @@ const CertificateBlock = ({ state, post }) => {
           <CertificateBorderInner>
             <Certificate>
               <img
-                src={state.theme.isMobile ? post.acf.certificate_image_mobile.url : post.acf.certificate_image.url}
+                src={
+                  state.theme.isMobile
+                    ? post.acf.certificate_image_mobile.url
+                    : post.acf.certificate_image.url
+                }
                 alt="certificate"
               />
             </Certificate>
@@ -71,7 +77,10 @@ const CertificateBlock = ({ state, post }) => {
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
-        <PrimaryBtn onClick={scrollToRates} content={post.acf.certificate_button_text} />
+        <PrimaryBtn
+          onClick={scrollToRates}
+          content={post.acf.certificate_button_text}
+        />
       </CourseBtnWrapper>
       <CommonModal
         isOpened={checkModalOpened}
@@ -163,6 +172,7 @@ const SubmitWrapper = styled.div`
 
 const InputWrapper = styled.div`
   margin-bottom: 16px;
+  position: relative;
   &:last-child {
     margin-bottom: 0;
   }

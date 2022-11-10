@@ -97,6 +97,7 @@ const SubmitWrapper = styled.div`
 
 const InputWrapper = styled.div`
   margin-bottom: 16px;
+  position: relative;
   &:last-child {
     margin-bottom: 0;
   }

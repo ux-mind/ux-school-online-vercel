@@ -88,7 +88,9 @@ const Contact = ({ state, post }) => {
           <Address>
             <Office>{post.acf.contacts_map_location_name}</Office>
             <P size="l">
-              {post.acf.contacts_map_location_address ? parse(post.acf.contacts_map_location_address) : ''}
+              {post.acf.contacts_map_location_address
+                ? parse(post.acf.contacts_map_location_address)
+                : ""}
             </P>
           </Address>
           <SocialList>
@@ -107,9 +109,7 @@ const Contact = ({ state, post }) => {
         <FormBlock onSubmit={formik.handleSubmit}>
           <FormTitle>{post.acf.contacts_form_title}</FormTitle>
           <FormSubtitle>
-            <P>
-              {post.acf.contacts_form_text}
-            </P>
+            <P>{post.acf.contacts_form_text}</P>
           </FormSubtitle>
           <ContactForm>
             <div>
@@ -145,7 +145,9 @@ const Contact = ({ state, post }) => {
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
                 {post.acf.contacts_form_personal_data_text}{" "}
-                <a href={post.acf.contacts_form_personal_data_link}>{post.acf.contacts_form_personal_data_link_text}</a>
+                <a href={post.acf.contacts_form_personal_data_link}>
+                  {post.acf.contacts_form_personal_data_link_text}
+                </a>
               </CheckboxItem>
             </div>
           </ContactForm>

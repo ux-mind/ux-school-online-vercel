@@ -32,9 +32,7 @@ const Collaboration = ({ post }) => {
           <FormWrapper>
             <FormTitle>{post.acf.collaboration_title}</FormTitle>
             <Subtitle>
-              <P size="l">
-                {post.acf.collaboration_text}
-              </P>
+              <P size="l">{post.acf.collaboration_text}</P>
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
@@ -68,7 +66,9 @@ const Collaboration = ({ post }) => {
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
                 {post.acf.collaboration_personal_data_text}{" "}
-                <a href={post.acf.collaboration_personal_data_link}>{post.acf.collaboration_personal_data_link_text}</a>
+                <a href={post.acf.collaboration_personal_data_link}>
+                  {post.acf.collaboration_personal_data_link_text}
+                </a>
               </CheckboxItem>
             </Agreement>
           </FormWrapper>
@@ -80,7 +80,11 @@ const Collaboration = ({ post }) => {
           setIsOpened={setSubmitModalOpened}
         >
           <ModalTitle>{post.acf.collaboration_modal_title}</ModalTitle>
-          <P size="l">{post.acf.collaboration_modal_text ? parse(post.acf.collaboration_modal_text) : ''}</P>
+          <P size="l">
+            {post.acf.collaboration_modal_text
+              ? parse(post.acf.collaboration_modal_text)
+              : ""}
+          </P>
         </CommonModal>
       </ModalWrapper>
     </section>
@@ -119,6 +123,7 @@ const ModalTitle = styled(TitleM)`
 
 const FormBlock = styled.div`
   margin-right: 8px;
+  position: relative;
   &:last-child {
     margin-right: 0;
   }

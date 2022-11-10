@@ -139,13 +139,15 @@ const Payment = ({ state, post }) => {
     <PaymentWrapper>
       <Content>
         <TitleM color="black" mb={isMobile ? 30 : 46}>
-          {post.acf.payment_title ? parse(post.acf.payment_title) : ''}
+          {post.acf.payment_title ? parse(post.acf.payment_title) : ""}
         </TitleM>
         <Select onClick={() => setDropdownOpened((prev) => !prev)}>
           {selectedRate ? (
             selectedRate
           ) : (
-            <span data-span="placeholder">{post.acf.payment_tariff_placeholder}</span>
+            <span data-span="placeholder">
+              {post.acf.payment_tariff_placeholder}
+            </span>
           )}
           <Drop rotated={dropdownOpened}>
             <svg
@@ -279,7 +281,9 @@ const Payment = ({ state, post }) => {
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
                 {`${post.acf.payment_personal_data_text} `}
-                <a href={post.acf.payment_personal_data_link}>{post.acf.payment_personal_data_link_text}</a>
+                <a href={post.acf.payment_personal_data_link}>
+                  {post.acf.payment_personal_data_link_text}
+                </a>
               </CheckboxItem>
             </CheckboxAgreementWrapper>
           </Info>
@@ -402,6 +406,7 @@ const BtnWrapper = styled.div`
 
 const InputWrapper = styled.div`
   margin-bottom: 16px;
+  position: relative;
 `;
 
 const MailNote = styled.div`
