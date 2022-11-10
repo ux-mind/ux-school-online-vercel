@@ -23,12 +23,20 @@ const Additional = ({ post }) => {
         <Poster>
           <img
             src={post.acf.reviews_youtube_poster_1x.url}
-            srcSet={`${post.acf.reviews_youtube_poster_1x.url} 1x, ${post.acf.reviews_youtube_poster_2x.url ? post.acf.reviews_youtube_poster_2x.url : post.acf.reviews_youtube_poster_1x.url} 2x`}
+            srcSet={`${post.acf.reviews_youtube_poster_1x.url} 1x, ${
+              post.acf.reviews_youtube_poster_2x.url
+                ? post.acf.reviews_youtube_poster_2x.url
+                : post.acf.reviews_youtube_poster_1x.url
+            } 2x`}
             alt="youtube poster"
           />
         </Poster>
         <YtContent>
-          <P>{post.acf.reviews_youtube_text ? parse(post.acf.reviews_youtube_text) : ''}</P>
+          <P>
+            {post.acf.reviews_youtube_text
+              ? parse(post.acf.reviews_youtube_text)
+              : ""}
+          </P>
           <YtBtnWrapper>
             <YtBtn
               rel="noopenner noreferrer"
@@ -60,14 +68,19 @@ const Additional = ({ post }) => {
         </Title>
         <LinksWrapper>
           {post.acf.reviews_social_items.map((link, id) => {
-            return (<TestimonialLink link={link.reviews_social_link} key={`${link.reviews_social_link}-${id}`}>
-              <img
-                height="40"
-                src={link.reviews_social_image_1x.url}
-                srcSet={`${link.reviews_social_image_1x.url} 1x, ${link.reviews_social_image_2x.url} 2x`}
-                alt="icon"
-              />
-            </TestimonialLink>);
+            return (
+              <TestimonialLink
+                link={link.reviews_social_link}
+                key={`${link.reviews_social_link}-${id}`}
+              >
+                <img
+                  height="40"
+                  src={link.reviews_social_image_1x.url}
+                  srcSet={`${link.reviews_social_image_1x.url} 1x, ${link.reviews_social_image_2x.url} 2x`}
+                  alt="icon"
+                />
+              </TestimonialLink>
+            );
           })}
         </LinksWrapper>
       </MoreTestimonials>
@@ -116,6 +129,9 @@ const YtBtn = styled(Link)`
   & div {
     ${flex()};
     margin-right: 10px;
+  }
+  &:hover {
+    opacity: 0.8;
   }
 `;
 

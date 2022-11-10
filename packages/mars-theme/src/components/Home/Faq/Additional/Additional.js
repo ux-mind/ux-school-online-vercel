@@ -30,12 +30,16 @@ const Additional = ({ state, post }) => {
         <Poster>
           <img
             src={post.acf.faq_video_poster_1x.url}
-            srcSet={`${post.acf.faq_video_poster_1x.url} 1x, ${post.acf.faq_video_poster_2x.url ? post.acf.faq_video_poster_2x.url : post.acf.faq_video_poster_1x.url} 2x`}
+            srcSet={`${post.acf.faq_video_poster_1x.url} 1x, ${
+              post.acf.faq_video_poster_2x.url
+                ? post.acf.faq_video_poster_2x.url
+                : post.acf.faq_video_poster_1x.url
+            } 2x`}
             alt="youtube poster"
           />
         </Poster>
         <YtContent>
-          <P>{post.acf.faq_video_text ? parse(post.acf.faq_video_text) : ''}</P>
+          <P>{post.acf.faq_video_text ? parse(post.acf.faq_video_text) : ""}</P>
           <YtBtnWrapper>
             <YtBtn
               rel="noopenner noreferrer"
@@ -76,7 +80,7 @@ const Additional = ({ state, post }) => {
               <P color={isMobile ? `black` : `white`}>
                 {post.acf.faq_contact_text} <br />
                 <button onClick={() => setConnectModalOpened(true)}>
-                  {post.acf.faq_contact_link_text} 
+                  {post.acf.faq_contact_link_text}
                 </button>
               </P>
             </Note>
@@ -208,6 +212,9 @@ const YtBtn = styled(Link)`
   & div {
     ${flex()};
     margin-right: 10px;
+  }
+  &:hover {
+    opacity: 0.8;
   }
 `;
 

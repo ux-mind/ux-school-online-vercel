@@ -72,6 +72,9 @@ const globalStyles = css`
   button {
     cursor: pointer;
   }
+  iframe {
+    border: none;
+  }
 `;
 
 export default globalStyles;

@@ -50,19 +50,27 @@ const Roadmap = ({ state, post }) => {
       <Container>
         <Content>
           <div>
-            <TitleM>{post.acf.roadmap_title ? parse(post.acf.roadmap_title) : ''}</TitleM>
+            <TitleM>
+              {post.acf.roadmap_title ? parse(post.acf.roadmap_title) : ""}
+            </TitleM>
           </div>
           <Slides>
             {!isMobile && (
               <Pagination>
                 {post.acf.roadmap_tabs.map((item, id) => (
                   <PaginationItem
-                    active={activeSlide.roadmap_item_title === item.roadmap_item_title}
+                    active={
+                      activeSlide.roadmap_item_title === item.roadmap_item_title
+                    }
                     key={item.roadmap_item_title}
                     onClick={() => setActiveSlide(item)}
                   >
-                    <Number>{id+1}</Number>
-                    <P>{item.roadmap_item_title ? parse(item.roadmap_item_title) : ''}</P>
+                    <Number>{id + 1}</Number>
+                    <P>
+                      {item.roadmap_item_title
+                        ? parse(item.roadmap_item_title)
+                        : ""}
+                    </P>
                   </PaginationItem>
                 ))}
               </Pagination>
@@ -70,10 +78,16 @@ const Roadmap = ({ state, post }) => {
             {isMobile ? (
               post.acf.roadmap_tabs.map((item) => (
                 <Slide key={item.roadmap_item_title}>
-                  <SlideTitle>{item.roadmap_item_title ? parse(item.roadmap_item_title) : ''}</SlideTitle>
+                  <SlideTitle>
+                    {item.roadmap_item_title
+                      ? parse(item.roadmap_item_title)
+                      : ""}
+                  </SlideTitle>
                   {item.roadmap_item_text.map((paragraph) => (
                     <P size="l" key={paragraph.roadmap_item_paragraph}>
-                      {paragraph.roadmap_item_paragraph ? parse(paragraph.roadmap_item_paragraph) : ''}
+                      {paragraph.roadmap_item_paragraph
+                        ? parse(paragraph.roadmap_item_paragraph)
+                        : ""}
                     </P>
                   ))}
                 </Slide>
@@ -82,7 +96,9 @@ const Roadmap = ({ state, post }) => {
               <Slide>
                 {activeSlide.roadmap_item_text.map((paragraph) => (
                   <P size="l" key={paragraph.roadmap_item_paragraph}>
-                    {paragraph.roadmap_item_paragraph ? parse(paragraph.roadmap_item_paragraph) : ''}
+                    {paragraph.roadmap_item_paragraph
+                      ? parse(paragraph.roadmap_item_paragraph)
+                      : ""}
                   </P>
                 ))}
               </Slide>
@@ -109,7 +125,7 @@ const PaginationItem = styled.button`
   background: var(--white);
   padding: 8px 24px;
   border: none;
-  outline: 1px solid ${grayRgba(0.1)};
+  border: 1px solid ${grayRgba(0.1)};
   border-radius: 8px;
   ${flex("row", "center")};
   position: relative;
@@ -150,6 +166,9 @@ const PaginationItem = styled.button`
     top: 50%;
     transform: translateY(-50%);
     background: url(${next}) no-repeat 50%;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
 `;
 

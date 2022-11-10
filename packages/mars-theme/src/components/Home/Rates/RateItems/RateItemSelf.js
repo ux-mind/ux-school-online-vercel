@@ -25,13 +25,13 @@ const RateItemSelf = ({ type, post, openModalFunc }) => {
         align="center"
         mb={23}
       >
-        {post.acf.tariff_3_title ? parse(post.acf.tariff_3_title) : ''}
+        {post.acf.tariff_3_title ? parse(post.acf.tariff_3_title) : ""}
       </RateTitle>
       <List>
         {post.acf.tariff_3_info.map((item) => {
           return (
             <ListItem type={type} key={item.tariff_3_info_item}>
-              {item.tariff_3_info_item ? parse(item.tariff_3_info_item) : ''}
+              {item.tariff_3_info_item ? parse(item.tariff_3_info_item) : ""}
             </ListItem>
           );
         })}
@@ -39,13 +39,15 @@ const RateItemSelf = ({ type, post, openModalFunc }) => {
       {(type === "max" || type === "self") && (
         <PriceWrapper type={type}>
           <Price align="center" color={type === "max" ? "white" : "black"}>
-            {post.acf.tariff_3_price ? parse(post.acf.tariff_3_price) : ''}
+            {post.acf.tariff_3_price ? parse(post.acf.tariff_3_price) : ""}
           </Price>
           {(type === "max" || type === "self") && (
             <Installment>
               <Or type={type}>или</Or>
               <InstallmentP color={type === "max" ? `white` : `black`}>
-                {post.acf.tariff_3_installment ? parse(post.acf.tariff_3_installment) : ''}
+                {post.acf.tariff_3_installment
+                  ? parse(post.acf.tariff_3_installment)
+                  : ""}
                 <InfoIcon>
                   <svg
                     width="16"
@@ -68,7 +70,14 @@ const RateItemSelf = ({ type, post, openModalFunc }) => {
         </PriceWrapper>
       )}
       <BtnWrapper type={type}>
-        <PrimaryBtn content={post.acf.tariff_3_button_text ? parse(post.acf.tariff_3_button_text) : ''} onClick={openModalFunc} />
+        <PrimaryBtn
+          content={
+            post.acf.tariff_3_button_text
+              ? parse(post.acf.tariff_3_button_text)
+              : ""
+          }
+          onClick={openModalFunc}
+        />
       </BtnWrapper>
     </Item>
   );
@@ -94,6 +103,9 @@ const WhiteBtn = styled(Link)`
     ${stretch(122)};
     font-weight: 500;
     padding: 0.4375em 1em;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
 `;
 

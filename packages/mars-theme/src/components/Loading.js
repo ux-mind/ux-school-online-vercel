@@ -34,12 +34,11 @@ const bar = (index) => css`
 
 const Container = styled.div`
   width: 800px;
-  margin: 0;
+  margin: 0 auto;
   padding: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-
   & > * {
     margin-top: 24px;
   }

@@ -25,13 +25,13 @@ const RateItemMax = ({ type, post, openModalFunc }) => {
         align="center"
         mb={23}
       >
-        {post.acf.tariff_2_title ? parse(post.acf.tariff_2_title) : ''}
+        {post.acf.tariff_2_title ? parse(post.acf.tariff_2_title) : ""}
       </RateTitle>
       <List>
         {post.acf.tariff_2_info.map((item) => {
           return (
             <ListItem type={type} key={item.tariff_2_info_item}>
-              {item.tariff_2_info_item ? parse(item.tariff_2_info_item) : ''}
+              {item.tariff_2_info_item ? parse(item.tariff_2_info_item) : ""}
             </ListItem>
           );
         })}
@@ -98,6 +98,9 @@ const WhiteBtn = styled(Link)`
     ${stretch(122)};
     font-weight: 500;
     padding: 0.4375em 1em;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
 `;
 

@@ -17,8 +17,8 @@ import bg from "../../../../assets/images/rate-item-bg.png";
 import check from "../../../../assets/images/svg/Check.svg";
 
 const RateItemFree = ({ type, post }) => {
-  console.log('post rate')
-  console.log(post)
+  console.log("post rate");
+  console.log(post);
   return (
     <Item className="rateItem" type={type}>
       <RateTitle
@@ -27,19 +27,21 @@ const RateItemFree = ({ type, post }) => {
         align="center"
         mb={23}
       >
-        {post.acf.tariff_1_title ? parse(post.acf.tariff_1_title) : ''}
+        {post.acf.tariff_1_title ? parse(post.acf.tariff_1_title) : ""}
       </RateTitle>
       <List>
         {post.acf.tariff_1_info.map((item) => {
           return (
             <ListItem type={type} key={item.tariff_1_info_item}>
-              {item.tariff_1_info_item ? parse(item.tariff_1_info_item) : ''}
+              {item.tariff_1_info_item ? parse(item.tariff_1_info_item) : ""}
             </ListItem>
           );
         })}
       </List>
       <BtnWrapper type={type}>
-        <WhiteBtn link={post.acf.tariff_1_button_link}>{post.acf.tariff_1_button_text}</WhiteBtn>
+        <WhiteBtn link={post.acf.tariff_1_button_link}>
+          {post.acf.tariff_1_button_text}
+        </WhiteBtn>
       </BtnWrapper>
     </Item>
   );
@@ -65,6 +67,9 @@ const WhiteBtn = styled(Link)`
     ${stretch(122)};
     font-weight: 500;
     padding: 0.4375em 1em;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
 `;
 

@@ -159,6 +159,9 @@ const NavLink = styled(Link)`
   letter-spacing: -0.02em;
   font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96, "YOPQ" 79,
     "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const MenuList = styled.div`

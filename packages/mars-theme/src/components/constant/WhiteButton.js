@@ -20,6 +20,9 @@ const WhiteButton = styled.button`
     padding: 0.4375em 1em;
     border-radius: 8px;
   }
+  &:hover {
+    background: var(--gray-100);
+  }
 `;
 
 export default WhiteButton;

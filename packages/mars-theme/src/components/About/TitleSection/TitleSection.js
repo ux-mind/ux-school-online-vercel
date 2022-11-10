@@ -25,9 +25,9 @@ const TitleSection = ({ post }) => {
               <InfoText>
                 {post.acf.who_we_are_text.map((item) => {
                   return (
-                  <P size="l" color="white">
-                    {parse(item.who_we_are_paragraph)}
-                  </P>
+                    <P size="l" color="white">
+                      {parse(item.who_we_are_paragraph)}
+                    </P>
                   );
                 })}
               </InfoText>
@@ -61,6 +61,9 @@ const InfoLink = styled(Link)`
   border-radius: 12px;
   & img {
     margin-left: 10px;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
   @media screen and (max-width: 576px) {
     max-width: 100%;

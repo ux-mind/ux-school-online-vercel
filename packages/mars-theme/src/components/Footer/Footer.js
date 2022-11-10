@@ -45,7 +45,9 @@ const Footer = ({ state }) => {
 
   const options = state.source.get(`acf-settings`);
   const navLinks = state.source.get(`/menu/footer-menu`).items;
-  const navLinksAdditional = state.source.get(`/menu/footer-additional-menu`).items;
+  const navLinksAdditional = state.source.get(
+    `/menu/footer-additional-menu`
+  ).items;
 
   return (
     <FooterElement>
@@ -69,12 +71,14 @@ const Footer = ({ state }) => {
               <Social>
                 <ListTitle>{options.acf.footer_social_section_title}</ListTitle>
                 <SocialList>
-                  {options.acf.footer_social_items.map(( item ) => (
+                  {options.acf.footer_social_items.map((item) => (
                     <SocialLi key={item.footer_social_item_text}>
                       <Icon>
                         <img src={item.footer_social_item_icon.url} alt="" />
                       </Icon>
-                      <Link link={item.footer_social_item_link}>{item.footer_social_item_text}</Link>
+                      <Link link={item.footer_social_item_link}>
+                        {item.footer_social_item_text}
+                      </Link>
                     </SocialLi>
                   ))}
                 </SocialList>
@@ -83,19 +87,21 @@ const Footer = ({ state }) => {
             <InfoWrapper>
               <Info>
                 <Block mb={24}>
-                  <InfoTitle>{options.acf.footer_working_hours_title}</InfoTitle>
+                  <InfoTitle>
+                    {options.acf.footer_working_hours_title}
+                  </InfoTitle>
                   <P color="white">{options.acf.footer_working_hours_text}</P>
                 </Block>
                 <Block mb={32}>
                   {options.acf.footer_legal_info.map((item) => {
-                    return (
-                      <P color="white">{item.footer_legal_info_item}</P>
-                    );
+                    return <P color="white">{item.footer_legal_info_item}</P>;
                   })}
                 </Block>
                 <Block>
                   {navLinksAdditional.map((item) => (
-                    <InfoLink link={item.url} key={item.title}>{item.title}</InfoLink>
+                    <InfoLink link={item.url} key={item.title}>
+                      {item.title}
+                    </InfoLink>
                   ))}
                 </Block>
               </Info>
@@ -104,7 +110,11 @@ const Footer = ({ state }) => {
           <Bottom>
             {options.acf.footer_bottom_text.map((item) => {
               return (
-                <P color="white">{item.footer_bottom_paragraph ? parse(item.footer_bottom_paragraph) : ''}</P>
+                <P color="white">
+                  {item.footer_bottom_paragraph
+                    ? parse(item.footer_bottom_paragraph)
+                    : ""}
+                </P>
               );
             })}
           </Bottom>
@@ -203,11 +213,17 @@ const Li = styled.li`
   & a {
     color: var(--white);
   }
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const SocialLi = styled(Li)`
   padding-left: 28px;
   ${flex("row", "center")}
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const List = styled.ul`

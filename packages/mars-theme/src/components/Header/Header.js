@@ -31,7 +31,14 @@ const Header = ({ state, actions }) => {
     <HeaderWrapper theme={headerTheme}>
       <HeaderContainer>
         <StyledLink link="/">
-          <Image src={headerTheme === "white" ? options.acf.header_logo_white.url : options.acf.header_logo.url} alt="logo" />
+          <Image
+            src={
+              headerTheme === "white"
+                ? options.acf.header_logo_white.url
+                : options.acf.header_logo.url
+            }
+            alt="logo"
+          />
         </StyledLink>
         <div
           css={css`
@@ -192,6 +199,7 @@ const CourseListButton = styled(ListButton)`
   border-bottom: 1px solid var(--gray-100);
   width: 100%;
   text-align: left;
+  margin: 0;
   &:first-of-type {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -246,6 +254,14 @@ const NavLink = styled.li`
   & a {
     color: ${({ theme }) =>
       theme === "white" ? "var(--white)" : "var(--black-900)"};
+  }
+  &:hover a {
+    color: ${({ theme }) =>
+      theme === "white" ? "rgba(255, 255, 255, 0.5);" : "var(--gray-500)"};
+  }
+  &:active a {
+    color: ${({ theme }) =>
+      theme === "white" ? "rgba(255, 255, 255, 0.3);" : "var(--gray-300)"};
   }
 `;
 

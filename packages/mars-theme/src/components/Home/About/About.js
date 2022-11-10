@@ -27,7 +27,13 @@ const About = ({ post }) => {
         <Content>
           <Small>
             <SmallText>
-              {post.acf.home_about_quote ? <P key={post.acf.home_about_quote}>{parse(post.acf.home_about_quote)}</P> : ''}
+              {post.acf.home_about_quote ? (
+                <P key={post.acf.home_about_quote}>
+                  {parse(post.acf.home_about_quote)}
+                </P>
+              ) : (
+                ""
+              )}
             </SmallText>
             <SmallInfo>
               <Avatar>
@@ -43,12 +49,16 @@ const About = ({ post }) => {
             <LargeText>
               {post.acf.home_about_text.map((item) => (
                 <P size="l" key={item.home_about_paragraph}>
-                  {item.home_about_paragraph ? parse(item.home_about_paragraph) : ''}
+                  {item.home_about_paragraph
+                    ? parse(item.home_about_paragraph)
+                    : ""}
                 </P>
               ))}
             </LargeText>
             <BtnWrapper>
-              <WhiteBtn link={post.acf.home_about_button_link}>{post.acf.home_about_button_text}</WhiteBtn>
+              <WhiteBtn link={post.acf.home_about_button_link}>
+                {post.acf.home_about_button_text}
+              </WhiteBtn>
             </BtnWrapper>
           </Large>
         </Content>
@@ -56,7 +66,11 @@ const About = ({ post }) => {
       <Poster>
         <img
           src={post.acf.home_about_image_1x.url}
-          srcSet={`${post.acf.home_about_image_1x.url} 1x, ${post.acf.home_about_image_2x.url ? post.acf.home_about_image_2x.url : post.acf.home_about_image_1x.url}`}
+          srcSet={`${post.acf.home_about_image_1x.url} 1x, ${
+            post.acf.home_about_image_2x.url
+              ? post.acf.home_about_image_2x.url
+              : post.acf.home_about_image_1x.url
+          }`}
           alt="poster"
         />
       </Poster>
@@ -139,6 +153,9 @@ const WhiteBtn = styled(Link)`
     font-weight: 500;
     padding: 0.4375em 1em;
     border-radius: 8px;
+  }
+  &:hover {
+    background: var(--gray-100);
   }
 `;
 
