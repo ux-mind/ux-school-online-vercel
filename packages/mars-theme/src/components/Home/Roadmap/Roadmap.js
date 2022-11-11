@@ -125,7 +125,7 @@ const PaginationItem = styled.button`
   background: var(--white);
   padding: 8px 24px;
   border: none;
-  border: 1px solid ${grayRgba(0.1)};
+  /* border: 1px solid ${grayRgba(0.1)}; */
   border-radius: 8px;
   ${flex("row", "center")};
   position: relative;
