@@ -136,7 +136,7 @@ const ModalWrapper = styled.div`
 `;
 
 const Note = styled.div`
-  & button {
+  & p button {
     color: var(--link-200);
     background: transparent;
     border: none;

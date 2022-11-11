@@ -36,7 +36,7 @@ const AdditionalBlock = ({ additionalItems }) => {
 };
 
 const Note = styled.div`
-  & a {
+  & p a {
     color: var(--link-200);
     text-decoration: underline;
     font-size: inherit;

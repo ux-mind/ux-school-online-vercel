@@ -17,14 +17,20 @@ const AdditionalBlock = ({ additionalItems }) => {
                 <img
                   width="24"
                   height="24"
-                  src={isMobile ? item.program_info_item_icon_mobile.url : item.program_info_item_icon.url}
+                  src={
+                    isMobile
+                      ? item.program_info_item_icon_mobile.url
+                      : item.program_info_item_icon.url
+                  }
                   alt=""
                 />
               </Icon>
               <Note>
                 <P
                   color={isMobile ? `black` : `white`}
-                  dangerouslySetInnerHTML={{ __html: item.program_info_item_text }}
+                  dangerouslySetInnerHTML={{
+                    __html: item.program_info_item_text,
+                  }}
                 />
               </Note>
             </AdditionalItem>
@@ -36,7 +42,7 @@ const AdditionalBlock = ({ additionalItems }) => {
 };
 
 const Note = styled.div`
-  & a {
+  & p a {
     color: var(--link-200);
     text-decoration: underline;
     font-size: inherit;

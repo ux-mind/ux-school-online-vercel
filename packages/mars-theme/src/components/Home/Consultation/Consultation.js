@@ -47,6 +47,7 @@ const Consultation = ({ post }) => {
             <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
                 <InputValid
+                  noBorder={true}
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   placeholder={post.acf.consultation_name_placeholder}
@@ -55,6 +56,7 @@ const Consultation = ({ post }) => {
               </FormBlock>
               <FormBlock>
                 <InputValid
+                  noBorder={true}
                   value={formik.values.tel}
                   onChange={formik.handleChange}
                   placeholder={post.acf.consultation_phone_placeholder}

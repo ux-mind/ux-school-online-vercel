@@ -9,6 +9,7 @@ const InputValid = ({
   onChange,
   type,
   required,
+  noBorder,
 }) => {
   return (
     <ValidWrapper placeholder={placeholder} value={value}>
@@ -16,6 +17,8 @@ const InputValid = ({
         {placeholder}
       </Placeholder>
       <Input
+        error={error}
+        noBorder={noBorder}
         required={required}
         type={type || "text"}
         name={name || ""}
@@ -30,12 +33,11 @@ const InputValid = ({
 const ValidWrapper = styled.div`
   display: flex;
   position: relative;
-  ${({ value, error }) =>
+  ${({ value }) =>
     value &&
     `& input {
     	padding-top: 0.809em;
     	padding-bottom: 0.33em;
-    	border: ${error ? `1px solid var(--error)` : "1px solid var(--gray-200)"}};
   	}`};
 `;
 
@@ -57,11 +59,13 @@ const Input = styled.input`
   padding: 0.5238095em 0.7142857143em;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid var(--gray-200);
+  border: ${({ noBorder, error }) =>
+    error ? "var(--error)" : noBorder ? "none" : "1px solid var(--gray-200)"};
   border-radius: 12px;
   outline: none;
   &::placeholder {
     color: var(--gray-300);
+    font-weight: 400;
   }
 `;
 

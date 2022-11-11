@@ -22,11 +22,18 @@ const AdditionalBlock = ({ state, post }) => {
             return (
               <AdditionalItem>
                 <Icon>
-                  <img width="24" height="24" src={item.after_course_info_item_icon.url} alt="" />
+                  <img
+                    width="24"
+                    height="24"
+                    src={item.after_course_info_item_icon.url}
+                    alt=""
+                  />
                 </Icon>
                 <Note>
                   <P color="white">
-                    {item.after_course_info_item_text ? parse(item.after_course_info_item_text) : ''}
+                    {item.after_course_info_item_text
+                      ? parse(item.after_course_info_item_text)
+                      : ""}
                   </P>
                 </Note>
               </AdditionalItem>
@@ -72,7 +79,7 @@ const PopupBtn = styled.button`
 `;
 
 const Note = styled.div`
-  & a {
+  & p a {
     color: var(--link-200);
     text-decoration: underline;
     font-size: inherit;

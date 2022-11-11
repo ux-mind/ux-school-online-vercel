@@ -125,7 +125,7 @@ const PaginationItem = styled.button`
   background: var(--white);
   padding: 8px 24px;
   border: none;
-  /* border: 1px solid ${grayRgba(0.1)}; */
+  border: 1px solid ${grayRgba(0.1)};
   border-radius: 8px;
   ${flex("row", "center")};
   position: relative;
@@ -138,16 +138,15 @@ const PaginationItem = styled.button`
   ${({ active }) =>
     active &&
     `
+		border: none;
 		background: var(--gradient-primary-btn);
 		outline: none;
+		pointer-events: none;
 		& span {
 			color: ${whiteRgba(0.5)};
 		}
 		& p {
 			color: var(--white);
-		}
-		&:hover {
-			background: var(--gradient-primary-btn-hover);
 		}
 	`}
   &:last-child {

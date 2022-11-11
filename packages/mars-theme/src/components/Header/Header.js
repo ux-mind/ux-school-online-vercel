@@ -215,7 +215,7 @@ const CourseButton = styled.button`
   position: relative;
   ${font(16, 24)}
   padding: .5em 1em;
-  padding-right: 46px;
+  padding-right: 60px;
   background: transparent;
   border-radius: 8px;
   border: 1px solid
