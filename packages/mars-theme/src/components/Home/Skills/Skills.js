@@ -26,7 +26,7 @@ const Skills = ({ post }) => {
               title="YouTube video player"
               /*frameborder="0"*/
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen=""
+              allowFullScreen=""
             ></iframe>
             {/* <Play aria-label="play video" onClick={playVideo}>
               <svg
@@ -63,7 +63,9 @@ const Skills = ({ post }) => {
       </VideoContainer>
       <SkillsContainer>
         <SkillsBlock>
-          <SkillsTitleM>{post.acf.skills_title ? parse(post.acf.skills_title) : ''}</SkillsTitleM>
+          <SkillsTitleM>
+            {post.acf.skills_title ? parse(post.acf.skills_title) : ""}
+          </SkillsTitleM>
           <SkillsSwiper post={post} />
         </SkillsBlock>
       </SkillsContainer>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Container from "../constant/Container";
 import Link from "../constant/TextLink";
 import Input from "../constant/Input";
+import InputValid from "../constant/InputWithValidation";
 import CheckboxItem from "../constant/CheckboxItem";
 import PrimaryBtn from "../constant/PrimaryButton";
 import CommonModal from "../constant/CommonModal";
@@ -113,7 +114,7 @@ const Contact = ({ state, post }) => {
           </FormSubtitle>
           <ContactForm>
             <div>
-              <Input
+              <InputValid
                 required
                 type="text"
                 placeholder={post.acf.contacts_form_name_placeholder}
@@ -123,7 +124,7 @@ const Contact = ({ state, post }) => {
               />
             </div>
             <div>
-              <Input
+              <InputValid
                 required
                 type="tel"
                 placeholder={post.acf.contacts_form_phone_placeholder}

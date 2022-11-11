@@ -1,32 +1,23 @@
-import { styled, css } from "frontity";
+import { styled } from "frontity";
 import { font, stretch } from "../base/functions";
 
-const InputValid = ({ name, placeholder, value, onChange, type }) => {
-  console.log(value);
-
-  if (!value) {
-    return (
-      <div
-        css={css`
-          display: flex;
-        `}
-      >
-        <Input
-          type={type || text}
-          name={name || ""}
-          placeholder={placeholder || ""}
-          value={value}
-          onChange={onChange}
-        />
-      </div>
-    );
-  }
-
+const InputValid = ({
+  error,
+  name,
+  placeholder,
+  value,
+  onChange,
+  type,
+  required,
+}) => {
   return (
     <ValidWrapper placeholder={placeholder} value={value}>
-      <Placeholder>{placeholder}</Placeholder>
+      <Placeholder value={value} error={error}>
+        {placeholder}
+      </Placeholder>
       <Input
-        type={type || text}
+        required={required}
+        type={type || "text"}
         name={name || ""}
         placeholder={placeholder || ""}
         value={value}
@@ -37,12 +28,15 @@ const InputValid = ({ name, placeholder, value, onChange, type }) => {
 };
 
 const ValidWrapper = styled.div`
+  display: flex;
   position: relative;
-  & input {
-    padding-top: 0.809em;
-    padding-bottom: 0.33em;
-    border: 1px solid var(--error);
-  }
+  ${({ value, error }) =>
+    value &&
+    `& input {
+    	padding-top: 0.809em;
+    	padding-bottom: 0.33em;
+    	border: ${error ? `1px solid var(--error)` : "1px solid var(--gray-200)"}};
+  	}`};
 `;
 
 const Placeholder = styled.div`
@@ -51,7 +45,8 @@ const Placeholder = styled.div`
   line-height: calc(16 / 12);
   top: 7px;
   left: 16px;
-  color: var(--error);
+  color: ${({ error }) => (error ? "var(--error)" : "var(--link-500)")};
+  ${({ value }) => (value ? "display: block;" : "display: none")};
 `;
 
 const Input = styled.input`

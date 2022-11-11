@@ -3,6 +3,7 @@ import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import PrimaryBtn from "../../constant/PrimaryButtonSmall";
 import Input from "../../constant/Input";
+import InputValid from "../../constant/InputWithValidation";
 import CheckboxItem from "../../constant/CheckboxItem";
 import CommonModal from "../../constant/CommonModal";
 import { TitleM } from "../../constant/Title";
@@ -36,7 +37,7 @@ const Collaboration = ({ post }) => {
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
-                <Input
+                <InputValid
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   placeholder={post.acf.collaboration_name_placeholder}
@@ -44,7 +45,7 @@ const Collaboration = ({ post }) => {
                 />
               </FormBlock>
               <FormBlock>
-                <Input
+                <InputValid
                   value={formik.values.tel}
                   onChange={formik.handleChange}
                   placeholder={post.acf.collaboration_phone_placeholder}

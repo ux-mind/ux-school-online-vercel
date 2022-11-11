@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import P from "../../../constant/Paragraph";
 import PrimaryBtn from "../../../constant/PrimaryButton";
 import Input from "../../../constant/Input";
+import InputValid from "../../../constant/InputWithValidation";
 import CheckboxItem from "../../../constant/CheckboxItem";
 import Emoji from "./Emoji/Emoji";
 import { useFormik } from "formik";
@@ -16,8 +17,8 @@ import {
 } from "../../../base/functions";
 import { TitleM } from "../../../constant/Title";
 
-import certificate from "../../../../assets/images/certificate.svg";
-import certificateMobile from "../../../../assets/images/certificate-mobile.svg";
+import certificate2x from "../../../../assets/images/certificate@2x.png";
+import certificateMobile2x from "../../../../assets/images/cetrificate-mobile@2x.png";
 import parse from "html-react-parser";
 
 const CertificateBlock = ({ state, post }) => {
@@ -59,6 +60,11 @@ const CertificateBlock = ({ state, post }) => {
                     ? post.acf.certificate_image_mobile.url
                     : post.acf.certificate_image.url
                 }
+                srcSet={
+                  state.theme.isMobile
+                    ? `${post.acf.certificate_image_mobile.url} 1x, ${certificateMobile2x} 2x`
+                    : `${post.acf.certificate_image.url} 1x, ${certificate2x} 2x`
+                }
                 alt="certificate"
               />
             </Certificate>
@@ -72,7 +78,6 @@ const CertificateBlock = ({ state, post }) => {
               {post.acf.certificate_sticker_text_after}
             </P>
           </CertificateCheck>
-          {/* TODO: Add Emoji */}
           {/* <Emoji /> */}
         </CertificateBorder>
       </CertificateWrapper>
@@ -95,7 +100,7 @@ const CertificateBlock = ({ state, post }) => {
         </ModalText>
         <CheckForm onSubmit={formik.handleSubmit}>
           <InputWrapper>
-            <Input
+            <InputValid
               type="text"
               placeholder="Имя и фамилия"
               value={formik.values.name}
@@ -104,7 +109,7 @@ const CertificateBlock = ({ state, post }) => {
             />
           </InputWrapper>
           <InputWrapper>
-            <Input
+            <InputValid
               type="tel"
               placeholder="Телефон"
               value={formik.values.tel}
@@ -113,7 +118,7 @@ const CertificateBlock = ({ state, post }) => {
             />
           </InputWrapper>
           <InputWrapper>
-            <Input
+            <InputValid
               type="email"
               placeholder="Email"
               value={formik.values.email}
@@ -243,6 +248,9 @@ const CertificateCheck = styled.div`
   border-radius: 12px;
   & p {
     color: var(--gray-800);
+    font-stretch: 122%;
+    font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96,
+      "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
   }
   @media screen and (max-width: 1400px) {
     top: 290px;

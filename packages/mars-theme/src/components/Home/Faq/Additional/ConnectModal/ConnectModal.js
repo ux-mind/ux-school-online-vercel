@@ -3,6 +3,7 @@ import CommonModal from "../../../../constant/CommonModal";
 import { TitleM } from "../../../../constant/Title";
 import { font } from "../../../../base/functions";
 import Input from "../../../../constant/Input";
+import InputValid from "../../../../constant/InputWithValidation";
 import PrimaryBtn from "../../../../constant/PrimaryButton";
 import CheckboxItem from "../../../../constant/CheckboxItem";
 import P from "../../../../constant/Paragraph";
@@ -40,7 +41,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
       </Subtitle>
       <ConnectForm onSubmit={formik.handleSubmit}>
         <InputWrapper>
-          <Input
+          <InputValid
             type="text"
             placeholder="Имя"
             value={formik.values.name}
@@ -49,7 +50,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
           />
         </InputWrapper>
         <InputWrapper>
-          <Input
+          <InputValid
             type="tel"
             placeholder="Телефон"
             value={formik.values.tel}

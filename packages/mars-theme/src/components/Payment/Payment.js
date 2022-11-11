@@ -5,6 +5,7 @@ import CheckboxItem from "../constant/CheckboxItem";
 import TextLink from "../constant/TextLink";
 import PrimaryBtn from "../constant/PrimaryButtonSmall";
 import Input from "../constant/Input";
+import InputValid from "../constant/InputWithValidation";
 import { font, stretch, flex } from "../base/functions";
 import { TitleM, TitleS } from "../constant/Title";
 import { styled, connect, css } from "frontity";
@@ -265,7 +266,7 @@ const Payment = ({ state, post }) => {
               </P>
             </MailNote>
             <InputWrapper>
-              <Input
+              <InputValid
                 placeholder={post.acf.payment_name_placeholder}
                 name="name"
                 value={formik.values.name}

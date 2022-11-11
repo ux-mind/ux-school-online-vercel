@@ -9,6 +9,7 @@ import PrimaryBtn from "../../constant/PrimaryButton";
 import WhiteBtn from "../../constant/WhiteButton";
 import Modal from "../../constant/CommonModal";
 import Input from "../../constant/Input";
+import InputValid from "../../constant/InputWithValidation";
 import { font, grayRgba, flex } from "../../base/functions";
 import { TitleM } from "../../constant/Title";
 import { styled, connect } from "frontity";
@@ -71,11 +72,11 @@ const Rates = ({ state, actions, post }) => {
       <Section>
         <Container ref={ratesRef}>
           <TitleM align="center" mb={isMobile ? 13 : 23}>
-            {post.acf.tariffs_title ? parse(post.acf.tariffs_title) : ''}
+            {post.acf.tariffs_title ? parse(post.acf.tariffs_title) : ""}
           </TitleM>
           <Subtitle>
             <P align="center" size="l">
-              {post.acf.tariffs_text ? parse(post.acf.tariffs_text) : ''}
+              {post.acf.tariffs_text ? parse(post.acf.tariffs_text) : ""}
             </P>
           </Subtitle>
           <Content>
@@ -101,7 +102,7 @@ const Rates = ({ state, actions, post }) => {
         <TitleM mb={isMobile ? 14 : 30}>{post.acf.tariff_2_modal_title}</TitleM>
         <SignupForm onSubmit={formik.handleSubmit}>
           <Label>
-            <Input
+            <InputValid
               type="text"
               name="name"
               placeholder={post.acf.tariff_2_modal_name_placeholder}
@@ -110,7 +111,7 @@ const Rates = ({ state, actions, post }) => {
             />
           </Label>
           <Label>
-            <Input
+            <InputValid
               type="tel"
               name="tel"
               placeholder={post.acf.tariff_2_modal_phone_placeholder}
@@ -119,7 +120,7 @@ const Rates = ({ state, actions, post }) => {
             />
           </Label>
           <Label>
-            <Input
+            <InputValid
               type="email"
               name="email"
               placeholder={post.acf.tariff_2_modal_email_placeholder}
@@ -140,7 +141,9 @@ const Rates = ({ state, actions, post }) => {
               checked={isApproved}
               setChecked={() => setIsApproved((prev) => !prev)}
             >
-              {post.acf.tariff_2_modal_checkbox_label ? parse(post.acf.tariff_2_modal_checkbox_label) : ''}
+              {post.acf.tariff_2_modal_checkbox_label
+                ? parse(post.acf.tariff_2_modal_checkbox_label)
+                : ""}
             </CheckboxItem>
           </CheckboxWrapper>
         </SignupForm>
@@ -163,7 +166,9 @@ const Rates = ({ state, actions, post }) => {
           ))}
         </NextList>
         <BtnWrapper>
-          <WhiteBtn onClick={() => setSendModalOpened(false)}>{post.acf.tariff_3_modal_button_text}</WhiteBtn>
+          <WhiteBtn onClick={() => setSendModalOpened(false)}>
+            {post.acf.tariff_3_modal_button_text}
+          </WhiteBtn>
         </BtnWrapper>
       </Modal>
     </>

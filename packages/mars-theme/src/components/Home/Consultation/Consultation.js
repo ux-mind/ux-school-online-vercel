@@ -12,8 +12,6 @@ import { styled } from "frontity";
 import parse from "html-react-parser";
 
 import bg from "../../../assets/images/consultation-bg.png";
-import like from "../../../assets/images/Like.png";
-import like2x from "../../../assets/images/Like@2x.png";
 
 import { useFormik } from "formik";
 
@@ -48,7 +46,7 @@ const Consultation = ({ post }) => {
             </Subtitle>
             <Form onSubmit={formik.handleSubmit}>
               <FormBlock>
-                <Input
+                <InputValid
                   value={formik.values.name}
                   onChange={formik.handleChange}
                   placeholder={post.acf.consultation_name_placeholder}
