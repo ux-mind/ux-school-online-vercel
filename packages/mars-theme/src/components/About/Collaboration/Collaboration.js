@@ -121,7 +121,7 @@ const Collaboration = ({ post }) => {
                   error={formErrors.phone}
                   placeholder={post.acf.collaboration_phone_placeholder}
                   name="phone"
-                  type="number"
+                  type="text"
                 />
               </FormBlock>
               <SubmitWrapper>

@@ -74,7 +74,7 @@ const Consultation = ({ post }) => {
 
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
-        
+
         setFormValues({
           name: '',
           phone: '',
@@ -132,7 +132,7 @@ const Consultation = ({ post }) => {
                   error={formErrors.phone}
                   placeholder={post.acf.consultation_phone_placeholder}
                   name="phone"
-                  type="number"
+                  type="text"
                 />
               </FormBlock>
               <SubmitWrapper>

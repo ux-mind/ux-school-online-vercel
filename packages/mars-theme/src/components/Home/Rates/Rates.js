@@ -221,7 +221,7 @@ const Rates = ({ state, actions, post }) => {
           </Label>
           <Label>
             <InputValid
-              type="number"
+              type="text"
               name="phone"
               placeholder={post.acf.tariff_2_modal_phone_placeholder}
               /*value={formik.values.tel}

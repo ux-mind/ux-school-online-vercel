@@ -198,7 +198,7 @@ const CertificateBlock = ({ state, post }) => {
           </InputWrapper>
           <InputWrapper>
             <InputValid
-              type="number"
+              type="text"
               placeholder="Телефон"
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.phone}
