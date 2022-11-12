@@ -74,6 +74,11 @@ const Consultation = ({ post }) => {
 
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
+        
+        setFormValues({
+          name: '',
+          phone: '',
+        });
 
         let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-consultation.php", {
           method: "POST",
@@ -81,10 +86,6 @@ const Consultation = ({ post }) => {
         });
 
         if (res.status === 200) {
-          setFormValues({
-            name: '',
-            phone: '',
-          });
           console.log("Success");
         } else {
           console.log("Some error occured");
@@ -131,7 +132,7 @@ const Consultation = ({ post }) => {
                   error={formErrors.phone}
                   placeholder={post.acf.consultation_phone_placeholder}
                   name="phone"
-                  type="phone"
+                  type="number"
                 />
               </FormBlock>
               <SubmitWrapper>

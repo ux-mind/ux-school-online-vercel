@@ -129,6 +129,12 @@ const Rates = ({ state, actions, post }) => {
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
         formData.append('ux-email', formValues.email);
+        setRateName('');
+        setFormValues({
+          name: '',
+          phone: '',
+          email: '',
+        });
 
         let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-course.php", {
           method: "POST",
@@ -136,11 +142,6 @@ const Rates = ({ state, actions, post }) => {
         });
 
         if (res.status === 200) {
-          setFormValues({
-            name: '',
-            phone: '',
-            email: '',
-          });
           console.log("Success");
         } else {
           console.log("Some error occured");
@@ -220,7 +221,7 @@ const Rates = ({ state, actions, post }) => {
           </Label>
           <Label>
             <InputValid
-              type="phone"
+              type="number"
               name="phone"
               placeholder={post.acf.tariff_2_modal_phone_placeholder}
               /*value={formik.values.tel}
