@@ -73,7 +73,7 @@ const Collaboration = ({ post }) => {
 
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
-        
+
         setFormValues({
           name: '',
           phone: '',
@@ -129,6 +129,7 @@ const Collaboration = ({ post }) => {
                   type="submit"
                   content={post.acf.collaboration_send_button_text}
                   disabled={!isUserAgree}
+                  onClick={(evt) => handleFormSubmit(evt)}
                 />
               </SubmitWrapper>
             </Form>
