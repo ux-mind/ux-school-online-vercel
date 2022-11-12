@@ -12,8 +12,6 @@ import { styled, connect } from "frontity";
 import P from "../constant/Paragraph";
 import parse from "html-react-parser";
 
-import { useFormik } from "formik";
-
 import telegram from "../../assets/images/social/Telegram-large.svg";
 import tel from "../../assets/images/social/Phone-large.svg";
 import whatsapp from "../../assets/images/social/Whatsapp-large.svg";
@@ -60,13 +58,75 @@ const Contact = ({ state, post }) => {
   const [isUserAgree, setIsUserAgree] = useState(true);
   const [submitModalOpened, setSubmitModalOpened] = useState(false);
 
-  const formik = useFormik({
-    initialValues: { name: "", tel: "", email: "" },
-    onSubmit: (values) => {
-      console.log(values);
-      setSubmitModalOpened(true);
-    },
+  const [formValues, setFormValues] = useState({
+    name: '',
+    phone: '',
   });
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+  });
+  const handleInputChange = (e) => {
+    const target = e.target;
+    const formValuesKey = target.name;
+    setFormValues((prev) => {
+      const newFormValues = Object.assign({}, prev);
+
+      newFormValues[`${formValuesKey}`] = target.value;
+
+      return newFormValues;
+    });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let errorSubmit = false;
+    Object.keys(formValues).map((key) => {
+      if (!formValues[key]) {
+        errorSubmit = true;
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = true;
+          return newFormErrors;
+        });
+      } else {
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = false;
+          return newFormErrors;
+        });
+      }
+    });
+    if (!errorSubmit) {
+      try {
+        
+        setSubmitModalOpened(true);
+        const formData = new FormData();
+
+        formData.append('ux-name', formValues.name);
+        formData.append('ux-phone', formValues.phone);
+
+        setFormValues({
+          name: '',
+          phone: '',
+        });
+
+        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-contact.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.status === 200) {
+          console.log("Success");
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <ContactsWrapper>
@@ -107,7 +167,7 @@ const Contact = ({ state, post }) => {
             })*/}
           </SocialList>
         </MapBlock>
-        <FormBlock onSubmit={formik.handleSubmit}>
+        <FormBlock>
           <FormTitle>{post.acf.contacts_form_title}</FormTitle>
           <FormSubtitle>
             <P>{post.acf.contacts_form_text}</P>
@@ -118,19 +178,21 @@ const Contact = ({ state, post }) => {
                 required
                 type="text"
                 placeholder={post.acf.contacts_form_name_placeholder}
-                value={formik.values.name}
-                onChange={formik.handleChange}
+                onChange={(evt) => handleInputChange(evt)}
+                value={formValues.name}
+                error={formErrors.name}
                 name="name"
               />
             </div>
             <div>
               <InputValid
                 required
-                type="tel"
+                type="number"
                 placeholder={post.acf.contacts_form_phone_placeholder}
-                value={formik.values.tel}
-                onChange={formik.handleChange}
-                name="tel"
+                onChange={(evt) => handleInputChange(evt)}
+                value={formValues.phone}
+                error={formErrors.phone}
+                name="phone"
               />
             </div>
             <SubmitWrapper>
@@ -138,6 +200,7 @@ const Contact = ({ state, post }) => {
                 disabled={isUserAgree ? false : true}
                 content={post.acf.contacts_form_send_button_text}
                 type="submit"
+                onClick={(evt) => handleFormSubmit(evt)}
               />
             </SubmitWrapper>
             <div>
