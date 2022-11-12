@@ -102,12 +102,9 @@ const CertificateBlock = ({ state, post }) => {
         console.log(JSON.stringify(data));*/
         const formData = new FormData();
 
-        console.log(rateName);
-        formData.append('ux-rate-name', rateName);
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
         formData.append('ux-email', formValues.email);
-        setRateName('');
         setFormValues({
           name: '',
           phone: '',
