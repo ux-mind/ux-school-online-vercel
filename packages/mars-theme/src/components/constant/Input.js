@@ -12,6 +12,8 @@ const Input = styled.input`
   border: 1px solid var(--gray-200);
   border-radius: 12px;
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
   &::placeholder {
     color: var(--gray-300);
   }
