@@ -18,41 +18,32 @@ const AdditionalBlock = ({ state, post }) => {
     <>
       <Additional>
         <Wrapper>
-          {post.acf.after_course_info_items.map((item) => {
-            return (
-              <AdditionalItem>
-                <Icon>
-                  <img
-                    width="24"
-                    height="24"
-                    src={item.after_course_info_item_icon.url}
-                    alt=""
-                  />
-                </Icon>
-                <Note>
-                  <P color="white">
-                    {item.after_course_info_item_text
-                      ? parse(item.after_course_info_item_text)
-                      : ""}
-                  </P>
-                </Note>
-              </AdditionalItem>
-            );
-          })}
-          {/*<AdditionalItem>
+          <AdditionalItem>
             <Icon>
-              <img width="24" height="24" src={lighting} alt="" />
+              <img width="24" height="24" src={post.acf.after_course_info_item_1_icon.url} alt="" />
             </Icon>
             <Note>
               <P color="white">
-                Вот так будет выглядеть
-                <PopupBtn onClick={() => setResumeOpened(true)}>
-                  ваше резюме
-                </PopupBtn>{" "}
-                после курса
+                {post.acf.after_course_info_item_1_text
+                        ? parse(post.acf.after_course_info_item_1_text)
+                        : ""}
               </P>
             </Note>
-        </AdditionalItem>*/}
+          </AdditionalItem>
+          <AdditionalItem>
+            <Icon>
+              <img width="24" height="24" src={post.acf.after_course_info_item_2_icon.url} alt="" />
+            </Icon>
+            <Note>
+              <P color="white">
+                {post.acf.after_course_info_item_2_text_before}
+                <PopupBtn onClick={() => setResumeOpened(true)}>
+                  {post.acf.after_course_info_item_2_text_button}
+                </PopupBtn>{" "}
+                {post.acf.after_course_info_item_2_text_after}
+              </P>
+            </Note>
+        </AdditionalItem>
         </Wrapper>
       </Additional>
       <Resume isOpened={resumeOpened} setIsOpened={setResumeOpened} />
