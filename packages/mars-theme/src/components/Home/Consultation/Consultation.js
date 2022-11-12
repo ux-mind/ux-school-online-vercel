@@ -13,19 +13,88 @@ import parse from "html-react-parser";
 
 import bg from "../../../assets/images/consultation-bg.png";
 
-import { useFormik } from "formik";
-
 const Consultation = ({ post }) => {
   const [isUserAgree, setIsUserAgree] = useState(true);
   const [consultationModalOpened, setConsultationModalOpened] = useState(false);
 
-  const formik = useFormik({
-    initialValues: { name: "", tel: "" },
-    onSubmit: (values) => {
-      setConsultationModalOpened(true);
-      console.log(values);
-    },
+  const [formValues, setFormValues] = useState({
+    name: '',
+    phone: '',
   });
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+  });
+  const handleInputChange = (e) => {
+    const target = e.target;
+    const formValuesKey = target.name;
+    setFormValues((prev) => {
+      const newFormValues = Object.assign({}, prev);
+
+      newFormValues[`${formValuesKey}`] = target.value;
+
+      return newFormValues;
+    });
+    console.log(formValues);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let errorSubmit = false;
+    Object.keys(formValues).map((key) => {
+      if (!formValues[key]) {
+        errorSubmit = true;
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = true;
+          return newFormErrors;
+        });
+      } else {
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = false;
+          return newFormErrors;
+        });
+      }
+    });
+    if (!errorSubmit) {
+      try {
+        
+        setConsultationModalOpened(true);
+        /*const data = {
+          'name': formValues.name,
+          'surname': formValues.surname,
+          'email': formValues.email,
+          'subject': formValues.subject,
+          'resume': formValues.resume,
+          'message': formValues.message,
+        }
+        console.log(JSON.stringify(data));*/
+        const formData = new FormData();
+
+        formData.append('ux-name', formValues.name);
+        formData.append('ux-phone', formValues.phone);
+
+        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-consultation.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.status === 200) {
+          setFormValues({
+            name: '',
+            phone: '',
+          });
+          console.log("Success");
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <Section>
@@ -44,12 +113,13 @@ const Consultation = ({ post }) => {
                   : ""}
               </P>
             </Subtitle>
-            <Form onSubmit={formik.handleSubmit}>
+            <Form>
               <FormBlock>
                 <InputValid
                   noBorder={true}
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
+                  onChange={(evt) => handleInputChange(evt)}
+                  value={formValues.name}
+                  error={formErrors.name}
                   placeholder={post.acf.consultation_name_placeholder}
                   name="name"
                 />
@@ -57,8 +127,9 @@ const Consultation = ({ post }) => {
               <FormBlock>
                 <InputValid
                   noBorder={true}
-                  value={formik.values.tel}
-                  onChange={formik.handleChange}
+                  onChange={(evt) => handleInputChange(evt)}
+                  value={formValues.phone}
+                  error={formErrors.phone}
                   placeholder={post.acf.consultation_phone_placeholder}
                   name="tel"
                   type="tel"
@@ -69,6 +140,7 @@ const Consultation = ({ post }) => {
                   type="submit"
                   content={post.acf.consultation_button_text}
                   disabled={!isUserAgree}
+                  onClick={(evt) => handleFormSubmit(evt)}
                 />
               </SubmitWrapper>
             </Form>
