@@ -15,8 +15,6 @@ import { TitleM } from "../../constant/Title";
 import { styled, connect } from "frontity";
 import parse from "html-react-parser";
 
-import { useFormik } from "formik";
-
 const freeContent = ["Базовые уроки", "Некоторые дополнительные материалы"];
 
 const maxContent = [
@@ -51,7 +49,104 @@ const Rates = ({ state, actions, post }) => {
   const [sendModalOpened, setSendModalOpened] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
 
-  const formik = useFormik({
+  const [formValues, setFormValues] = useState({
+    name: '',
+    phone: '',
+    email: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+    email: false,
+  });
+  const handleInputChange = (e) => {
+    const target = e.target;
+    const formValuesKey = target.name;
+    setFormValues((prev) => {
+      const newFormValues = Object.assign({}, prev);
+
+      newFormValues[`${formValuesKey}`] = target.value;
+
+      return newFormValues;
+    });
+    console.log(formValues);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let errorSubmit = false;
+    Object.keys(formValues).map((key) => {
+      if (!formValues[key]) {
+        errorSubmit = true;
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = true;
+          return newFormErrors;
+        });
+      } else {
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = false;
+          return newFormErrors;
+        });
+      }
+    });
+    if (!(/\S+@\S+\.\S+/).test(formValues['email'])) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors['email'] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
+    if (formValues['email'] && formValues['email'].indexOf('@') === -1) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors['email'] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
+    if (!errorSubmit) {
+      try {
+        /*const data = {
+          'name': formValues.name,
+          'surname': formValues.surname,
+          'email': formValues.email,
+          'subject': formValues.subject,
+          'resume': formValues.resume,
+          'message': formValues.message,
+        }
+        console.log(JSON.stringify(data));*/
+        const formData = new FormData();
+        formData.append('ux-name', formValues.name);
+        formData.append('ux-phone', formValues.phone);
+        formData.append('ux-email', formValues.email);
+
+        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-course.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.status === 200) {
+          setFormValues({
+            name: '',
+            phone: '',
+            email: '',
+          });
+          setSignupModalOpened(false);
+          console.log("Success");
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  /*const formik = useFormik({
     initialValues: { name: "", tel: "", email: "" },
     onSubmit: (values) => {
       setSignupModalOpened(false);
@@ -59,7 +154,7 @@ const Rates = ({ state, actions, post }) => {
 
       console.log(values);
     },
-  });
+  });*/
 
   useEffect(() => {
     if (ratesRef) {
@@ -100,23 +195,27 @@ const Rates = ({ state, actions, post }) => {
         className="signup"
       >
         <TitleM mb={isMobile ? 14 : 30}>{post.acf.tariff_2_modal_title}</TitleM>
-        <SignupForm onSubmit={formik.handleSubmit}>
+        <SignupForm>
           <Label>
             <InputValid
               type="text"
               name="name"
               placeholder={post.acf.tariff_2_modal_name_placeholder}
-              value={formik.values.name}
-              onChange={formik.handleChange}
+              /*value={formik.values.name}
+              onChange={formik.handleChange}*/
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.name}
             />
           </Label>
           <Label>
             <InputValid
-              type="tel"
-              name="tel"
+              type="phone"
+              name="phone"
               placeholder={post.acf.tariff_2_modal_phone_placeholder}
-              value={formik.values.tel}
-              onChange={formik.handleChange}
+              /*value={formik.values.tel}
+              onChange={formik.handleChange}*/
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.phone}
             />
           </Label>
           <Label>
@@ -124,8 +223,10 @@ const Rates = ({ state, actions, post }) => {
               type="email"
               name="email"
               placeholder={post.acf.tariff_2_modal_email_placeholder}
-              value={formik.values.email}
-              onChange={formik.handleChange}
+              /*value={formik.values.email}
+              onChange={formik.handleChange}*/
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.email}
             />
           </Label>
           <SubmitWrapper>
@@ -134,6 +235,7 @@ const Rates = ({ state, actions, post }) => {
               maxWidth="100%"
               type="submit"
               content={post.acf.tariff_2_modal_button_text}
+              onClick={(evt) => handleFormSubmit(evt)}
             />
           </SubmitWrapper>
           <CheckboxWrapper>
