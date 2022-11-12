@@ -111,6 +111,9 @@ const Rates = ({ state, actions, post }) => {
     }
     if (!errorSubmit) {
       try {
+        
+        setSignupModalOpened(false);
+        setSendModalOpened(true);
         /*const data = {
           'name': formValues.name,
           'surname': formValues.surname,
@@ -139,8 +142,6 @@ const Rates = ({ state, actions, post }) => {
             phone: '',
             email: '',
           });
-          setSignupModalOpened(false);
-          setSendModalOpened(true);
           console.log("Success");
         } else {
           console.log("Some error occured");
