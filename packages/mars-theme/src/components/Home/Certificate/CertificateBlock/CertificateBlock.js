@@ -5,7 +5,6 @@ import Input from "../../../constant/Input";
 import InputValid from "../../../constant/InputWithValidation";
 import CheckboxItem from "../../../constant/CheckboxItem";
 import Emoji from "./Emoji/Emoji";
-import { useFormik } from "formik";
 import CommonModal from "../../../constant/CommonModal";
 import { styled, connect } from "frontity";
 import {
@@ -26,18 +25,109 @@ const CertificateBlock = ({ state, post }) => {
   const [confirmModalOpened, setConfirmModalOpened] = useState(false);
   const [isUserAgree, setIsUserAgree] = useState(false);
 
-  const formik = useFormik({
-    initialValues: { name: "", tel: "", email: "" },
-    onSubmit: (values) => {
-      setCheckModalOpened(false);
-      setConfirmModalOpened(true);
-
-      console.log(values);
-    },
-  });
-
   const scrollToRates = () => {
     state.theme.ratesElement.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const [formValues, setFormValues] = useState({
+    name: '',
+    phone: '',
+    email: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+    email: false,
+  });
+  const handleInputChange = (e) => {
+    const target = e.target;
+    const formValuesKey = target.name;
+    setFormValues((prev) => {
+      const newFormValues = Object.assign({}, prev);
+
+      newFormValues[`${formValuesKey}`] = target.value;
+
+      return newFormValues;
+    });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let errorSubmit = false;
+    Object.keys(formValues).map((key) => {
+      if (!formValues[key]) {
+        errorSubmit = true;
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = true;
+          return newFormErrors;
+        });
+      } else {
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = false;
+          return newFormErrors;
+        });
+      }
+    });
+    if (!(/\S+@\S+\.\S+/).test(formValues['email'])) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors['email'] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
+    if (formValues['email'] && formValues['email'].indexOf('@') === -1) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors['email'] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
+    if (!errorSubmit) {
+      try {
+        setCheckModalOpened(false);
+        setConfirmModalOpened(true);
+        /*const data = {
+          'name': formValues.name,
+          'surname': formValues.surname,
+          'email': formValues.email,
+          'subject': formValues.subject,
+          'resume': formValues.resume,
+          'message': formValues.message,
+        }
+        console.log(JSON.stringify(data));*/
+        const formData = new FormData();
+
+        console.log(rateName);
+        formData.append('ux-rate-name', rateName);
+        formData.append('ux-name', formValues.name);
+        formData.append('ux-phone', formValues.phone);
+        formData.append('ux-email', formValues.email);
+        setRateName('');
+        setFormValues({
+          name: '',
+          phone: '',
+          email: '',
+        });
+
+        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-certificate.php", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (res.status === 200) {
+          console.log("Success");
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (
@@ -98,31 +188,34 @@ const CertificateBlock = ({ state, post }) => {
             информацию для проверки подлинности сертификата.
           </P>
         </ModalText>
-        <CheckForm onSubmit={formik.handleSubmit}>
+        <CheckForm>
           <InputWrapper>
             <InputValid
               type="text"
               placeholder="Имя и фамилия"
-              value={formik.values.name}
-              onChange={formik.handleChange}
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.name}
+              error={formErrors.name}
               name="name"
             />
           </InputWrapper>
           <InputWrapper>
             <InputValid
-              type="tel"
+              type="number"
               placeholder="Телефон"
-              value={formik.values.tel}
-              onChange={formik.handleChange}
-              name="tel"
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.phone}
+              error={formErrors.phone}
+              name="phone"
             />
           </InputWrapper>
           <InputWrapper>
             <InputValid
               type="email"
               placeholder="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
+              onChange={(evt) => handleInputChange(evt)}
+              value={formValues.email}
+              error={formErrors.email}
               name="email"
             />
           </InputWrapper>
@@ -131,6 +224,7 @@ const CertificateBlock = ({ state, post }) => {
               disabled={isUserAgree ? false : true}
               content="Отправить заявку"
               type="submit"
+              onClick={(evt) => handleFormSubmit(evt)}
             />
           </SubmitWrapper>
           <CheckboxWrapper>
