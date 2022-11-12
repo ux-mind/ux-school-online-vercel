@@ -70,7 +70,6 @@ const Rates = ({ state, actions, post }) => {
 
       return newFormValues;
     });
-    console.log(formValues);
   };
 
   const handleFormSubmit = async (e) => {

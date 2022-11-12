@@ -35,7 +35,6 @@ const Consultation = ({ post }) => {
 
       return newFormValues;
     });
-    console.log(formValues);
   };
 
   const handleFormSubmit = async (e) => {
