@@ -48,6 +48,7 @@ const Rates = ({ state, actions, post }) => {
   const [signupModalOpened, setSignupModalOpened] = useState(false);
   const [sendModalOpened, setSendModalOpened] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
+  const [rateName, setRateName] = useState('');
 
   const [formValues, setFormValues] = useState({
     name: '',
@@ -120,6 +121,9 @@ const Rates = ({ state, actions, post }) => {
         }
         console.log(JSON.stringify(data));*/
         const formData = new FormData();
+
+        console.log(rateName);
+        formData.append('ux-rate-name', rateName);
         formData.append('ux-name', formValues.name);
         formData.append('ux-phone', formValues.phone);
         formData.append('ux-email', formValues.email);
@@ -136,6 +140,7 @@ const Rates = ({ state, actions, post }) => {
             email: '',
           });
           setSignupModalOpened(false);
+          setSendModalOpened(true);
           console.log("Success");
         } else {
           console.log("Some error occured");
@@ -145,6 +150,11 @@ const Rates = ({ state, actions, post }) => {
       }
     }
   };
+
+  const handleSetRate = (name) => {
+    setRateName(name);
+    setSignupModalOpened(true);
+  }
 
   /*const formik = useFormik({
     initialValues: { name: "", tel: "", email: "" },
@@ -177,12 +187,12 @@ const Rates = ({ state, actions, post }) => {
           <Content>
             <RateItemFree type="free" post={post} />
             <RateItemMax
-              openModalFunc={() => setSignupModalOpened(true)}
+              openModalFunc={() => handleSetRate('Максимальный')}
               type="max"
               post={post}
             />
             <RateItemSelf
-              openModalFunc={() => setSendModalOpened(true)}
+              openModalFunc={() => handleSetRate('Учусь сам')}
               type="self"
               post={post}
             />
