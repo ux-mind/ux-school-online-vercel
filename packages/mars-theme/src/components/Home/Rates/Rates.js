@@ -205,6 +205,7 @@ const Rates = ({ state, actions, post }) => {
               onChange={formik.handleChange}*/
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.name}
+              error={formErrors.name}
             />
           </Label>
           <Label>
@@ -216,6 +217,7 @@ const Rates = ({ state, actions, post }) => {
               onChange={formik.handleChange}*/
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.phone}
+              error={formErrors.phone}
             />
           </Label>
           <Label>
@@ -227,6 +229,7 @@ const Rates = ({ state, actions, post }) => {
               onChange={formik.handleChange}*/
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.email}
+              error={formErrors.email}
             />
           </Label>
           <SubmitWrapper>
