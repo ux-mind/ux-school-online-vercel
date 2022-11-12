@@ -131,8 +131,8 @@ const Consultation = ({ post }) => {
                   value={formValues.phone}
                   error={formErrors.phone}
                   placeholder={post.acf.consultation_phone_placeholder}
-                  name="tel"
-                  type="tel"
+                  name="phone"
+                  type="phone"
                 />
               </FormBlock>
               <SubmitWrapper>
