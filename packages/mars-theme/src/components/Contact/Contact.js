@@ -59,8 +59,8 @@ const Contact = ({ state, post }) => {
   const [submitModalOpened, setSubmitModalOpened] = useState(false);
 
   const [formValues, setFormValues] = useState({
-    name: '',
-    phone: '',
+    name: "",
+    phone: "",
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
@@ -100,22 +100,24 @@ const Contact = ({ state, post }) => {
     });
     if (!errorSubmit) {
       try {
-        
         setSubmitModalOpened(true);
         const formData = new FormData();
 
-        formData.append('ux-name', formValues.name);
-        formData.append('ux-phone', formValues.phone);
+        formData.append("ux-name", formValues.name);
+        formData.append("ux-phone", formValues.phone);
 
         setFormValues({
-          name: '',
-          phone: '',
+          name: "",
+          phone: "",
         });
 
-        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-contact.php", {
-          method: "POST",
-          body: formData,
-        });
+        let res = await fetch(
+          "https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-contact.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (res.status === 200) {
           console.log("Success");
@@ -258,6 +260,9 @@ const SubmitWrapper = styled.div`
     letter-spacing: -0.01em;
     padding: 0.476em;
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+  }
+  & div {
     border-radius: 12px;
   }
 `;

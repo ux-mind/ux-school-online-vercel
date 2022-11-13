@@ -90,6 +90,9 @@ const BtnWrapper = styled.div`
 			padding: 10px 20px;
 			border-radius: 12px;
 		}
+		& div {
+    	border-radius: 12px;
+  	}
 	`}
   @media screen and (max-width: 991px) {
     & button {

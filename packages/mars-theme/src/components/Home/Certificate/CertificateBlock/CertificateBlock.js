@@ -30,9 +30,9 @@ const CertificateBlock = ({ state, post }) => {
   };
 
   const [formValues, setFormValues] = useState({
-    name: '',
-    phone: '',
-    email: '',
+    name: "",
+    phone: "",
+    email: "",
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
@@ -71,18 +71,18 @@ const CertificateBlock = ({ state, post }) => {
         });
       }
     });
-    if (!(/\S+@\S+\.\S+/).test(formValues['email'])) {
+    if (!/\S+@\S+\.\S+/.test(formValues["email"])) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
-        newFormErrors['email'] = true;
+        newFormErrors["email"] = true;
         return newFormErrors;
       });
       errorSubmit = true;
     }
-    if (formValues['email'] && formValues['email'].indexOf('@') === -1) {
+    if (formValues["email"] && formValues["email"].indexOf("@") === -1) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
-        newFormErrors['email'] = true;
+        newFormErrors["email"] = true;
         return newFormErrors;
       });
       errorSubmit = true;
@@ -102,19 +102,22 @@ const CertificateBlock = ({ state, post }) => {
         console.log(JSON.stringify(data));*/
         const formData = new FormData();
 
-        formData.append('ux-name', formValues.name);
-        formData.append('ux-phone', formValues.phone);
-        formData.append('ux-email', formValues.email);
+        formData.append("ux-name", formValues.name);
+        formData.append("ux-phone", formValues.phone);
+        formData.append("ux-email", formValues.email);
         setFormValues({
-          name: '',
-          phone: '',
-          email: '',
+          name: "",
+          phone: "",
+          email: "",
         });
 
-        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-certificate.php", {
-          method: "POST",
-          body: formData,
-        });
+        let res = await fetch(
+          "https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-certificate.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (res.status === 200) {
           console.log("Success");
@@ -264,6 +267,9 @@ const SubmitWrapper = styled.div`
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
     border-radius: 12px;
   }
+  & div {
+    border-radius: 12px;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -379,6 +385,9 @@ const CourseBtnWrapper = styled.div`
     & button {
       max-width: 257px;
       padding: 0.47em;
+      border-radius: 12px;
+    }
+    & div {
       border-radius: 12px;
     }
   }
