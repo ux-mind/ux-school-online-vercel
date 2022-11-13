@@ -12,14 +12,15 @@ import { styled } from "frontity";
 import parse from "html-react-parser";
 
 import bg from "../../../assets/images/consultation-bg.png";
+import bgMobile from "../../../assets/images/consultation-bg-m.png";
 
 const Consultation = ({ post }) => {
   const [isUserAgree, setIsUserAgree] = useState(true);
   const [consultationModalOpened, setConsultationModalOpened] = useState(false);
 
   const [formValues, setFormValues] = useState({
-    name: '',
-    phone: '',
+    name: "",
+    phone: "",
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
@@ -59,7 +60,6 @@ const Consultation = ({ post }) => {
     });
     if (!errorSubmit) {
       try {
-        
         setConsultationModalOpened(true);
         /*const data = {
           'name': formValues.name,
@@ -72,18 +72,21 @@ const Consultation = ({ post }) => {
         console.log(JSON.stringify(data));*/
         const formData = new FormData();
 
-        formData.append('ux-name', formValues.name);
-        formData.append('ux-phone', formValues.phone);
+        formData.append("ux-name", formValues.name);
+        formData.append("ux-phone", formValues.phone);
 
         setFormValues({
-          name: '',
-          phone: '',
+          name: "",
+          phone: "",
         });
 
-        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-consultation.php", {
-          method: "POST",
-          body: formData,
-        });
+        let res = await fetch(
+          "https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-consultation.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (res.status === 200) {
           console.log("Success");
@@ -233,6 +236,12 @@ const Agreement = styled.div`
   & p {
     color: var(--white);
   }
+  @media screen and (max-width: 768px) {
+    & p a {
+      text-decoration: none;
+      color: var(--white) !important;
+    }
+  }
 `;
 
 const SubmitWrapper = styled.div`
@@ -302,6 +311,9 @@ const Section = styled.section`
   padding-bottom: 128px;
   @media screen and (max-width: 991px) {
     padding: 128px 0 168px;
+  }
+  @media screen and (max-width: 768px) {
+    background: url(${bgMobile}) no-repeat 50% / cover;
   }
 `;
 

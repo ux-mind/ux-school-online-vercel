@@ -196,7 +196,11 @@ const Content = styled.div`
 `;
 
 const Section = styled.section`
-  background: url(${bg}) no-repeat 50% 0 / contain;
+  background: url(${bg}) no-repeat 50% 0;
+  background-size: 100% 1000px;
+  @media screen and (max-width: 991px) {
+    background-size: cover;
+  }
 `;
 
 export default connect(Lecturers);

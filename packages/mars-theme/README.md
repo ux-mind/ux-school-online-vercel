@@ -44,7 +44,7 @@ The theme options can be specified in the `state.theme` property.
         ["Nature", "/category/nature/"],
         ["Travel", "/category/travel/"],
         ["Japan", "/tag/japan/"],
-        ["About Us", "/about-us/"]
+        ["About Us", "/about/"]
       ],
       featured: {
         showOnList: true,

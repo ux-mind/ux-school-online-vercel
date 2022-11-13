@@ -298,12 +298,12 @@ const Section = styled.section`
     }
   }
   @media screen and (max-width: 991px) {
+    padding-top: 110px;
     & .modal-wrapper {
       padding: 32px 48px;
     }
   }
   @media screen and (max-width: 768px) {
-    padding-top: 110px;
     & .modal {
       &-wrapper {
         padding: 24px;

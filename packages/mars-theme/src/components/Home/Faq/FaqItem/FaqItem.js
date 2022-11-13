@@ -14,12 +14,14 @@ const ProgramItem = ({ data }) => {
       <BtnWrapper
         style={
           isOpened && state.theme.isMobile
-            ? { outline: "1px dashed rgba(14, 16, 41, 0.2)" }
-            : { outline: "none" }
+            ? { borderBottom: "1px dashed rgba(14, 16, 41, 0.2)" }
+            : { border: "none" }
         }
       >
         <Title>
-          <P size="l">{data.faq_item_title ? parse(data.faq_item_title) : ''}</P>
+          <P size="l">
+            {data.faq_item_title ? parse(data.faq_item_title) : ""}
+          </P>
         </Title>
         <Drop
           style={
@@ -45,7 +47,9 @@ const ProgramItem = ({ data }) => {
       {isOpened && (
         <ContentWrapper>
           {data.faq_item_text.map((paragraph) => (
-            <P key={paragraph.faq_item_paragraph}>{paragraph.faq_item_paragraph}</P>
+            <P key={paragraph.faq_item_paragraph}>
+              {paragraph.faq_item_paragraph}
+            </P>
           ))}
         </ContentWrapper>
       )}
