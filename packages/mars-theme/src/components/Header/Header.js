@@ -16,6 +16,7 @@ const Header = ({ state, actions }) => {
   const { menu, headerTheme, courseModalOpened } = state.theme;
 
   const options = state.source.get(`acf-settings`);
+  const navLinks = state.source.get(`/menu/header-menu`).items;
 
   useEffect(() => {
     actions.theme.checkIsMobile();
@@ -91,11 +92,11 @@ const Header = ({ state, actions }) => {
                 : "var(--black-900)"};
             `}
           >
-            {menu &&
-              menu.map(([text, link]) => {
+            {navLinks &&
+              navLinks.map((item) => {
                 return (
-                  <NavLink theme={headerTheme} key={link}>
-                    <Link link={link}>{text}</Link>
+                  <NavLink theme={headerTheme} key={item.title}>
+                    <Link link={item.url}>{item.title}</Link>
                   </NavLink>
                 );
               })}
