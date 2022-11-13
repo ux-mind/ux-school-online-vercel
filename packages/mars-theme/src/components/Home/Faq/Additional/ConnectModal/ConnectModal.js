@@ -14,15 +14,87 @@ import { useFormik } from "formik";
 const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
   const [isUserAgree, setIsUserAgree] = useState(false);
 
-  const formik = useFormik({
-    initialValues: { name: "", tel: "" },
-    onSubmit: (values) => {
-      setIsOpened(false);
-      setApproveModalOpened(true);
-
-      console.log(values);
-    },
+  const [formValues, setFormValues] = useState({
+    name: "",
+    phone: "",
   });
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+  });
+  const handleInputChange = (e) => {
+    const target = e.target;
+    const formValuesKey = target.name;
+    setFormValues((prev) => {
+      const newFormValues = Object.assign({}, prev);
+
+      newFormValues[`${formValuesKey}`] = target.value;
+
+      return newFormValues;
+    });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    let errorSubmit = false;
+    Object.keys(formValues).map((key) => {
+      if (!formValues[key]) {
+        errorSubmit = true;
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = true;
+          return newFormErrors;
+        });
+      } else {
+        setFormErrors((prev) => {
+          const newFormErrors = Object.assign({}, prev);
+          newFormErrors[`${key}`] = false;
+          return newFormErrors;
+        });
+      }
+    });
+    if (!errorSubmit) {
+      try {
+        setIsOpened(false);
+        setApproveModalOpened(true);
+        /*const data = {
+          'name': formValues.name,
+          'surname': formValues.surname,
+          'email': formValues.email,
+          'subject': formValues.subject,
+          'resume': formValues.resume,
+          'message': formValues.message,
+        }
+        console.log(JSON.stringify(data));*/
+        const formData = new FormData();
+
+        formData.append("ux-name", formValues.name);
+        formData.append("ux-phone", formValues.phone);
+
+        setFormValues({
+          name: "",
+          phone: "",
+        });
+
+        let res = await fetch(
+          "https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-consultation.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (res.status === 200) {
+          console.log("Success");
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <CommonModal isOpened={isOpened} setIsOpened={setIsOpened}>
@@ -39,23 +111,25 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
           вас по любым вопросам.
         </P>
       </Subtitle>
-      <ConnectForm onSubmit={formik.handleSubmit}>
+      <ConnectForm>
         <InputWrapper>
           <InputValid
             type="text"
             placeholder="Имя"
-            value={formik.values.name}
-            onChange={formik.handleChange}
+            onChange={(evt) => handleInputChange(evt)}
+            value={formValues.name}
+            error={formErrors.name}
             name="name"
           />
         </InputWrapper>
         <InputWrapper>
           <InputValid
-            type="tel"
+            type="phone"
             placeholder="Телефон"
-            value={formik.values.tel}
-            onChange={formik.handleChange}
-            name="tel"
+            onChange={(evt) => handleInputChange(evt)}
+            value={formValues.phone}
+            error={formErrors.phone}
+            name="phone"
           />
         </InputWrapper>
         <SubmitWrapper>
@@ -63,6 +137,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
             disabled={isUserAgree ? false : true}
             content="Отправить"
             type="submit"
+            onClick={(evt) => handleFormSubmit(evt)}
           />
         </SubmitWrapper>
         <CheckboxWrapper>
