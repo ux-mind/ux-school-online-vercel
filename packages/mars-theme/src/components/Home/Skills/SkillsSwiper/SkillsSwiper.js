@@ -124,20 +124,32 @@ const SkillsSwiper = ({ state, post }) => {
             <SwiperSlide key={slide.skills_item_title}>
               <SlideContent className="slide-content">
                 <Note>
-                  <SlideTitle>{slide.skills_item_title ? parse(slide.skills_item_title) : ''}</SlideTitle>
+                  <SlideTitle>
+                    {slide.skills_item_title
+                      ? parse(slide.skills_item_title)
+                      : ""}
+                  </SlideTitle>
                   <Text>
-                    <P size="l">{slide.skills_item_description ? parse(slide.skills_item_description) : ''}</P>
+                    <P size="l">
+                      {slide.skills_item_description
+                        ? parse(slide.skills_item_description)
+                        : ""}
+                    </P>
                   </Text>
                 </Note>
                 <ImageContainer>
                   <ImageWrapper className="image-wrapper">
-                   { /*<img
+                    <img
                       width="400"
                       height="400"
                       src={slide.skills_item_image_1x.url}
-                      srcSet={slide.skills_item_image_2x.url ? slide.skills_item_image_2x.url : slide.skills_item_image_1x.url}
+                      srcSet={
+                        slide.skills_item_image_2x.url
+                          ? slide.skills_item_image_2x.url
+                          : slide.skills_item_image_1x.url
+                      }
                       alt=""
-                    />*/}
+                    />
                   </ImageWrapper>
                 </ImageContainer>
               </SlideContent>
@@ -162,9 +174,13 @@ const SkillsSwiper = ({ state, post }) => {
                 <ImageWrapper>
                   <img
                     width="400"
-                    height="400" 
+                    height="400"
                     src={slide.skills_item_image_1x.url}
-                    srcSet={slide.skills_item_image_2x.url ? slide.skills_item_image_2x.url : slide.skills_item_image_1x.url}
+                    srcSet={
+                      slide.skills_item_image_2x.url
+                        ? slide.skills_item_image_2x.url
+                        : slide.skills_item_image_1x.url
+                    }
                     alt=""
                   />
                 </ImageWrapper>
