@@ -48,12 +48,12 @@ const Rates = ({ state, actions, post }) => {
   const [signupModalOpened, setSignupModalOpened] = useState(false);
   const [sendModalOpened, setSendModalOpened] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
-  const [rateName, setRateName] = useState('');
+  const [rateName, setRateName] = useState("");
 
   const [formValues, setFormValues] = useState({
-    name: '',
-    phone: '',
-    email: '',
+    name: "",
+    phone: "",
+    email: "",
   });
   const [formErrors, setFormErrors] = useState({
     name: false,
@@ -92,25 +92,24 @@ const Rates = ({ state, actions, post }) => {
         });
       }
     });
-    if (!(/\S+@\S+\.\S+/).test(formValues['email'])) {
+    if (!/\S+@\S+\.\S+/.test(formValues["email"])) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
-        newFormErrors['email'] = true;
+        newFormErrors["email"] = true;
         return newFormErrors;
       });
       errorSubmit = true;
     }
-    if (formValues['email'] && formValues['email'].indexOf('@') === -1) {
+    if (formValues["email"] && formValues["email"].indexOf("@") === -1) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
-        newFormErrors['email'] = true;
+        newFormErrors["email"] = true;
         return newFormErrors;
       });
       errorSubmit = true;
     }
     if (!errorSubmit) {
       try {
-        
         setSignupModalOpened(false);
         setSendModalOpened(true);
         /*const data = {
@@ -125,21 +124,24 @@ const Rates = ({ state, actions, post }) => {
         const formData = new FormData();
 
         console.log(rateName);
-        formData.append('ux-rate-name', rateName);
-        formData.append('ux-name', formValues.name);
-        formData.append('ux-phone', formValues.phone);
-        formData.append('ux-email', formValues.email);
-        setRateName('');
+        formData.append("ux-rate-name", rateName);
+        formData.append("ux-name", formValues.name);
+        formData.append("ux-phone", formValues.phone);
+        formData.append("ux-email", formValues.email);
+        setRateName("");
         setFormValues({
-          name: '',
-          phone: '',
-          email: '',
+          name: "",
+          phone: "",
+          email: "",
         });
 
-        let res = await fetch("https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-course.php", {
-          method: "POST",
-          body: formData,
-        });
+        let res = await fetch(
+          "https://online.ux-mind.pro/wp-content/themes/twentytwentyone/send-form-course.php",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         if (res.status === 200) {
           console.log("Success");
@@ -155,7 +157,7 @@ const Rates = ({ state, actions, post }) => {
   const handleSetRate = (name) => {
     setRateName(name);
     setSignupModalOpened(true);
-  }
+  };
 
   /*const formik = useFormik({
     initialValues: { name: "", tel: "", email: "" },
@@ -188,12 +190,12 @@ const Rates = ({ state, actions, post }) => {
           <Content>
             <RateItemFree type="free" post={post} />
             <RateItemMax
-              openModalFunc={() => handleSetRate('Максимальный')}
+              openModalFunc={() => handleSetRate("Максимальный")}
               type="max"
               post={post}
             />
             <RateItemSelf
-              openModalFunc={() => handleSetRate('Учусь сам')}
+              openModalFunc={() => handleSetRate("Учусь сам")}
               type="self"
               post={post}
             />
@@ -355,6 +357,9 @@ const SubmitWrapper = styled.div`
     letter-spacing: -0.01em;
     padding: 0.476em;
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+  }
+  & div {
     border-radius: 12px;
   }
 `;

@@ -16,7 +16,7 @@ const Button = ({ disabled, type, content, onClick }) => {
 
 const Border = styled.div`
   opacity: 0;
-  border-radius: 20px;
+  border-radius: 12px;
   position: absolute;
   top: 0;
   left: 0;

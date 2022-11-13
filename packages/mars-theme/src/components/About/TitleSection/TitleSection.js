@@ -105,7 +105,7 @@ const Who = styled(P)`
 `;
 
 const InfoBlock = styled.div`
-  padding: 81px 0 120px;
+  padding-top: 81px;
   display: grid;
   grid-template-columns: 4fr 6fr 2fr;
   grid-gap: 24px;
@@ -141,7 +141,7 @@ const TitleTop = styled(TitleL)`
 
 const TitleBlock = styled.div`
   position: relative;
-  padding: 102px 0 98px;
+  padding-bottom: 98px;
   ${flex("column")};
   border-bottom: 1px dashed ${whiteRgba(0.3)};
   @media screen and (max-width: 991px) {
@@ -153,7 +153,7 @@ const TitleBlock = styled.div`
 
 const Content = styled.div`
   position: relative;
-  padding: 126px 0 144px;
+  padding: 102px 0 120px;
 `;
 
 const Section = styled.section`

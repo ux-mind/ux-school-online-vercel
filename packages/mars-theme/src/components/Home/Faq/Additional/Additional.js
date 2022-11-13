@@ -65,7 +65,11 @@ const Additional = ({ state, post }) => {
           </YtBtnWrapper>
         </YtContent>
       </YtBlock>
-      <div>
+      <div
+        css={css`
+          width: 100%;
+        `}
+      >
         <AdditionalItemWrapper>
           <AdditionalItem>
             <Icon>
@@ -190,6 +194,7 @@ const AdditionalItemWrapper = styled.div`
     border: 1px dashed ${grayRgba(0.2)};
     padding: 31px 24px 25px;
     background: var(--white);
+    border-radius: 32px;
   }
 `;
 

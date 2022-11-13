@@ -20,30 +20,40 @@ const AdditionalBlock = ({ state, post }) => {
         <Wrapper>
           <AdditionalItem>
             <Icon>
-              <img width="24" height="24" src={post.acf.after_course_info_item_1_icon.url} alt="" />
+              <img
+                width="24"
+                height="24"
+                src={post.acf.after_course_info_item_1_icon.url}
+                alt=""
+              />
             </Icon>
             <Note>
               <P color="white">
                 {post.acf.after_course_info_item_1_text
-                        ? parse(post.acf.after_course_info_item_1_text)
-                        : ""}
+                  ? parse(post.acf.after_course_info_item_1_text)
+                  : ""}
               </P>
             </Note>
           </AdditionalItem>
           <AdditionalItem>
             <Icon>
-              <img width="24" height="24" src={post.acf.after_course_info_item_2_icon.url} alt="" />
+              <img
+                width="24"
+                height="24"
+                src={post.acf.after_course_info_item_2_icon.url}
+                alt=""
+              />
             </Icon>
             <Note>
               <P color="white">
-                {post.acf.after_course_info_item_2_text_before}
+                {`${post.acf.after_course_info_item_2_text_before} `}
                 <PopupBtn onClick={() => setResumeOpened(true)}>
                   {post.acf.after_course_info_item_2_text_button}
                 </PopupBtn>{" "}
                 {post.acf.after_course_info_item_2_text_after}
               </P>
             </Note>
-        </AdditionalItem>
+          </AdditionalItem>
         </Wrapper>
       </Additional>
       <Resume isOpened={resumeOpened} setIsOpened={setResumeOpened} />
@@ -122,6 +132,7 @@ const Wrapper = styled.div`
   }
   @media screen and (max-width: 991px) {
     padding: 31px 24px 25px;
+    border-radius: 32px;
   }
 `;
 

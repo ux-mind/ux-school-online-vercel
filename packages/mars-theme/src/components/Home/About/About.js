@@ -3,12 +3,13 @@ import Container from "../../constant/Container";
 import P from "../../constant/Paragraph";
 import Link from "../../constant/Link";
 import { font, stretch, gradient, grayRgba } from "../../base/functions";
-import { styled } from "frontity";
+import { styled, useConnect, connect } from "frontity";
 import parse from "html-react-parser";
 
 import igor from "../../../assets/images/Igor.png";
 import poster from "../../../assets/images/about-poster.png";
-import poster2x from "../../../assets/images/about-poster@2x.png";
+import mobilePoster from "../../../assets/images/about-poster-m.png";
+import mobilePoster2x from "../../../assets/images/about-poster-m@2x.png";
 
 const smallContent = [
   "«Сейчас знания быстро устаревают, и учиться имеет смысл только у тех, кто в этом «варится». Мы каждый день на передовой и знаем, что сейчас в тренде, какие технологии лучше использовать, что стоит делать, а что — нет. Наша команда UX Mind имеет большой опыт работы с клиентами из Европы и Америки»",
@@ -21,6 +22,9 @@ const largeContent = [
 ];
 
 const About = ({ post }) => {
+  const { state } = useConnect();
+  const { isMobile } = state.theme;
+
   return (
     <Section>
       <Container>
@@ -64,15 +68,23 @@ const About = ({ post }) => {
         </Content>
       </Container>
       <Poster>
-        <img
-          src={post.acf.home_about_image_1x.url}
-          srcSet={`${post.acf.home_about_image_1x.url} 1x, ${
-            post.acf.home_about_image_2x.url
-              ? post.acf.home_about_image_2x.url
-              : post.acf.home_about_image_1x.url
-          }`}
-          alt="poster"
-        />
+        {isMobile ? (
+          <img
+            src={mobilePoster}
+            srcSet={`${mobilePoster} 1x, ${mobilePoster2x} 2x`}
+            alt="poster"
+          />
+        ) : (
+          <img
+            src={post.acf.home_about_image_1x.url}
+            srcSet={`${post.acf.home_about_image_1x.url} 1x, ${
+              post.acf.home_about_image_2x.url
+                ? post.acf.home_about_image_2x.url
+                : post.acf.home_about_image_1x.url
+            }`}
+            alt="poster"
+          />
+        )}
       </Poster>
     </Section>
   );
@@ -216,4 +228,4 @@ const Content = styled.div`
 
 const Section = styled.section``;
 
-export default About;
+export default connect(About);

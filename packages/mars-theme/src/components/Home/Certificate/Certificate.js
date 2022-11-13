@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../constant/Container";
 import CertificateBlock from "./CertificateBlock/CertificateBlock";
 import { styled } from "frontity";
 
-import commonImage from "../../../assets/images/common-image.png";
-import commonImage2x from "../../../assets/images/common-image@2x.png";
-
 const Certificate = ({ post }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <Section>
       <Container>
@@ -15,8 +14,9 @@ const Certificate = ({ post }) => {
             src={post.acf.after_course_image_1x.url}
             srcSet={`${post.acf.after_course_image_1x.url} 1x, ${post.acf.after_course_image_2x.url} 2x`}
             alt=""
+            onLoad={() => setImageLoaded(true)}
           />
-          <DarkLayer />
+          <DarkLayer loaded={imageLoaded} />
         </ImageWrapper>
         <CertificateBlock post={post} />
       </Container>
@@ -31,6 +31,7 @@ const DarkLayer = styled.div`
   top: 0;
   left: 0;
   background: rgba(5, 46, 74, 0.3);
+  opacity: ${({ loaded }) => (loaded ? "1" : "0")};
 `;
 
 const ImageWrapper = styled.div`

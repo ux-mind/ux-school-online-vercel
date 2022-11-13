@@ -19,17 +19,24 @@ const TestimonialModal = ({ isOpened, setIsOpened, testimonial }) => {
             <img
               src={testimonial.acf.review_photo_1x.url}
               srcSet={`${testimonial.acf.review_photo_1x.url} 1x, ${
-                testimonial.acf.review_photo_2x.url ? testimonial.acf.review_photo_2x.url : testimonial.acf.review_photo_1x.url
+                testimonial.acf.review_photo_2x.url
+                  ? testimonial.acf.review_photo_2x.url
+                  : testimonial.acf.review_photo_1x.url
               } 2x`}
               alt="avatar"
             />
           </Avatar>
           <Name>{testimonial.acf.review_author_name}</Name>
-          {testimonial.acf.review_author_age && <Age>{testimonial.acf.review_author_age}</Age>}
+          {testimonial.acf.review_author_age && (
+            <Age>{testimonial.acf.review_author_age}</Age>
+          )}
           <Social>
             {testimonial.acf.review_social_links[0] &&
               testimonial.acf.review_social_links.map((item, id) => (
-                <SocialLink link={item.review_social_link} key={`${item.review_social_link}-${id}`}>
+                <SocialLink
+                  link={item.review_social_link}
+                  key={`${item.review_social_link}-${id}`}
+                >
                   <img src={item.review_social_icon.url} alt="social link" />
                 </SocialLink>
               ))}
@@ -38,7 +45,9 @@ const TestimonialModal = ({ isOpened, setIsOpened, testimonial }) => {
         <Text>
           {testimonial.acf.review_full_text.map((paragraph) => (
             <P size="l" key={paragraph.review_full_paragrah}>
-              {paragraph.review_full_paragrah ? parse(paragraph.review_full_paragrah) : ''}
+              {paragraph.review_full_paragrah
+                ? parse(paragraph.review_full_paragrah)
+                : ""}
             </P>
           ))}
         </Text>
@@ -70,6 +79,9 @@ const SocialLink = styled(Link)`
   }
   &:last-child {
     margin-right: 0;
+  }
+  &:hover {
+    opacity: 0.8;
   }
   @media screen and (max-width: 768px) {
     width: 48px;

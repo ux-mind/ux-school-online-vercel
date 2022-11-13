@@ -109,7 +109,9 @@ const Projects = ({ state, post }) => {
 
   return (
     <Section>
-      <ProjectsTitle>{post.acf.projects_title ? parse(post.acf.projects_title) : ''}</ProjectsTitle>
+      <ProjectsTitle>
+        {post.acf.projects_title ? parse(post.acf.projects_title) : ""}
+      </ProjectsTitle>
       <Content>
         {post.acf.projects_items.map((project, idx) => {
           if (
@@ -120,13 +122,20 @@ const Projects = ({ state, post }) => {
           }
 
           return (
-            <ProjectBlock key={project.projects_item_title}>
+            <ProjectBlock key={`${project.projects_item_title}` + idx}>
               <Bg>
-                <img src={project.projects_item_image.url} alt="project image" />
+                <img
+                  src={project.projects_item_image.url}
+                  alt="project image"
+                />
                 <Shadow />
               </Bg>
               <BtnLinkWrapper>
-                <BtnLink link={project.project_item_link}>{project.projects_item_title ? parse(project.projects_item_title) : ''}</BtnLink>
+                <BtnLink link={project.project_item_link}>
+                  {project.projects_item_title
+                    ? parse(project.projects_item_title)
+                    : ""}
+                </BtnLink>
               </BtnLinkWrapper>
             </ProjectBlock>
           );
@@ -145,7 +154,9 @@ const Projects = ({ state, post }) => {
           target="_blank"
           link={post.acf.all_projects_button_link}
         >
-          {post.acf.all_projects_button_text ? parse(post.acf.all_projects_button_text) : ''}
+          {post.acf.all_projects_button_text
+            ? parse(post.acf.all_projects_button_text)
+            : ""}
         </AllProjectsBtn>
       </AllProjects>
     </Section>
@@ -308,6 +319,7 @@ const Bg = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  display: flex;
   & img {
     width: 100%;
     height: 100%;

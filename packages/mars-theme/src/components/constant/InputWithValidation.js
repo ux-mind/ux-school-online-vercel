@@ -12,7 +12,7 @@ const InputValid = ({
   noBorder,
 }) => {
   return (
-    <ValidWrapper placeholder={placeholder} value={value}>
+    <ValidWrapper placeholder={placeholder} value={value} error={error}>
       <Placeholder value={value} error={error}>
         {placeholder}
       </Placeholder>
@@ -33,8 +33,8 @@ const InputValid = ({
 const ValidWrapper = styled.div`
   display: flex;
   position: relative;
-  ${({ value }) =>
-    value &&
+  ${({ value, error }) =>
+    (value || error) &&
     `& input {
     	padding-top: 0.809em;
     	padding-bottom: 0.33em;
@@ -48,7 +48,8 @@ const Placeholder = styled.div`
   top: 7px;
   left: 16px;
   color: ${({ error }) => (error ? "var(--error)" : "var(--link-500)")};
-  ${({ value }) => (value ? "display: block;" : "display: none")};
+  ${({ value, error }) =>
+    value || error ? "display: block;" : "display: none"};
 `;
 
 const Input = styled.input`
@@ -60,12 +61,17 @@ const Input = styled.input`
   width: 100%;
   box-sizing: border-box;
   border: ${({ noBorder, error }) =>
-    error ? "var(--error)" : noBorder ? "none" : "1px solid var(--gray-200)"};
+    error
+      ? "1px solid var(--error)"
+      : noBorder
+      ? "none"
+      : "1px solid var(--gray-200)"};
   border-radius: 12px;
   outline: none;
   &::placeholder {
     color: var(--gray-300);
     font-weight: 400;
+    ${({ error }) => error && "opacity: 0;"};
   }
 `;
 

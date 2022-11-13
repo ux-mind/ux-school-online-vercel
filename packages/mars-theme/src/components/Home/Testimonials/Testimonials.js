@@ -110,7 +110,7 @@ const Testimonials = ({ state, post }) => {
   const [testimonialModalOpened, setTestimonialModalOpened] = useState(false);
   const [openedTestimonial, setOpenedTestimonial] = useState(null);
   const [allTestimonialsShown, setAllTestimonialsShown] = useState(false);
-  
+
   const reviews = state.source.get(`/reviews/`).items;
   console.log("reviews");
   console.log(reviews);
@@ -118,7 +118,9 @@ const Testimonials = ({ state, post }) => {
   return (
     <Section>
       <Container>
-        <TestimonialsTitle>{post.acf.reviews_title ? parse(post.acf.reviews_title) : ''}</TestimonialsTitle>
+        <TestimonialsTitle>
+          {post.acf.reviews_title ? parse(post.acf.reviews_title) : ""}
+        </TestimonialsTitle>
         <Content>
           <TestimonialsList>
             {reviews.map((review, idx) => {
@@ -159,7 +161,7 @@ const Testimonials = ({ state, post }) => {
                 </TestimonialItem>
               );
             })}
-            {(!allTestimonialsShown && reviews.length > 4) && (
+            {!allTestimonialsShown && reviews.length > 4 && (
               <BtnContainer>
                 <WhiteBtn onClick={() => setAllTestimonialsShown(true)}>
                   {post.acf.reviews_show_more}
@@ -167,7 +169,7 @@ const Testimonials = ({ state, post }) => {
               </BtnContainer>
             )}
           </TestimonialsList>
-          <Additional post={post}/>
+          <Additional post={post} />
         </Content>
         <TestimonialModal
           isOpened={testimonialModalOpened}
@@ -204,8 +206,12 @@ const Name = styled.div`
 const InfoText = styled.div`
   margin-bottom: 6px;
   cursor: pointer;
+  transition: opacity 0.3s;
   & p {
     color: var(--black-900);
+  }
+  &:hover {
+    opacity: 0.65;
   }
   @media screen and (max-width: 991px) {
     margin-bottom: 9px;
@@ -292,12 +298,12 @@ const Section = styled.section`
     }
   }
   @media screen and (max-width: 991px) {
+    padding-top: 110px;
     & .modal-wrapper {
       padding: 32px 48px;
     }
   }
   @media screen and (max-width: 768px) {
-    padding-top: 110px;
     & .modal {
       &-wrapper {
         padding: 24px;

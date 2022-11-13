@@ -94,6 +94,9 @@ const SubmitWrapper = styled.div`
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
     border-radius: 12px;
   }
+  & div {
+    border-radius: 12px;
+  }
 `;
 
 const InputWrapper = styled.div`

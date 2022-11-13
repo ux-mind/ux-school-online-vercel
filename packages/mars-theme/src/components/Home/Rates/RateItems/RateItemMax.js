@@ -14,6 +14,7 @@ import { styled } from "frontity";
 import parse from "html-react-parser";
 
 import bg from "../../../../assets/images/rate-item-bg.png";
+import bgMobile from "../../../../assets/images/rate-item-bg-m.png";
 import check from "../../../../assets/images/svg/Check.svg";
 
 const RateItemMax = ({ type, post, openModalFunc }) => {
@@ -121,6 +122,9 @@ const BtnWrapper = styled.div`
 			padding: 10px 20px;
 			border-radius: 12px;
 		}
+		& div {
+    	border-radius: 12px;
+  	}
 	`}
   @media screen and (max-width: 991px) {
     & button {
@@ -251,6 +255,8 @@ const Item = styled.div`
   }
   @media screen and (max-width: 768px) {
     padding: 19px 24px 24px;
+    ${({ type }) =>
+      type === "max" && `background: url(${bgMobile}) no-repeat 50% / cover;`};
   }
 `;
 

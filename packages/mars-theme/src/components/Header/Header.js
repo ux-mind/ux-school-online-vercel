@@ -3,7 +3,7 @@ import { connect, styled, css } from "frontity";
 import Link from "../constant/Link";
 import MobileMenu from "./Menu";
 import Container from "../constant/Container";
-import Image from "@frontity/components/image";
+// import Image from "@frontity/components/image";
 import DropdownModal from "../constant/DropdownModal";
 import logo from "../../assets/images/svg/Logo.svg";
 import whiteLogo from "../../assets/images/svg/Logo-white.svg";
@@ -32,7 +32,7 @@ const Header = ({ state, actions }) => {
     <HeaderWrapper theme={headerTheme}>
       <HeaderContainer>
         <StyledLink link="/">
-          <Image
+          <img
             src={
               headerTheme === "white"
                 ? options.acf.header_logo_white.url

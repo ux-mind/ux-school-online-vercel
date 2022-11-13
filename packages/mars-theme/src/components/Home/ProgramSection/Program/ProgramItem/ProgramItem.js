@@ -17,12 +17,14 @@ const ProgramItem = ({ data }) => {
       <BtnWrapper
         style={
           isOpened && state.theme.isMobile
-            ? { outline: "1px dashed rgba(14, 16, 41, 0.2)" }
-            : { outline: "none" }
+            ? { borderBottom: "1px dashed rgba(14, 16, 41, 0.2)" }
+            : { border: "none" }
         }
       >
         <Title>
-          <P size="l">{data.program_item_title ? parse(data.program_item_title) : ''}</P>
+          <P size="l">
+            {data.program_item_title ? parse(data.program_item_title) : ""}
+          </P>
         </Title>
         <Drop
           style={
@@ -51,7 +53,11 @@ const ProgramItem = ({ data }) => {
             return (
               <VideoItem key={item.program_item_link_title}>
                 <VideoItemContent>
-                  <P>{item.program_item_link_title ? parse(item.program_item_link_title) : ''}</P>
+                  <P>
+                    {item.program_item_link_title
+                      ? parse(item.program_item_link_title)
+                      : ""}
+                  </P>
                 </VideoItemContent>
                 <VideoItemState>
                   {!item.program_item_link_url ? (
@@ -74,7 +80,11 @@ const ProgramItem = ({ data }) => {
                   ) : (
                     <VideoInfo>
                       <VideoLink link={item.program_item_link_url}>
-                        <span>{item.program_item_link_text ? parse(item.program_item_link_text) : ''}</span>
+                        <span>
+                          {item.program_item_link_text
+                            ? parse(item.program_item_link_text)
+                            : ""}
+                        </span>
                         <img src={play} width="24" height="24" alt="play" />
                       </VideoLink>
                     </VideoInfo>
