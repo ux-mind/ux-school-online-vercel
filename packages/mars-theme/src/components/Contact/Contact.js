@@ -285,6 +285,9 @@ const SocialLink = styled(Link)`
   ${font(21, 32)};
   ${stretch(109)};
   position: relative;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const Icon = styled.div`

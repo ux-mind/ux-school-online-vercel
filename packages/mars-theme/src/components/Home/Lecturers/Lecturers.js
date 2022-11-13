@@ -30,7 +30,9 @@ const Lecturers = ({ state, post }) => {
     <Section>
       <LecturersContainer>
         <Content>
-          <LecturersTitle color="white">{post.acf.lecturers_title ? parse(post.acf.lecturers_title) : ''}</LecturersTitle>
+          <LecturersTitle color="white">
+            {post.acf.lecturers_title ? parse(post.acf.lecturers_title) : ""}
+          </LecturersTitle>
           <SwiperWrapper>
             <Swiper
               modules={[Pagination]}
@@ -60,7 +62,9 @@ const Lecturers = ({ state, post }) => {
                       width="384"
                       src={item.lecturers_item_photo_1x.url}
                       srcSet={`${item.lecturers_item_photo_1x.url} 1x, ${
-                        item.lecturers_item_photo_2x.url ? item.lecturers_item_photo_2x.url : item.lecturers_item_photo_1x.url
+                        item.lecturers_item_photo_2x.url
+                          ? item.lecturers_item_photo_2x.url
+                          : item.lecturers_item_photo_1x.url
                       } 2x`}
                       alt="lecturer"
                     />
@@ -192,7 +196,7 @@ const Content = styled.div`
 `;
 
 const Section = styled.section`
-  background: url(${bg}) no-repeat 50% / cover;
+  background: url(${bg}) no-repeat 50% 0 / contain;
 `;
 
 export default connect(Lecturers);

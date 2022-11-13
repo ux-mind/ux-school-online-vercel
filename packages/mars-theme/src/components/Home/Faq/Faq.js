@@ -98,7 +98,9 @@ const Faq = ({ post }) => {
     <Section>
       <Container>
         <Content>
-          <FaqTitleM color="white">{post.acf.faq_title ? parse(post.acf.faq_title) : ''}</FaqTitleM>
+          <FaqTitleM color="white">
+            {post.acf.faq_title ? parse(post.acf.faq_title) : ""}
+          </FaqTitleM>
           <Additional post={post} />
           <FaqContent>
             <FaqBlock>
@@ -175,7 +177,7 @@ const Content = styled.div`
     );
   grid-column-gap: 24px;
   grid-row-gap: 46px;
-  border-bottom: 1px solid ${grayRgba(0.2)};
+  border-bottom: 1px dashed ${grayRgba(0.2)};
   @media screen and (max-width: 991px) {
     grid-template-columns: 100%;
     padding: 110px 0 152px;
@@ -184,7 +186,7 @@ const Content = styled.div`
 `;
 
 const Section = styled.section`
-  background: url(${bg}) no-repeat 50% 0;
+  background: url(${bg}) no-repeat 50% 0 / contain;
   background-size: 100% 936px;
   @media screen and (max-width: 991px) {
     background-size: auto 936px;
