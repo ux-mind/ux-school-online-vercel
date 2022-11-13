@@ -1,5 +1,5 @@
 import { styled, connect, css } from "frontity";
-
+import { useState, useEffect } from "react";
 import logo from "../../assets/images/svg/Logo.svg";
 import Image from "@frontity/components/image";
 import Link from "../constant/Link";
@@ -21,6 +21,14 @@ const Menu = ({ state, actions }) => {
   const { menu, headerTheme, isMobileMenuOpened } = state.theme;
 
   const navLinks = state.source.get(`/menu/header-menu`).items;
+
+  const [courseValue, setCourseValue] = useState("");
+
+  useEffect(() => {
+    if (courseValue === "Занятия в классе") {
+      window.location.href = "https://ux-school.by";
+    }
+  }, [courseValue]);
 
   return (
     <MobileMenu isOpened={isMobileMenuOpened}>
@@ -71,31 +79,18 @@ const Menu = ({ state, actions }) => {
       </Container>
       <BottomBlock>
         <ButtonContainer>
-          <CourseButton
-            theme={headerTheme}
-            rotation={"down"}
-            onClick={() => actions.theme.toggleCourseModal()}
-          >
-            Онлайн-курсы
-          </CourseButton>
-          {/* {courseModalOpened && (
-            <CourseModal>
-              <DropdownModal>
-                <CourseListButton
-                  onClick={() => actions.theme.closeCourseModal()}
-                >
-                  Онлайн-курсы
-                </CourseListButton>
-                <CourseListButton
-                  onClick={() =>
-                    (window.location.href = "https://ux-school.by/")
-                  }
-                >
-                  Занятия в классе
-                </CourseListButton>
-              </DropdownModal>
-            </CourseModal>
-          )} */}
+          <SelectWrapper rotation={"down"}>
+            <CourseButton
+              theme={headerTheme}
+              value={courseValue}
+              onChange={(e) => setCourseValue(e.target.value)}
+            >
+              <option selected value="Онлайн-курсы">
+                Онлайн-курсы
+              </option>
+              <option value="Занятия в классе">Занятия в классе</option>
+            </CourseButton>
+          </SelectWrapper>
         </ButtonContainer>
       </BottomBlock>
     </MobileMenu>
@@ -121,11 +116,10 @@ const MenuItem = styled.li`
   }
 `;
 
-const CourseButton = styled.button`
+const CourseButton = styled.select`
   position: relative;
   text-align: left;
   width: 100%;
-  max-width: 325px;
   ${font(16, 24)}
   padding: 1em;
   padding-right: 46px;
@@ -133,6 +127,21 @@ const CourseButton = styled.button`
   border-radius: 12px;
   border: 1px solid var(--gray-200);
   color: var(--black-900);
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+  &::-ms-expand {
+    /* IE */
+    display: none;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  display: flex;
+  position: relative;
+  max-width: 325px;
+  margin: 0 auto;
   &::after {
     content: "";
     position: absolute;
