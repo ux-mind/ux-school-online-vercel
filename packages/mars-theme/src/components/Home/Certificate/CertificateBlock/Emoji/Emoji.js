@@ -61,7 +61,6 @@ const EmojiElement = () => {
       >
         <img src={emoji5} alt="emoji" />
       </Emoji>
-      $
       {!isMobile && (
         <Emoji
           transform={
