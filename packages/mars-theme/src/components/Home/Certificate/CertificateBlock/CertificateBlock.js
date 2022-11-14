@@ -150,6 +150,7 @@ const CertificateBlock = ({ state, post }) => {
         </P>
       </Subtitle>
       <CertificateWrapper>
+        <Emoji />
         <CertificateBorder>
           <CertificateBorderInner>
             <Certificate>
@@ -177,7 +178,6 @@ const CertificateBlock = ({ state, post }) => {
               {post.acf.certificate_sticker_text_after}
             </P>
           </CertificateCheck>
-          {/* <Emoji /> */}
         </CertificateBorder>
       </CertificateWrapper>
       <CourseBtnWrapper>
@@ -485,6 +485,7 @@ const Subtitle = styled.div`
   }
   @media screen and (max-width: 991px) {
     margin-bottom: 33px;
+    max-width: 312px;
   }
 `;
 
