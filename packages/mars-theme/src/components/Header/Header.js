@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect, styled, css } from "frontity";
 import Link from "../constant/Link";
 import MobileMenu from "./Menu";
@@ -17,6 +17,8 @@ const Header = ({ state, actions }) => {
 
   const options = state.source.get(`acf-settings`);
   const navLinks = state.source.get(`/menu/header-menu`).items;
+
+  const courseBtnRef = useRef(null);
 
   useEffect(() => {
     actions.theme.checkIsMobile();
@@ -54,10 +56,16 @@ const Header = ({ state, actions }) => {
             theme={headerTheme}
             rotation={"down"}
             onClick={() => actions.theme.toggleCourseModal()}
+            ref={courseBtnRef}
           >
             {options.acf.header_dropdown_menu_button_text}
           </CourseButton>
-          <CourseModal opened={courseModalOpened}>
+          <CourseModal
+            opened={courseModalOpened}
+            maxWidth={
+              courseBtnRef.current ? courseBtnRef.current.offsetWidth : null
+            }
+          >
             <DropdownModal>
               <CourseListButton
                 onClick={() => actions.theme.closeCourseModal()}
@@ -166,15 +174,12 @@ const CourseModal = styled.div`
   position: absolute;
   left: 50%;
   top: calc(100% + 10px);
-  transform: translateX(-50%);
   width: 100vw;
-  max-width: 184px;
-  transition: all 0.3s ease-in-out;
-  transition: height 0.3s ease-in-out;
-  overflow: hidden;
-  max-height: max-content;
-  ${({ opened }) =>
-    opened ? "height: 90px; padding-top: 5px;" : "height: 0;"};
+  max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
+  transition: transform 0.3s, opacity 0.3s;
+  transform: translate(-50%, 5px);
+  opacity: 0;
+  ${({ opened }) => opened && "opacity: 1; transform: translateX(-50%);"};
 `;
 
 const HeaderWrapper = styled.div`

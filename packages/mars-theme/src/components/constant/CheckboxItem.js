@@ -60,6 +60,18 @@ const CheckboxWrapper = styled.div`
   position: relative;
   ${flex()};
   cursor: pointer;
+  & p a {
+    color: var(--link-200);
+    &:hover {
+      color: var(--link-100);
+    }
+    &:active {
+      color: var(--link-500);
+    }
+    &:focus {
+      color: var(--link-200);
+    }
+  }
   @media screen and (max-width: 991px) {
     & p {
       ${font(14, 20)};

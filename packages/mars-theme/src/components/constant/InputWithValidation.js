@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { styled } from "frontity";
 import { font, stretch } from "../base/functions";
 
@@ -11,12 +12,20 @@ const InputValid = ({
   required,
   noBorder,
 }) => {
+  const [inputFocused, setInputFocused] = useState(false);
+
   return (
-    <ValidWrapper placeholder={placeholder} value={value} error={error}>
-      <Placeholder value={value} error={error}>
+    <ValidWrapper
+      placeholder={placeholder}
+      value={value}
+      error={error}
+      focused={inputFocused}
+    >
+      <Placeholder value={value} error={error} focused={inputFocused}>
         {placeholder}
       </Placeholder>
       <Input
+        focused={inputFocused}
         error={error}
         noBorder={noBorder}
         required={required}
@@ -25,6 +34,8 @@ const InputValid = ({
         placeholder={placeholder || ""}
         value={value}
         onChange={onChange}
+        onFocus={() => setInputFocused(true)}
+        onBlur={() => setInputFocused(false)}
       />
     </ValidWrapper>
   );
@@ -33,11 +44,11 @@ const InputValid = ({
 const ValidWrapper = styled.div`
   display: flex;
   position: relative;
-  ${({ value, error }) =>
-    (value || error) &&
+  ${({ value, error, focused }) =>
+    (value || error || focused) &&
     `& input {
-    	padding-top: 0.809em;
-    	padding-bottom: 0.33em;
+    	padding-top: 0.7619em;
+    	padding-bottom: 0.2857em;
   	}`};
 `;
 
@@ -48,8 +59,8 @@ const Placeholder = styled.div`
   top: 7px;
   left: 16px;
   color: ${({ error }) => (error ? "var(--error)" : "var(--link-500)")};
-  ${({ value, error }) =>
-    value || error ? "display: block;" : "display: none"};
+  ${({ value, error, focused }) =>
+    value || error || focused ? "display: block;" : "display: none"};
 `;
 
 const Input = styled.input`
@@ -64,7 +75,7 @@ const Input = styled.input`
     error
       ? "1px solid var(--error)"
       : noBorder
-      ? "none"
+      ? "1px solid transparent"
       : "1px solid var(--gray-200)"};
   border-radius: 12px;
   outline: none;
@@ -72,6 +83,7 @@ const Input = styled.input`
     color: var(--gray-300);
     font-weight: 400;
     ${({ error }) => error && "opacity: 0;"};
+    ${({ focused }) => focused && "opacity: 0;"};
   }
 `;
 

@@ -138,6 +138,7 @@ const PaginationItem = styled.button`
   ${({ active }) =>
     active &&
     `
+		padding: 9px 24px;
 		border: none;
 		background: var(--gradient-primary-btn);
 		outline: none;
