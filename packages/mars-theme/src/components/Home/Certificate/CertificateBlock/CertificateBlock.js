@@ -181,18 +181,17 @@ const CertificateBlock = ({ state, post }) => {
         isOpened={checkModalOpened}
         setIsOpened={setCheckModalOpened}
       >
-        <ModalTitle>Проверить сертификат</ModalTitle>
+        <ModalTitle>{post.acf.certificate_modal_title}</ModalTitle>
         <ModalText>
           <P size="l">
-            Оставьте ваши контактные данные. Мы свяжемся с вами и уточним
-            информацию для проверки подлинности сертификата.
+            {post.acf.certificate_modal_text ? parse(post.acf.certificate_modal_text) : ''}
           </P>
         </ModalText>
         <CheckForm>
           <InputWrapper>
             <InputValid
               type="text"
-              placeholder="Имя и фамилия"
+              placeholder={post.acf.certificate_modal_name_placeholder}
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.name}
               error={formErrors.name}
@@ -202,7 +201,7 @@ const CertificateBlock = ({ state, post }) => {
           <InputWrapper>
             <InputValid
               type="text"
-              placeholder="Телефон"
+              placeholder={post.acf.certificate_modal_phone_placeholder}
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.phone}
               error={formErrors.phone}
@@ -212,7 +211,7 @@ const CertificateBlock = ({ state, post }) => {
           <InputWrapper>
             <InputValid
               type="email"
-              placeholder="Email"
+              placeholder={post.acf.certificate_modal_email_placeholder}
               onChange={(evt) => handleInputChange(evt)}
               value={formValues.email}
               error={formErrors.email}
@@ -222,7 +221,7 @@ const CertificateBlock = ({ state, post }) => {
           <SubmitWrapper>
             <PrimaryBtn
               disabled={isUserAgree ? false : true}
-              content="Отправить заявку"
+              content={post.acf.certificate_modal_submit_button_text}
               type="submit"
               onClick={(evt) => handleFormSubmit(evt)}
             />
@@ -232,8 +231,8 @@ const CertificateBlock = ({ state, post }) => {
               checked={isUserAgree}
               setChecked={() => setIsUserAgree((prev) => !prev)}
             >
-              Я согласен с условиями обработки{" "}
-              <a href="/terms/">персональных данных</a>
+              {post.acf.certificate_modal_checkbox_text}{" "}
+              <a href={post.acf.certificate_modal_checkbox_link_text}>{post.acf.certificate_modal_checkbox_link_url}</a>
             </CheckboxItem>
           </CheckboxWrapper>
         </CheckForm>
@@ -242,10 +241,9 @@ const CertificateBlock = ({ state, post }) => {
         isOpened={confirmModalOpened}
         setIsOpened={setConfirmModalOpened}
       >
-        <ModalTitle>Заявка отправлена</ModalTitle>
+        <ModalTitle>{post.acf.certificate_confirm_modal_title}</ModalTitle>
         <P size="l">
-          Наш менеджер скоро свяжется с вами для уточнения данных, необходимых
-          чтобы проверить сертификат на подлинность
+          {post.acf.certificate_confirm_modal_text ? parse(post.acf.certificate_confirm_modal_text) : ''}
         </P>
       </CommonModal>
     </Wrapper>
