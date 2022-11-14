@@ -189,7 +189,7 @@ const Contact = ({ state, post }) => {
             <div>
               <InputValid
                 required
-                type="number"
+                type="tel"
                 placeholder={post.acf.contacts_form_phone_placeholder}
                 onChange={(evt) => handleInputChange(evt)}
                 value={formValues.phone}
