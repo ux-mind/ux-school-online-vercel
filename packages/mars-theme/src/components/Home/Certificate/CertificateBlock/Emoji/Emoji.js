@@ -13,21 +13,21 @@ const EmojiElement = () => {
   const { state } = useConnect();
   const { isMobile } = state.theme;
 
-  console.log(isMobile);
-
   return (
     <EmojiWrapper>
-      <Emoji
-        transform={
-          isMobile
-            ? `translate(calc(-50% - 172px)) rotate(-23deg)`
-            : `translate(calc(-50% - 722px)) rotate(-23deg)`
-        }
-        top={isMobile ? 255 : 195}
-        zIndex={isMobile ? -1 : 0}
-      >
-        <img src={emoji1} alt="emoji" />
-      </Emoji>
+      {!isMobile && (
+        <Emoji
+          transform={
+            isMobile
+              ? `translate(calc(-50% - 172px)) rotate(-23deg)`
+              : `translate(calc(-50% - 722px)) rotate(-23deg)`
+          }
+          top={isMobile ? 255 : 195}
+          zIndex={isMobile ? -1 : 0}
+        >
+          <img src={emoji1} alt="emoji" />
+        </Emoji>
+      )}
       <Emoji
         transform={
           isMobile
@@ -61,17 +61,20 @@ const EmojiElement = () => {
       >
         <img src={emoji5} alt="emoji" />
       </Emoji>
-      <Emoji
-        transform={
-          isMobile
-            ? `translate(calc(-50% + 64px + 104px)) rotate(-9deg)`
-            : `translate(calc(-50% + 474px)) rotate(-26deg)`
-        }
-        top={isMobile ? 31 : 18}
-        zIndex={0}
-      >
-        <img src={emoji6} alt="emoji" />
-      </Emoji>
+      $
+      {!isMobile && (
+        <Emoji
+          transform={
+            isMobile
+              ? `translate(calc(-50% + 64px + 104px)) rotate(-9deg)`
+              : `translate(calc(-50% + 474px)) rotate(-26deg)`
+          }
+          top={isMobile ? 31 : 18}
+          zIndex={0}
+        >
+          <img src={emoji6} alt="emoji" />
+        </Emoji>
+      )}
       <Emoji
         transform={
           isMobile

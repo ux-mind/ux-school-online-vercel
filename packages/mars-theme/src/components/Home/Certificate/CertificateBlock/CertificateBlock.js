@@ -5,6 +5,7 @@ import Input from "../../../constant/Input";
 import InputValid from "../../../constant/InputWithValidation";
 import CheckboxItem from "../../../constant/CheckboxItem";
 import Emoji from "./Emoji/Emoji";
+import EmojiBg from "./Emoji/EmojiBg";
 import CommonModal from "../../../constant/CommonModal";
 import { styled, connect } from "frontity";
 import {
@@ -87,7 +88,7 @@ const CertificateBlock = ({ state, post }) => {
       });
       errorSubmit = true;
     }
-    const regex = new RegExp('^[\+]?[0-9]+');
+    const regex = new RegExp("^[+]?[0-9]+");
     if (!regex.test(formValues["phone"])) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
@@ -150,7 +151,7 @@ const CertificateBlock = ({ state, post }) => {
         </P>
       </Subtitle>
       <CertificateWrapper>
-        <Emoji />
+        <EmojiBg />
         <CertificateBorder>
           <CertificateBorderInner>
             <Certificate>
@@ -179,6 +180,7 @@ const CertificateBlock = ({ state, post }) => {
             </P>
           </CertificateCheck>
         </CertificateBorder>
+        <Emoji />
       </CertificateWrapper>
       <CourseBtnWrapper>
         <PrimaryBtn
