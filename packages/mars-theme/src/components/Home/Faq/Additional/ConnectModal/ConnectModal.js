@@ -113,7 +113,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened, post }) =>
         </InputWrapper>
         <InputWrapper>
           <InputValid
-            type="phone"
+            type="number"
             placeholder={post.acf.faq_contact_form_phone_placeholder}
             onChange={(evt) => handleInputChange(evt)}
             value={formValues.phone}
