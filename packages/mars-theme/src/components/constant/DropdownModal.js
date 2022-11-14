@@ -9,9 +9,12 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 1;
   border-radius: 8px;
-  filter: drop-shadow(0px 0px 32px rgba(0, 0, 0, 0.03))
+  /* filter: drop-shadow(0px 0px 32px rgba(0, 0, 0, 0.03))
     drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.1))
-    drop-shadow(0px 48px 64px rgba(0, 0, 0, 0.05));
+    drop-shadow(0px 48px 64px rgba(0, 0, 0, 0.05)); */
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
+    0px 48px 64px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
   &::before {
     z-index: 0;
     pointer-events: none;
