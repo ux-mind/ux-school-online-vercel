@@ -149,6 +149,7 @@ const Consultation = ({ post }) => {
             </Form>
             <Agreement>
               <CheckboxItem
+                lightLink={true}
                 checked={isUserAgree}
                 setChecked={() => setIsUserAgree((prev) => !prev)}
               >
