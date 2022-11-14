@@ -57,24 +57,20 @@ const Header = ({ state, actions }) => {
           >
             {options.acf.header_dropdown_menu_button_text}
           </CourseButton>
-          {courseModalOpened && (
-            <CourseModal>
-              <DropdownModal>
-                <CourseListButton
-                  onClick={() => actions.theme.closeCourseModal()}
-                >
-                  {options.acf.header_dropdown_menu_item_1}
-                </CourseListButton>
-                <CourseListButton
-                  onClick={() =>
-                    (window.location.href = "https://ux-school.by/")
-                  }
-                >
-                  {options.acf.header_dropdown_menu_item_2}
-                </CourseListButton>
-              </DropdownModal>
-            </CourseModal>
-          )}
+          <CourseModal opened={courseModalOpened}>
+            <DropdownModal>
+              <CourseListButton
+                onClick={() => actions.theme.closeCourseModal()}
+              >
+                {options.acf.header_dropdown_menu_item_1}
+              </CourseListButton>
+              <CourseListButton
+                onClick={() => (window.location.href = "https://ux-school.by/")}
+              >
+                {options.acf.header_dropdown_menu_item_2}
+              </CourseListButton>
+            </DropdownModal>
+          </CourseModal>
         </div>
         <nav
           css={css`
@@ -173,6 +169,12 @@ const CourseModal = styled.div`
   transform: translateX(-50%);
   width: 100vw;
   max-width: 184px;
+  transition: all 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+  max-height: max-content;
+  ${({ opened }) =>
+    opened ? "height: 90px; padding-top: 5px;" : "height: 0;"};
 `;
 
 const HeaderWrapper = styled.div`
@@ -201,6 +203,11 @@ const CourseListButton = styled(ListButton)`
   width: 100%;
   text-align: left;
   margin: 0;
+  position: relative;
+  z-index: 1;
+  &:hover {
+    background: var(--gray-100);
+  }
   &:first-of-type {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;

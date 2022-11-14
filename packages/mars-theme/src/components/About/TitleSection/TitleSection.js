@@ -58,12 +58,16 @@ const InfoLink = styled(Link)`
   padding: 10px 32px;
   background: var(--white);
   max-width: max-content;
+  text-decoration: none;
   border-radius: 12px;
   & img {
     margin-left: 10px;
   }
   &:hover {
     background: var(--gray-100);
+  }
+  &:active {
+    background: var(--white);
   }
   @media screen and (max-width: 576px) {
     max-width: 100%;

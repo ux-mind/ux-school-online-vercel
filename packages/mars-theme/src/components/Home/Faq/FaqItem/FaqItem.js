@@ -44,21 +44,23 @@ const ProgramItem = ({ data }) => {
           </svg>
         </Drop>
       </BtnWrapper>
-      {isOpened && (
-        <ContentWrapper>
-          {data.faq_item_text.map((paragraph) => (
-            <P key={paragraph.faq_item_paragraph}>
-              {paragraph.faq_item_paragraph}
-            </P>
-          ))}
-        </ContentWrapper>
-      )}
+      <ContentWrapper opened={isOpened}>
+        {data.faq_item_text.map((paragraph) => (
+          <P key={paragraph.faq_item_paragraph}>
+            {paragraph.faq_item_paragraph}
+          </P>
+        ))}
+      </ContentWrapper>
     </Item>
   );
 };
 
 const ContentWrapper = styled.div`
   padding: 0 48px 16px;
+  transition: all 0.3s;
+  overflow: hidden;
+  ${({ opened }) =>
+    opened ? "max-height: 100vh;" : "max-height: 0; padding-bottom: 0;"};
   @media screen and (max-width: 991px) {
     padding: 0 24px 4px;
     padding: 10px 24px;

@@ -47,54 +47,52 @@ const ProgramItem = ({ data }) => {
           </svg>
         </Drop>
       </BtnWrapper>
-      {isOpened && (
-        <ContentWrapper>
-          {data.program_item_links.map((item) => {
-            return (
-              <VideoItem key={item.program_item_link_title}>
-                <VideoItemContent>
-                  <P>
-                    {item.program_item_link_title
-                      ? parse(item.program_item_link_title)
-                      : ""}
-                  </P>
-                </VideoItemContent>
-                <VideoItemState>
-                  {!item.program_item_link_url ? (
-                    <div>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M8 8V10H7.75C7.28587 10 6.84075 10.1844 6.51256 10.5126C6.18437 10.8407 6 11.2859 6 11.75V17.25C6 18.216 6.784 19 7.75 19H16.25C16.7141 19 17.1592 18.8156 17.4874 18.4874C17.8156 18.1592 18 17.7141 18 17.25V11.75C18 11.2859 17.8156 10.8407 17.4874 10.5126C17.1592 10.1844 16.7141 10 16.25 10H16V8C16 6.93913 15.5786 5.92172 14.8284 5.17157C14.0783 4.42143 13.0609 4 12 4C10.9391 4 9.92172 4.42143 9.17157 5.17157C8.42143 5.92172 8 6.93913 8 8ZM14.5 10V8C14.5 7.33696 14.2366 6.70107 13.7678 6.23223C13.2989 5.76339 12.663 5.5 12 5.5C11.337 5.5 10.7011 5.76339 10.2322 6.23223C9.76339 6.70107 9.5 7.33696 9.5 8V10H14.5ZM16 11.5H16.25C16.3163 11.5 16.3799 11.5263 16.4268 11.5732C16.4737 11.6201 16.5 11.6837 16.5 11.75V17.25C16.5 17.3163 16.4737 17.3799 16.4268 17.4268C16.3799 17.4737 16.3163 17.5 16.25 17.5H7.75C7.6837 17.5 7.62011 17.4737 7.57322 17.4268C7.52634 17.3799 7.5 17.3163 7.5 17.25V11.75C7.5 11.6837 7.52634 11.6201 7.57322 11.5732C7.62011 11.5263 7.6837 11.5 7.75 11.5H16Z"
-                          fill="#B0B5CB"
-                        />
-                      </svg>
-                    </div>
-                  ) : (
-                    <VideoInfo>
-                      <VideoLink link={item.program_item_link_url}>
-                        <span>
-                          {item.program_item_link_text
-                            ? parse(item.program_item_link_text)
-                            : ""}
-                        </span>
-                        <img src={play} width="24" height="24" alt="play" />
-                      </VideoLink>
-                    </VideoInfo>
-                  )}
-                </VideoItemState>
-              </VideoItem>
-            );
-          })}
-        </ContentWrapper>
-      )}
+      <ContentWrapper opened={isOpened}>
+        {data.program_item_links.map((item) => {
+          return (
+            <VideoItem key={item.program_item_link_title}>
+              <VideoItemContent>
+                <P>
+                  {item.program_item_link_title
+                    ? parse(item.program_item_link_title)
+                    : ""}
+                </P>
+              </VideoItemContent>
+              <VideoItemState>
+                {!item.program_item_link_url ? (
+                  <div>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M8 8V10H7.75C7.28587 10 6.84075 10.1844 6.51256 10.5126C6.18437 10.8407 6 11.2859 6 11.75V17.25C6 18.216 6.784 19 7.75 19H16.25C16.7141 19 17.1592 18.8156 17.4874 18.4874C17.8156 18.1592 18 17.7141 18 17.25V11.75C18 11.2859 17.8156 10.8407 17.4874 10.5126C17.1592 10.1844 16.7141 10 16.25 10H16V8C16 6.93913 15.5786 5.92172 14.8284 5.17157C14.0783 4.42143 13.0609 4 12 4C10.9391 4 9.92172 4.42143 9.17157 5.17157C8.42143 5.92172 8 6.93913 8 8ZM14.5 10V8C14.5 7.33696 14.2366 6.70107 13.7678 6.23223C13.2989 5.76339 12.663 5.5 12 5.5C11.337 5.5 10.7011 5.76339 10.2322 6.23223C9.76339 6.70107 9.5 7.33696 9.5 8V10H14.5ZM16 11.5H16.25C16.3163 11.5 16.3799 11.5263 16.4268 11.5732C16.4737 11.6201 16.5 11.6837 16.5 11.75V17.25C16.5 17.3163 16.4737 17.3799 16.4268 17.4268C16.3799 17.4737 16.3163 17.5 16.25 17.5H7.75C7.6837 17.5 7.62011 17.4737 7.57322 17.4268C7.52634 17.3799 7.5 17.3163 7.5 17.25V11.75C7.5 11.6837 7.52634 11.6201 7.57322 11.5732C7.62011 11.5263 7.6837 11.5 7.75 11.5H16Z"
+                        fill="#B0B5CB"
+                      />
+                    </svg>
+                  </div>
+                ) : (
+                  <VideoInfo>
+                    <VideoLink link={item.program_item_link_url}>
+                      <span>
+                        {item.program_item_link_text
+                          ? parse(item.program_item_link_text)
+                          : ""}
+                      </span>
+                      <img src={play} width="24" height="24" alt="play" />
+                    </VideoLink>
+                  </VideoInfo>
+                )}
+              </VideoItemState>
+            </VideoItem>
+          );
+        })}
+      </ContentWrapper>
     </Item>
   );
 };
@@ -135,6 +133,10 @@ const VideoItem = styled.div`
 
 const ContentWrapper = styled.div`
   padding: 0 48px 16px;
+  transition: all 0.3s;
+  overflow: hidden;
+  ${({ opened }) =>
+    opened ? "max-height: 100vh;" : "max-height: 0; padding-bottom: 0;"};
   @media screen and (max-width: 991px) {
     padding: 0 24px 4px;
   }
