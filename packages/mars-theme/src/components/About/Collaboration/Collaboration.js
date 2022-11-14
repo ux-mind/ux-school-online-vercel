@@ -56,7 +56,7 @@ const Collaboration = ({ post }) => {
         });
       }
     });
-    const regex = new RegExp('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
+    const regex = new RegExp('^[\+]?[0-9]+');
     if (!regex.test(formValues["phone"])) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
