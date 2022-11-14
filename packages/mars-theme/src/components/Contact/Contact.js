@@ -224,8 +224,10 @@ const Contact = ({ state, post }) => {
           isOpened={submitModalOpened}
           setIsOpened={setSubmitModalOpened}
         >
-          <ModalTitle>Заявка отправлена</ModalTitle>
-          <P size="l">Наш менеджер скоро свяжется с вами</P>
+          <ModalTitle>{post.acf.contact_modal_title}</ModalTitle>
+          <P size="l">{post.acf.contact_modal_text
+                ? parse(post.acf.contact_modal_text)
+                : ""}</P>
         </CommonModal>
       </ModalWrapper>
     </ContactsWrapper>
