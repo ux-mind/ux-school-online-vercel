@@ -133,10 +133,7 @@ const VideoItem = styled.div`
 
 const ContentWrapper = styled.div`
   padding: 0 48px 16px;
-  transition: all 0.3s;
-  overflow: hidden;
-  ${({ opened }) =>
-    opened ? "max-height: 100vh;" : "max-height: 0; padding-bottom: 0;"};
+  ${({ opened }) => (opened ? "display: block;" : "display: none;")};
   @media screen and (max-width: 991px) {
     padding: 0 24px 4px;
   }

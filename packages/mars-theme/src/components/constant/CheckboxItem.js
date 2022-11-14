@@ -60,6 +60,9 @@ const CheckboxWrapper = styled.div`
   position: relative;
   ${flex()};
   cursor: pointer;
+  & p {
+    ${font(14, 20)};
+  }
   & p a {
     ${({ lightLink }) =>
       lightLink &&
@@ -73,11 +76,6 @@ const CheckboxWrapper = styled.div`
     &:focus {
       color: var(--link-200);
     }`}
-  }
-  @media screen and (max-width: 991px) {
-    & p {
-      ${font(14, 20)};
-    }
   }
 `;
 
