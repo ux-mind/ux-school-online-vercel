@@ -56,6 +56,14 @@ const Collaboration = ({ post }) => {
         });
       }
     });
+    if (!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(formValues["phone"])) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors["phone"] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
     if (!errorSubmit) {
       try {
         
