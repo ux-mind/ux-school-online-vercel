@@ -184,7 +184,9 @@ const CertificateBlock = ({ state, post }) => {
         <ModalTitle>{post.acf.certificate_modal_title}</ModalTitle>
         <ModalText>
           <P size="l">
-            {post.acf.certificate_modal_text ? parse(post.acf.certificate_modal_text) : ''}
+            {post.acf.certificate_modal_text
+              ? parse(post.acf.certificate_modal_text)
+              : ""}
           </P>
         </ModalText>
         <CheckForm>
@@ -232,7 +234,9 @@ const CertificateBlock = ({ state, post }) => {
               setChecked={() => setIsUserAgree((prev) => !prev)}
             >
               {post.acf.certificate_modal_checkbox_text}{" "}
-              <a href={post.acf.certificate_modal_checkbox_link_text}>{post.acf.certificate_modal_checkbox_link_url}</a>
+              <a href={post.acf.certificate_modal_checkbox_link_url}>
+                {post.acf.certificate_modal_checkbox_link_text}
+              </a>
             </CheckboxItem>
           </CheckboxWrapper>
         </CheckForm>
@@ -243,7 +247,9 @@ const CertificateBlock = ({ state, post }) => {
       >
         <ModalTitle>{post.acf.certificate_confirm_modal_title}</ModalTitle>
         <P size="l">
-          {post.acf.certificate_confirm_modal_text ? parse(post.acf.certificate_confirm_modal_text) : ''}
+          {post.acf.certificate_confirm_modal_text
+            ? parse(post.acf.certificate_confirm_modal_text)
+            : ""}
         </P>
       </CommonModal>
     </Wrapper>

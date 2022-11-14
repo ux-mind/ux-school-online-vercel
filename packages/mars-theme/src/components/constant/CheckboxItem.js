@@ -3,9 +3,9 @@ import P from "./Paragraph";
 import { flex, font } from "../base/functions";
 import { styled } from "frontity";
 
-const CheckboxItem = ({ checked, setChecked, top, children }) => {
+const CheckboxItem = ({ checked, setChecked, top, lightLink, children }) => {
   return (
-    <CheckboxWrapper onClick={setChecked}>
+    <CheckboxWrapper onClick={setChecked} lightLink={lightLink}>
       <CheckboxInput />
       <Checkbox top={top} checked={checked}>
         {checked && (
@@ -60,8 +60,13 @@ const CheckboxWrapper = styled.div`
   position: relative;
   ${flex()};
   cursor: pointer;
+  & p {
+    ${font(14, 20)};
+  }
   & p a {
-    color: var(--link-200);
+    ${({ lightLink }) =>
+      lightLink &&
+      `color: var(--link-200);
     &:hover {
       color: var(--link-100);
     }
@@ -70,12 +75,7 @@ const CheckboxWrapper = styled.div`
     }
     &:focus {
       color: var(--link-200);
-    }
-  }
-  @media screen and (max-width: 991px) {
-    & p {
-      ${font(14, 20)};
-    }
+    }`}
   }
 `;
 

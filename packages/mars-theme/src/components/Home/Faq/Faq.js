@@ -112,13 +112,14 @@ const Faq = ({ post }) => {
                 return <FaqItem key={item.faq_item_title} data={item} />;
               })}
             </FaqBlock>
-            {!isAllFaqShown && (
-              <ShowMore>
-                <WhiteBtn onClick={() => setIsAllFaqShown(true)}>
-                  {post.acf.faq_more_button_text}
-                </WhiteBtn>
-              </ShowMore>
-            )}
+            {!isAllFaqShown ||
+              (post.acf.faq_items.length <= 9 && (
+                <ShowMore>
+                  <WhiteBtn onClick={() => setIsAllFaqShown(true)}>
+                    {post.acf.faq_more_button_text}
+                  </WhiteBtn>
+                </ShowMore>
+              ))}
           </FaqContent>
         </Content>
       </Container>

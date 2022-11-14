@@ -10,7 +10,12 @@ import P from "../../../../constant/Paragraph";
 import { styled, css } from "frontity";
 import parse from "html-react-parser";
 
-const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened, post }) => {
+const ConnectModal = ({
+  isOpened,
+  setIsOpened,
+  setApproveModalOpened,
+  post,
+}) => {
   const [isUserAgree, setIsUserAgree] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -97,7 +102,9 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened, post }) =>
       </TitleM>
       <Subtitle>
         <P size="l">
-          {post.acf.faq_contact_form_text ? parse(post.acf.faq_contact_form_text) : ''}
+          {post.acf.faq_contact_form_text
+            ? parse(post.acf.faq_contact_form_text)
+            : ""}
         </P>
       </Subtitle>
       <ConnectForm>
@@ -135,7 +142,9 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened, post }) =>
             setChecked={() => setIsUserAgree((prev) => !prev)}
           >
             {post.acf.faq_contact_form_checkbox_text}{" "}
-            <a href={post.acf.faq_contact_form_checkbox_link_url}>{post.acf.faq_contact_form_checkbox_link_text}</a>
+            <a href={post.acf.faq_contact_form_checkbox_link_url}>
+              {post.acf.faq_contact_form_checkbox_link_text}
+            </a>
           </CheckboxItem>
         </CheckboxWrapper>
       </ConnectForm>
