@@ -8,10 +8,9 @@ import PrimaryBtn from "../../../../constant/PrimaryButton";
 import CheckboxItem from "../../../../constant/CheckboxItem";
 import P from "../../../../constant/Paragraph";
 import { styled, css } from "frontity";
+import parse from "html-react-parser";
 
-import { useFormik } from "formik";
-
-const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
+const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened, post }) => {
   const [isUserAgree, setIsUserAgree] = useState(false);
 
   const [formValues, setFormValues] = useState({
@@ -58,15 +57,6 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
       try {
         setIsOpened(false);
         setApproveModalOpened(true);
-        /*const data = {
-          'name': formValues.name,
-          'surname': formValues.surname,
-          'email': formValues.email,
-          'subject': formValues.subject,
-          'resume': formValues.resume,
-          'message': formValues.message,
-        }
-        console.log(JSON.stringify(data));*/
         const formData = new FormData();
 
         formData.append("ux-name", formValues.name);
@@ -103,19 +93,18 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
           margin-bottom: 23px;
         `}
       >
-        Связаться с нами
+        {post.acf.faq_contact_form_title}
       </TitleM>
       <Subtitle>
         <P size="l">
-          Оставьте ваши контактные данные. Мы свяжемся с вами и проконсультируем
-          вас по любым вопросам.
+          {post.acf.faq_contact_form_text ? parse(post.acf.faq_contact_form_text) : ''}
         </P>
       </Subtitle>
       <ConnectForm>
         <InputWrapper>
           <InputValid
             type="text"
-            placeholder="Имя"
+            placeholder={post.acf.faq_contact_form_name_placeholder}
             onChange={(evt) => handleInputChange(evt)}
             value={formValues.name}
             error={formErrors.name}
@@ -125,7 +114,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
         <InputWrapper>
           <InputValid
             type="phone"
-            placeholder="Телефон"
+            placeholder={post.acf.faq_contact_form_phone_placeholder}
             onChange={(evt) => handleInputChange(evt)}
             value={formValues.phone}
             error={formErrors.phone}
@@ -135,7 +124,7 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
         <SubmitWrapper>
           <PrimaryBtn
             disabled={isUserAgree ? false : true}
-            content="Отправить"
+            content={post.acf.faq_contact_form_submit_button_text}
             type="submit"
             onClick={(evt) => handleFormSubmit(evt)}
           />
@@ -145,8 +134,8 @@ const ConnectModal = ({ isOpened, setIsOpened, setApproveModalOpened }) => {
             checked={isUserAgree}
             setChecked={() => setIsUserAgree((prev) => !prev)}
           >
-            Я согласен с условиями обработки{" "}
-            <a href="/terms/">персональных данных</a>
+            {post.acf.faq_contact_form_checkbox_text}{" "}
+            <a href={post.acf.faq_contact_form_checkbox_link_url}>{post.acf.faq_contact_form_checkbox_link_text}</a>
           </CheckboxItem>
         </CheckboxWrapper>
       </ConnectForm>

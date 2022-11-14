@@ -96,6 +96,7 @@ const Additional = ({ state, post }) => {
           isOpened={connectModalOpened}
           setIsOpened={setConnectModalOpened}
           setApproveModalOpened={setApproveModalOpened}
+          post={post}
         />
         <CommonModal
           isOpened={approveModalOpened}
