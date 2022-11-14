@@ -58,6 +58,15 @@ const Consultation = ({ post }) => {
         });
       }
     });
+    const regex = new RegExp('^[\+]?[0-9]+');
+    if (!regex.test(formValues["phone"])) {
+      setFormErrors((prev) => {
+        const newFormErrors = Object.assign({}, prev);
+        newFormErrors["phone"] = true;
+        return newFormErrors;
+      });
+      errorSubmit = true;
+    }
     if (!errorSubmit) {
       try {
         setConsultationModalOpened(true);
