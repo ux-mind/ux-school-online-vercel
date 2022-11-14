@@ -110,10 +110,10 @@ const Additional = ({ state, post }) => {
               }
             `}
           >
-            Заявка отправлена
+            {post.acf.faq_contact_form_approve_modal_title}
           </TitleM>
           <Subtitle>
-            <P size="l">Наш менеджер совсем скоро свяжется с вами</P>
+            <P size="l">{post.acf.faq_contact_form_approve_modal_text ? parse(post.acf.faq_contact_form_approve_modal_text) : ''}</P>
           </Subtitle>
         </CommonModal>
       </ModalWrapper>
