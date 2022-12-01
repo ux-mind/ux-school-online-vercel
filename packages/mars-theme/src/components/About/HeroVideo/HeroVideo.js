@@ -58,7 +58,11 @@ const HeroVideo = ({ post }) => {
           nocontrols="true"
           playsInline
           preload="auto"
-          poster={isPosterMobile ? post.acf.about_page_video_poster_mobile.url : post.acf.about_page_video_poster.url}
+          poster={
+            isPosterMobile
+              ? post.acf.about_page_video_poster_mobile.url
+              : post.acf.about_page_video_poster.url
+          }
           ref={videoElementRef}
         >
           <source src={aboutVideo} type="video/mp4" />
@@ -122,8 +126,10 @@ const VideoWrapper = styled.div`
   position: relative;
   max-width: 100%;
   display: flex;
+  max-height: 100vh;
   & video {
     object-fit: cover;
+    max-height: 100vh;
   }
   & > div {
     position: absolute;
@@ -139,16 +145,6 @@ const VideoWrapper = styled.div`
   }
   & img {
     max-width: 100vw;
-  }
-  @media screen and (max-width: 1400px) {
-    & video {
-      max-height: 800px;
-    }
-  }
-  @media screen and (max-width: 991px) {
-    & video {
-      max-height: 640px;
-    }
   }
 `;
 

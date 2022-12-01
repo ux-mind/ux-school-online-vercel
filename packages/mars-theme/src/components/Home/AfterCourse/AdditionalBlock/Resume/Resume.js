@@ -45,7 +45,7 @@ const apps = [
 const Resume = ({ isOpened, setIsOpened }) => {
   return (
     <>
-      <Modal className="modal" isOpened={isOpened}>
+      <Modal size="l" className="modal" isOpened={isOpened}>
         <ModalWrapper>
           <div
             css={css`

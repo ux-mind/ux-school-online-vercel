@@ -121,7 +121,7 @@ const InstallmentP = styled(P)`
   @media screen and (max-width: 576px) {
     text-align: center;
     display: inline;
-    padding: 0 20px;
+    padding: 0;
     & span {
       display: inline-flex;
       transform: translateY(3px);

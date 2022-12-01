@@ -3,7 +3,7 @@ import SimpleBar from "simplebar-react";
 import { grayRgba } from "../base/functions";
 import { styled } from "frontity";
 
-const CommonModal = ({ isOpened, setIsOpened, border, children }) => {
+const CommonModal = ({ isOpened, setIsOpened, border, size, children }) => {
   return (
     <>
       <Modal className="modal" border={border} isOpened={isOpened}>
@@ -66,12 +66,12 @@ const Close = styled.button`
 `;
 
 const Wrapper = styled.div`
-  padding: ${({ padding }) => (padding ? padding : "40px 96px")};
+  padding: ${({ padding }) => (padding ? padding : "58px 96px")};
   position: relative;
   box-sizing: border-box;
   max-width: 100%;
   @media screen and (max-width: 991px) {
-    padding: 24px;
+    padding: 16px 24px;
   }
 `;
 
@@ -84,7 +84,7 @@ const Modal = styled.div`
   transform: translate(-50%, -50%);
   max-height: calc(100vh - 48px);
   width: 100%;
-  max-width: 792px;
+  max-width: ${({ size }) => (size === "l" ? "792px" : "670px")};
   background: var(--white);
   border-radius: ${({ border }) => (border ? `${border}px` : "24px")};
   opacity: 0;
@@ -96,6 +96,7 @@ const Modal = styled.div`
   }
   @media screen and (max-width: 991px) {
     max-width: calc(100% - 32px);
+    border-radius: 24px;
   }
 `;
 

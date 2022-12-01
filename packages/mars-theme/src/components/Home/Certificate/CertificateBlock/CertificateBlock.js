@@ -311,7 +311,8 @@ const ModalTitle = styled(TitleM)`
   }
 `;
 
-const CheckBtn = styled.button`
+const CheckBtn = styled.span`
+  display: inline-block;
   padding: 0;
   background: transparent;
   border: none;
@@ -355,11 +356,22 @@ const CertificateCheck = styled.div`
   padding: 8px 16px;
   background: ${whiteRgba(0.01)};
   backdrop-filter: blur(24px);
-  max-width: 333px;
+  max-width: 334px;
   box-sizing: border-box;
   border-radius: 12px;
   & p {
+    ${font(16, 24)};
+    font-weight: 400;
     color: var(--gray-800);
+    font-stretch: 122%;
+    font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96,
+      "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;
+  }
+  & button {
+    ${font(16, 24)};
+    font-weight: inherit;
+    padding: 0;
+    margin: 0;
     font-stretch: 122%;
     font-variation-settings: "GRAD" 0, "slnt" 0, "XTRA" 468, "XOPQ" 96,
       "YOPQ" 79, "YTLC" 514, "YTUC" 712, "YTAS" 750, "YTDE" -203, "YTFI" 738;

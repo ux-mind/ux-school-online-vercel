@@ -206,8 +206,9 @@ const Rates = ({ state, actions, post }) => {
         isOpened={signupModalOpened}
         setIsOpened={setSignupModalOpened}
         className="signup"
+        border={48}
       >
-        <TitleM mb={isMobile ? 14 : 30}>{post.acf.tariff_2_modal_title}</TitleM>
+        <TitleM mb={isMobile ? 14 : 23}>{post.acf.tariff_2_modal_title}</TitleM>
         <SignupForm>
           <Label>
             <InputValid
