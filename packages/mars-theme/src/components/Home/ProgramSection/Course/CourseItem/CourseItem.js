@@ -74,10 +74,11 @@ const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
   background: ${whiteRgba(0.01)};
+  /* background: transparent; */
   backdrop-filter: blur(12px);
   border: 1px solid ${whiteRgba(0.1)};
   border-radius: 50px;
-  padding: 8px 20px;
+  padding: 7px 20px;
   ${flex("row", "center", "center")};
   @media screen and (max-width: 991px) {
     backdrop-filter: none;
@@ -123,15 +124,12 @@ const Item = styled.div`
   box-shadow: inset 1px 1px 0px ${whiteRgba(0.35)};
   backdrop-filter: blur(50px);
   border-radius: 48px;
-  padding: ${({ isMouseOver }) =>
-    isMouseOver ? "100px 48px 33px" : "24px 32px 24px"};
   min-height: 304px;
   box-sizing: border-box;
   position: relative;
   ${flex("column", "center", "flex-end")};
-  min-height: 344px;
   padding: ${({ isMouseOver }) =>
-    isMouseOver ? "100px 32px 24px" : "24px 32px 24px"};
+    isMouseOver ? "100px 31px 24px" : "24px 31px 24px"};
   @media screen and (max-width: 991px) {
     border-radius: 32px;
     box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.35);

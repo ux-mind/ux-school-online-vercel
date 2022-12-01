@@ -90,6 +90,7 @@ const Header = ({ state, actions }) => {
         >
           <ul
             css={css`
+              margin: 0;
               ${flex("row", "center")}
               color: ${headerTheme === "white"
                 ? "var(--white)"
@@ -183,7 +184,7 @@ const CourseModal = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
-  padding: 28px 0;
+  padding: 24px 0 23px;
   position: relative;
   z-index: 2;
   border-bottom: 1px solid
@@ -227,7 +228,7 @@ const CourseListButton = styled(ListButton)`
 const CourseButton = styled.button`
   position: relative;
   ${font(16, 24)}
-  padding: .5em 1em;
+  padding: .4375em 1em;
   padding-right: 60px;
   background: transparent;
   border-radius: 8px;

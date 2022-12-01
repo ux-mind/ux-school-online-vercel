@@ -28,20 +28,30 @@ const Hero = ({ state, post }) => {
       <Container>
         <Content>
           <HeroTitle>
-            {post.acf.main_banner_title ? parse(post.acf.main_banner_title) : ''}
+            {post.acf.main_banner_title
+              ? parse(post.acf.main_banner_title)
+              : ""}
           </HeroTitle>
           <AdvantagesList>
-            {post.acf.main_banner_list && post.acf.main_banner_list.map((item) => <li key={item.main_banner_list_item}>{item.main_banner_list_item}</li>)}
+            {post.acf.main_banner_list &&
+              post.acf.main_banner_list.map((item) => (
+                <li key={item.main_banner_list_item}>
+                  {item.main_banner_list_item}
+                </li>
+              ))}
           </AdvantagesList>
           <PrimaryButton
             onClick={scrollToRates}
-            content={post.acf.main_banner_button_text ? parse(post.acf.main_banner_button_text) : ''}
+            content={
+              post.acf.main_banner_button_text
+                ? parse(post.acf.main_banner_button_text)
+                : ""
+            }
           />
           <VideoWrapper>
-            {/* <img src={videoGif} alt="" /> */}
             <video
-              width="728"
-              height="728"
+              width="1020"
+              height="1020"
               autoPlay
               nocontrols="true"
               playsInline
@@ -50,13 +60,18 @@ const Hero = ({ state, post }) => {
               preload="auto"
             >
               <source src={post.acf.main_banner_animation} type="video/mp4" />
-              <source src={post.acf.main_banner_animation_webm} type="video/webm" /> § Тег video не
-              поддерживается вашим браузером.
+              <source
+                src={post.acf.main_banner_animation_webm}
+                type="video/webm"
+              />{" "}
+              § Тег video не поддерживается вашим браузером.
             </video>
           </VideoWrapper>
           <Quote>
             <p>
-              {post.acf.main_banner_sticker_text ? parse(post.acf.main_banner_sticker_text) : ''}
+              {post.acf.main_banner_sticker_text
+                ? parse(post.acf.main_banner_sticker_text)
+                : ""}
             </p>
           </Quote>
         </Content>
@@ -74,7 +89,7 @@ const Quote = styled.div`
   transform: translateX(calc(-50% + 66px)) rotate(10deg);
   backdrop-filter: blur(24px);
   background: ${whiteRgba(0.1)};
-  max-width: 380px;
+  max-width: 390px;
   border-radius: 12px;
   & p {
     ${font(16, 24)};
@@ -99,17 +114,17 @@ const Quote = styled.div`
 
 const VideoWrapper = styled.div`
   width: auto;
-  height: 728px;
+  height: 1020px;
   position: absolute;
-  top: 20px;
-  right: -112px;
+  top: -3px;
+  right: -225px;
   @media screen and (max-width: 1400px) {
     height: auto;
-    right: -80px;
-    top: 120px;
+    right: -218px;
+    top: 69px;
     & video {
-      width: 500px;
-      height: 500px;
+      width: 800px;
+      height: 800px;
     }
   }
   @media screen and (max-width: 991px) {
@@ -119,8 +134,10 @@ const VideoWrapper = styled.div`
     right: initial;
     margin-top: 46px;
     width: 100%;
+
     & video {
       width: 100%;
+      height: auto;
     }
   }
   @media screen and (max-width: 576px) {

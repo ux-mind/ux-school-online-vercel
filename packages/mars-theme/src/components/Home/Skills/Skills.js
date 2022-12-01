@@ -73,10 +73,12 @@ const Skills = ({ post }) => {
 };
 
 const SkillsTitleM = styled(TitleM)`
+  padding-top: 26px;
   @media screen and (max-width: 1400px) {
     ${font(38, 46)};
   }
   @media screen and (max-width: 991px) {
+    padding: 0;
     text-align: center;
     margin-bottom: 34px;
   }

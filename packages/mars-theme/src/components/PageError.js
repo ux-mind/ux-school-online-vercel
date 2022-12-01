@@ -71,6 +71,7 @@ const Content = styled.div`
   max-width: 100%;
   margin: 0 auto;
   ${flex("column", "center")};
+  position: relative;
   @media screen and (max-width: 991px) {
     padding: 40px 24px;
   }

@@ -28,9 +28,7 @@ const Info = ({ post }) => {
               <InfoWrapper>
                 <InfoText>
                   {post.acf.info_quote_text.map((paragraph) => (
-                    <P size="l">
-                      {parse(paragraph.info_quote_paragraph)}
-                    </P>
+                    <P size="l">{parse(paragraph.info_quote_paragraph)}</P>
                   ))}
                   <SmallInfo>
                     <Avatar>
@@ -102,7 +100,7 @@ const NumbersBlock = styled.div`
 const Bottom = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 25%);
-  background: var(--white);
+  /* background: var(--white); */
   @media screen and (max-width: 991px) {
     border: 1px dashed ${grayRgba(0.2)};
     border-radius: 24px;
@@ -223,7 +221,7 @@ const InfoBlock = styled.div`
 const Top = styled.div`
   padding: 64px;
   padding-bottom: 98px;
-  background: var(--white);
+  /* background: var(--white); */
   border-top-left-radius: 48px;
   border-top-right-radius: 48px;
   border-bottom: 1px dashed ${grayRgba(0.2)};
@@ -239,11 +237,36 @@ const Top = styled.div`
 
 const Content = styled.div`
   position: relative;
+  z-index: 1;
   bottom: -128px;
   border-radius: 48px;
-  overflow: hidden;
+  background: var(--white);
   box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1),
     0px 48px 64px rgba(0, 0, 0, 0.05);
+  /* &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+  }
+  &::before {
+    border-radius: 4px / 30px;
+    background: var(--white);
+    top: 33px;
+    bottom: 33px;
+    right: -2px;
+    left: -2px;
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  &::after {
+    border-radius: 30px / 4px;
+    background: var(--white);
+    left: 33px;
+    right: 33px;
+    top: -2px;
+    bottom: -2px;
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.03), 0px 1px 1px rgba(0, 0, 0, 0.1);
+  } */
   @media screen and (max-width: 991px) {
     box-shadow: none;
     overflow: visible;

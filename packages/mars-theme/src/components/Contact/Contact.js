@@ -18,7 +18,6 @@ import whatsapp from "../../assets/images/social/Whatsapp-large.svg";
 import viber from "../../assets/images/social/Viber-large.svg";
 import linked from "../../assets/images/social/linkedin-large.svg";
 
-/*
 const socials = [
   {
     id: 1,
@@ -50,7 +49,7 @@ const socials = [
     link: "linkedin.com/company/ux-mind-school",
     content: "linkedin.com/company/ux-mind-school",
   },
-];*/
+];
 
 const Contact = ({ state, post }) => {
   const { isMobile } = state.theme;
@@ -62,10 +61,12 @@ const Contact = ({ state, post }) => {
     name: "",
     phone: "",
   });
+
   const [formErrors, setFormErrors] = useState({
     name: false,
     phone: false,
   });
+
   const handleInputChange = (e) => {
     const target = e.target;
     const formValuesKey = target.name;
@@ -98,7 +99,7 @@ const Contact = ({ state, post }) => {
         });
       }
     });
-    const regex = new RegExp('^[\+]?[0-9]+');
+    const regex = new RegExp("^[+]?[0-9]+");
     if (!regex.test(formValues["phone"])) {
       setFormErrors((prev) => {
         const newFormErrors = Object.assign({}, prev);
@@ -166,7 +167,7 @@ const Contact = ({ state, post }) => {
             </P>
           </Address>
           <SocialList>
-            {/*socials.map((item) => {
+            {socials.map((item) => {
               return (
                 <SocialItem key={item.id}>
                   <Icon>
@@ -175,7 +176,7 @@ const Contact = ({ state, post }) => {
                   <SocialLink link={item.link}>{item.content}</SocialLink>
                 </SocialItem>
               );
-            })*/}
+            })}
           </SocialList>
         </MapBlock>
         <FormBlock>
@@ -234,9 +235,11 @@ const Contact = ({ state, post }) => {
           setIsOpened={setSubmitModalOpened}
         >
           <ModalTitle>{post.acf.contact_modal_title}</ModalTitle>
-          <P size="l">{post.acf.contact_modal_text
-                ? parse(post.acf.contact_modal_text)
-                : ""}</P>
+          <P size="l">
+            {post.acf.contact_modal_text
+              ? parse(post.acf.contact_modal_text)
+              : ""}
+          </P>
         </CommonModal>
       </ModalWrapper>
     </ContactsWrapper>
