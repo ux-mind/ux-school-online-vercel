@@ -167,15 +167,15 @@ const Contact = ({ state, post }) => {
             </P>
           </Address>
           <SocialList>
-            {socials.map((item) => {
+            {post.acf.contact_social_items.map((item, i) => {
               return (
-                <SocialItem key={item.id}>
+                <SocialItem key={`social-item-${i}`}>
                   <Icon>
-                    <img width="24" height="24" src={item.icon} alt="icon" />
+                    <img width="24" height="24" src={item.contacts_social_item_icon.url} alt="icon" />
                   </Icon>
-                  <SocialLink link={item.link}>{item.content}</SocialLink>
+                  <SocialLink link={item.contacts_social_item_link}>{item.contacts_social_item_text}</SocialLink>
                 </SocialItem>
-              );
+              )
             })}
           </SocialList>
         </MapBlock>
