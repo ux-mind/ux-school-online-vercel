@@ -35,6 +35,7 @@ const DarkLayer = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  display: flex;
   margin-top: -281px;
   position: relative;
   border-radius: 48px;

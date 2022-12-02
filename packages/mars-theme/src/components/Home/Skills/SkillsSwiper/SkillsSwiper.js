@@ -280,6 +280,7 @@ const Note = styled.div`
 `;
 
 const ImageWrapper = styled.div`
+  display: flex;
   @media screen and (max-width: 1200px) {
     & img {
       max-width: 280px;
